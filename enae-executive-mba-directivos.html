@@ -824,7 +824,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.85);
     z-index: 1;
   }
   .d-hero-inner {
@@ -1824,31 +1824,14 @@
 
     ctx.clearRect(0, 0, w, h);
 
-    // Solid dark sphere
-    var bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-    bgGrad.addColorStop(0, '#1a1a20');
-    bgGrad.addColorStop(0.9, '#141418');
-    bgGrad.addColorStop(1, '#101014');
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.fillStyle = bgGrad;
-    ctx.fill();
-
-    // Outer glow
-    var glowGrad = ctx.createRadialGradient(cx, cy, radius * 0.85, cx, cy, radius * 1.25);
-    glowGrad.addColorStop(0, 'rgba(169,24,50,0.08)');
+    // Subtle outer glow only — no solid background
+    var glowGrad = ctx.createRadialGradient(cx, cy, radius * 0.7, cx, cy, radius * 1.15);
+    glowGrad.addColorStop(0, 'rgba(169,24,50,0.04)');
     glowGrad.addColorStop(1, 'rgba(169,24,50,0)');
     ctx.beginPath();
-    ctx.arc(cx, cy, radius * 1.25, 0, Math.PI * 2);
+    ctx.arc(cx, cy, radius * 1.15, 0, Math.PI * 2);
     ctx.fillStyle = glowGrad;
     ctx.fill();
-
-    // Sphere edge ring
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(169,24,50,0.2)';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
 
     // Project all nodes
     var projected = [];
