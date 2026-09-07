@@ -773,7 +773,7 @@
   /* --- CUSTOM CSS PARA DIRECTIVOS --- */
   :root {
     --enae-negro: #2D2D2D;
-    --enae-gris-claro: #F8F9FA;
+    --enae-gris-claro: #dbdbdb;
   }
 
   
@@ -1154,7 +1154,8 @@
       margin: 0 auto;
     }
     .d-hero-globe-wrap {
-      width: 90%;
+      width: 70%;
+      max-width: 350px;
       margin: 0 auto;
     }
     .orbit-concept {
@@ -1186,7 +1187,7 @@
   /* Rankings section */
   .d-rankings {
     width: 100vw;
-    background: var(--enae-gris-claro, #F8F9FA);
+    background: var(--enae-gris-claro, #dbdbdb);
     padding: 3rem 2rem;
     overflow: hidden;
     border-bottom: 1px solid rgba(0,0,0,0.06);
@@ -1252,12 +1253,70 @@
     font-weight: 400;
     font-size: 0.85rem;
   }
+
+  /* ENAE symbol watermark */
+  .enae-wm {
+    position: relative;
+    overflow: hidden;
+  }
+  .enae-wm::before {
+    content: '';
+    position: absolute;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 708.66 708.66'%3E%3Cpath fill='%23a91832' d='M481.8,435.18h-183.03c-5.44,0-9.84-4.41-9.84-9.84v-85.17c0-5.44,4.41-9.84,9.84-9.84h147.67c5.44,0,9.84-4.41,9.84-9.84v-39.75c0-5.44-4.41-9.84-9.84-9.84h-147.67c-5.44,0-9.84-4.41-9.84-9.84v-77.32c0-5.44,4.41-9.84,9.84-9.84h177.14c5.44,0,9.84-4.41,9.84-9.84v-40.31c0-5.44-4.41-9.84-9.84-9.84H226.87c-5.44,0-9.84,4.41-9.84,9.84V485.34c0,5.44,4.41,9.84,9.84,9.84h254.93c5.44,0,9.84-4.41,9.84-9.84v-40.31c0-5.44-4.41-9.84-9.84-9.84'/%3E%3Cpath fill='%23a91832' d='M485.94,554.51H222.72c-3.13,0-5.69,2.56-5.69,5.7v28.87c0,3.13,2.56,5.7,5.69,5.7H485.94c3.13,0,5.7-2.56,5.7-5.7v-28.87c0-3.13-2.56-5.7-5.7-5.7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .enae-wm > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Position variants */
+  .enae-wm--hero::before {
+    width: 500px; height: 500px;
+    bottom: -80px; right: -60px;
+    opacity: 0.04;
+    transform: rotate(-15deg);
+  }
+  .enae-wm--problema::before {
+    width: 400px; height: 400px;
+    top: -50px; left: -80px;
+    opacity: 0.04;
+    transform: rotate(25deg);
+  }
+  .enae-wm--beneficio::before {
+    width: 550px; height: 550px;
+    bottom: -120px; right: -100px;
+    opacity: 0.035;
+    transform: rotate(-35deg);
+  }
+  .enae-wm--porque::before {
+    width: 450px; height: 450px;
+    top: -60px; left: -70px;
+    opacity: 0.04;
+    transform: rotate(12deg);
+  }
+  .enae-wm--programa::before {
+    width: 600px; height: 600px;
+    bottom: -150px; right: -120px;
+    opacity: 0.03;
+    transform: rotate(-20deg);
+  }
+  .enae-wm--final::before {
+    width: 500px; height: 500px;
+    top: -100px; left: 50%;
+    margin-left: -250px;
+    opacity: 0.05;
+    transform: rotate(40deg);
+  }
 </style>
 <!-- END CUSTOM CSS DIRECTIVOS -->
 
 
 <!-- HERO -->
-<header class="hero d-hero">
+<header class="hero d-hero enae-wm enae-wm--hero">
   <div class="pattern" aria-hidden="true">
     <span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span><span class="b5"></span>
   </div>
@@ -1335,7 +1394,7 @@
 </section>
 
 <!-- EL PROBLEMA -->
-<section class="d-problema">
+<section class="d-problema enae-wm enae-wm--problema">
   <div class="wrap reveal">
     <h2 class="mix" style="margin-bottom: 2rem; color: #F8F9FA;">
       <span class="t-bold" style="font-size: 42px; display:block;">Conocer tu área ya no es suficiente.</span>
@@ -1361,7 +1420,7 @@
 </section>
 
 <!-- BENEFICIO PRINCIPAL -->
-<section class="perfil-section" id="beneficio" style="padding: 5rem 0; background: var(--enae-gris-claro);">
+<section class="perfil-section enae-wm enae-wm--beneficio" id="beneficio" style="padding: 5rem 0; background: var(--enae-gris-claro);">
   <div class="wrap">
     <div class="d-section-head reveal">
       <h2 class="mix">
@@ -1391,7 +1450,7 @@
 </section>
 
 <!-- POR QUE ESTE MBA -->
-<section id="porque" style="padding: 5rem 0; background: var(--enae-blanco);">
+<section id="porque" class="enae-wm enae-wm--porque" style="padding: 5rem 0; background: var(--enae-blanco);">
   <div class="wrap">
     <div class="d-section-head reveal">
       <h2 class="mix">
@@ -1460,7 +1519,7 @@
 </section>
 
 <!-- EL PROGRAMA -->
-<section class="programa-section" id="programa" style="padding: 5rem 0; background: var(--enae-blanco);">
+<section class="programa-section enae-wm enae-wm--programa" id="programa" style="padding: 5rem 0; background: var(--enae-blanco);">
   <div class="wrap">
     <div class="d-section-head reveal">
       <h2 class="mix">
@@ -1503,7 +1562,7 @@
 </section>
 
 <!-- CIERRE / CTA -->
-<section class="final" id="solicitar" style="padding: 5rem 0; background: #1A1A1D; color: var(--enae-blanco); text-align: center; position:relative; overflow:hidden;">
+<section class="final enae-wm enae-wm--final" id="solicitar" style="padding: 5rem 0; background: #1A1A1D; color: var(--enae-blanco); text-align: center; position:relative; overflow:hidden;">
   <div class="pattern" aria-hidden="true">
     <span class="b1"></span><span class="b2"></span><span class="b3"></span>
   </div>
@@ -1765,19 +1824,29 @@
 
     ctx.clearRect(0, 0, w, h);
 
+    // Solid dark sphere
+    var bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+    bgGrad.addColorStop(0, '#1a1a20');
+    bgGrad.addColorStop(0.9, '#141418');
+    bgGrad.addColorStop(1, '#101014');
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.fillStyle = bgGrad;
+    ctx.fill();
+
     // Outer glow
-    var glowGrad = ctx.createRadialGradient(cx, cy, radius * 0.8, cx, cy, radius * 1.3);
-    glowGrad.addColorStop(0, 'rgba(169,24,50,0.06)');
+    var glowGrad = ctx.createRadialGradient(cx, cy, radius * 0.85, cx, cy, radius * 1.25);
+    glowGrad.addColorStop(0, 'rgba(169,24,50,0.08)');
     glowGrad.addColorStop(1, 'rgba(169,24,50,0)');
     ctx.beginPath();
-    ctx.arc(cx, cy, radius * 1.3, 0, Math.PI * 2);
+    ctx.arc(cx, cy, radius * 1.25, 0, Math.PI * 2);
     ctx.fillStyle = glowGrad;
     ctx.fill();
 
-    // Sphere outline ring
+    // Sphere edge ring
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(169,24,50,0.15)';
+    ctx.strokeStyle = 'rgba(169,24,50,0.2)';
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
