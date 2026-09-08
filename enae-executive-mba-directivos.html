@@ -1,5 +1,7 @@
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Executive MBA · ENAE</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="stylesheet" href="./src/css/base.css">
 
 <!-- ENAE Logo inline SVG (path definitions reused) -->
@@ -99,6 +101,12 @@
     </div>
   </div>
 </header>
+
+<!-- BANNER IA -->
+<div class="ia-banner reveal" style="background: linear-gradient(90deg, var(--enae-granate), #8c1025); color: #fff; padding: 1.5rem 1rem; text-align: center; margin: 0 auto 4rem; width: 90%; max-width: 1000px; border-radius: 12px; box-shadow: 0 12px 24px rgba(169, 24, 50, 0.15); display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; position:relative; z-index:10;">
+  <span style="background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 20px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px;">NOVEDAD</span>
+  <span style="font-size: clamp(17px, 2vw, 21px); font-family: var(--font-serif); font-weight: 500; line-height: 1.3;">Incluye formación especializada en <strong>Inteligencia Artificial (IA)</strong> para la toma de decisiones</span>
+</div>
 
 <!-- RANKINGS -->
 <section class="d-rankings">
@@ -495,39 +503,15 @@
         </div>
       </div>
       <div class="d-form-container reveal delay-1">
-        <form id="contact-form" method="POST">
-          <h3 style="margin: 0 0 1.25rem; font-size: 1.25rem; font-weight: 800; color: var(--ink);">Solicita información</h3>
-          <div style="display:flex;flex-direction:column;gap:.75rem;">
-            <div class="d-input-group">
-              <input type="text" id="form_name" name="name" placeholder=" " required class="d-input-floating" autocomplete="name">
-              <label for="form_name" class="d-floating-label">Nombre completo</label>
-            </div>
-            <div class="d-input-group">
-              <input type="email" id="form_email" name="email" placeholder=" " required class="d-input-floating" autocomplete="email">
-              <label for="form_email" class="d-floating-label">Email profesional</label>
-            </div>
-            <div class="d-input-group">
-              <input type="tel" id="form_phone" name="phone" placeholder=" " required class="d-input-floating" autocomplete="tel">
-              <label for="form_phone" class="d-floating-label">Teléfono directo</label>
-            </div>
-            <div class="d-input-group">
-              <input type="text" id="form_company" name="company" placeholder=" " class="d-input-floating" autocomplete="organization">
-              <label for="form_company" class="d-floating-label">Empresa / Cargo actual</label>
-            </div>
-            <div style="margin-top:.5rem;">
-              <label class="d-checkbox-label">
-                <input type="checkbox" required>
-                <span class="d-checkbox-text">Acepto recibir información del Executive MBA y la política de privacidad de ENAE.</span>
-              </label>
-            </div>
-            <button type="submit" class="btn" style="width:100%;justify-content:center;margin-top:1rem;">
-              Solicitar información <span class="arrow">&rarr;</span>
-            </button>
-          </div>
-        </form>
-        <div id="form-success" class="form-status">
-          <p class="fs-msg">Gracias. Nos pondremos en contacto contigo en las próximas 24 horas.</p>
+        <h3 style="margin: 0 0 1.25rem; font-size: 1.25rem; font-weight: 800; color: var(--ink);">Solicita información</h3>
+        
+<div
+          data-form-id='a4081b62-f94d-f111-bec6-00224899880e'
+          data-form-api-url='https://public-eur.mkt.dynamics.com/api/v1.0/orgs/8bc28068-3b86-4b51-aa0e-5a151b861c76/landingpageforms'
+          data-cached-form-url='https://assets-eur.mkt.dynamics.com/8bc28068-3b86-4b51-aa0e-5a151b861c76/digitalassets/forms/a4081b62-f94d-f111-bec6-00224899880e'>
         </div>
+        <script src='https://formui-usa1.mkt.dynamics.com/eur/FormLoader/FormLoader.bundle.js'></script>
+
       </div>
     </div>
   </div>

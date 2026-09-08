@@ -14,10 +14,9 @@
   .js-ready .reveal.delay-3 { transition-delay: .45s }
 
   /* Hero with background image */
-  /* Hero with background image */
   .d-hero {
-    background: url('./src/img/hero_executive_mba.jpg') no-repeat center center !important;
-    background-size: cover !important;
+    background: url('../img/hero_executive_mba.jpg') no-repeat center center;
+    background-size: cover;
     position: relative;
   }
   .d-hero::before {
@@ -120,14 +119,14 @@
     box-shadow: 0 8px 24px rgba(0,0,0,0.04);
     border-color: rgba(169,24,49,.25);
   }
-  .d-ranking-item img, .d-ranking-item svg { height: 65px; width: auto; flex-shrink: 0; object-fit: contain; }
-  .d-ranking-info { display: flex; flex-direction: column; gap: 4px; text-align: center; align-items: center; }
+  .d-ranking-item img, .d-ranking-item svg { height: 100px; max-width: 100%; width: auto; flex-shrink: 0; object-fit: contain; }
+  .d-ranking-info { display: flex; flex-direction: column; gap: 6px; text-align: center; align-items: center; margin-top: 4px; }
   .d-ranking-label {
     font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
     color: var(--ink-soft); line-height: 1.25; font-weight: 600;
   }
   .d-ranking-value {
-    font-family: var(--font-body); font-size: .95rem; font-weight: 800;
+    font-family: var(--font-body); font-size: 1rem; font-weight: 800;
     color: var(--ink); line-height: 1.3;
   }
   .d-ranking-value span { color: var(--ink-soft); font-weight: 500; font-size: .85rem }
@@ -416,7 +415,10 @@
   /* Final CTA 2-column conversion layout */
   .final-container {
     display: grid; grid-template-columns: 1.15fr 1fr;
-    gap: clamp(40px, 6vw, 80px); align-items: center;
+    gap: clamp(40px, 6vw, 80px); align-items: start;
+  }
+  .final-info {
+    margin-top: 10%;
   }
   .final-perks {
     margin-top: 36px; display: flex; flex-direction: column; gap: 16px;
@@ -524,5 +526,9 @@
   }
   .btn:active { transform: translateY(1px); opacity: 0.9; }
   @media (prefers-reduced-motion: reduce) {
-    .orbit-concept { animation: none !important; transform: none !important; }
-  }
+
+/* CEO Landing Hero Overrides */
+.d-hero--ceo::before {
+  /* Lighter gradient so the CEO image is visible, but text remains readable */
+  background: linear-gradient(135deg, rgba(17,18,17,0.7) 0%, rgba(32,34,33,0.5) 50%, rgba(94,15,30,0.6) 100%);
+}

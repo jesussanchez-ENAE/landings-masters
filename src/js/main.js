@@ -1,4 +1,4 @@
-  document.addEventListener('DOMContentLoaded', function() {
+  (function() {
     document.documentElement.classList.add('js-ready');
 
     var revealElements = document.querySelectorAll('.reveal');
@@ -8,7 +8,7 @@
           entry.target.classList.add('active');
           observer.unobserve(entry.target);
         }
-      });
+      })();
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     revealElements.forEach(function(el) { revealObserver.observe(el); });
 
@@ -28,26 +28,7 @@
       }
     }
 
-    var form = document.getElementById('contact-form');
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        var btn = form.querySelector('button[type="submit"]');
-        var origText = btn.innerHTML;
-        btn.textContent = 'Enviando…';
-        btn.disabled = true;
-        btn.style.opacity = '0.7';
-        setTimeout(function() {
-          form.style.display = 'none';
-          var success = document.getElementById('form-success');
-          if (success) {
-            success.classList.add('visible');
-            success.setAttribute('tabindex', '-1');
-            success.focus();
-          }
-        }, 1200);
-      });
-    }
+
   });
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -364,3 +345,122 @@
   // Initial check after DOM ready
   setTimeout(updateControls, 100);
 })();
+
+/* RADAR CHART LOGIC */
+document.addEventListener('DOMContentLoaded', function() {
+  var canvas = document.getElementById('mba-radar-chart');
+  if (!canvas) return;
+
+  var ctx = canvas.getContext('2d');
+  
+  // Custom plugin to add a glow effect to the chart lines
+  const glowPlugin = {
+    id: 'glowPlugin',
+    beforeDatasetsDraw: function(chart) {
+      const ctx = chart.ctx;
+      ctx.save();
+      ctx.shadowColor = 'rgba(169, 24, 50, 0.4)';
+      ctx.shadowBlur = 15;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+    },
+    afterDatasetsDraw: function(chart) {
+      chart.ctx.restore();
+    }
+  };
+
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: [
+        'Visión Estratégica', 
+        'Liderazgo', 
+        'Innovación', 
+        'Finanzas', 
+        'Toma Decisiones', 
+        'Networking'
+      ],
+      datasets: [{
+        label: 'Con Executive MBA',
+        data: [95, 90, 85, 90, 95, 90],
+        backgroundColor: 'rgba(169, 24, 50, 0.25)', /* ENAE Granate */
+        borderColor: 'rgba(169, 24, 50, 1)',
+        pointBackgroundColor: 'rgba(169, 24, 50, 1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(169, 24, 50, 1)',
+        borderWidth: 3,
+        fill: true
+      }, {
+        label: 'Sin Executive MBA',
+        data: [50, 55, 45, 50, 60, 40],
+        backgroundColor: 'rgba(255, 255, 255, 0.05)', /* Slate */
+        borderColor: 'rgba(255, 255, 255, 0.4)',
+        pointBackgroundColor: 'rgba(255, 255, 255, 0.8)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(255, 255, 255, 1)',
+        borderWidth: 2,
+        fill: true,
+        borderDash: [5, 5]
+      }]
+    },
+    plugins: [glowPlugin],
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          angleLines: {
+            color: 'rgba(255, 255, 255, 0.15)'
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.15)',
+            circular: true
+          },
+          pointLabels: {
+            font: {
+              family: "'Inter', sans-serif",
+              size: 13,
+              weight: '600'
+            },
+            color: 'rgba(255, 255, 255, 0.85)' /* Slate 700 */
+          },
+          ticks: {
+            display: false, /* Hide the numeric values (0, 20, 40...) */
+            min: 0,
+            max: 100
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: {
+              family: "'Inter', sans-serif",
+              size: 14,
+              weight: '500'
+            },
+            color: '#ffffff',
+            padding: 20,
+            usePointStyle: true,
+            pointStyle: 'circle'
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(15, 23, 42, 0.9)',
+          titleFont: { size: 14, family: "'Inter', sans-serif" },
+          bodyFont: { size: 13, family: "'Inter', sans-serif" },
+          padding: 12,
+          cornerRadius: 8,
+          displayColors: true
+        }
+      },
+      animation: {
+        duration: 2000,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+});
