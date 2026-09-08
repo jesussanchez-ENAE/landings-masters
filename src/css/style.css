@@ -532,3 +532,181 @@
   /* Lighter gradient so the CEO image is visible, but text remains readable */
   background: linear-gradient(135deg, rgba(17,18,17,0.7) 0%, rgba(32,34,33,0.5) 50%, rgba(94,15,30,0.6) 100%);
 }
+
+/* Dynamics Form overrides for 2 columns & landing style */
+.d-form-container .columnContainer {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+.d-form-container .textFormFieldBlock,
+.d-form-container .phoneFormFieldBlock,
+.d-form-container .lookupFormFieldBlock,
+.d-form-container .optionSetFormFieldBlock {
+  position: relative;
+  width: 100%;
+}
+
+/* Full width elements */
+.d-form-container .textFormFieldBlock[data-targetproperty="qualificationcomments"],
+.d-form-container .consentBlock,
+.d-form-container div[data-editorblocktype="Text"],
+.d-form-container .submitButtonWrapper {
+  grid-column: 1 / -1;
+}
+
+/* Hidden elements */
+.d-form-container [data-hide="hide"],
+.d-form-container .optionSetFormFieldBlock[data-hide="hide"] {
+  display: none !important;
+}
+
+/* Inputs, Textareas, Selects */
+.d-form-container input:not([type="checkbox"]),
+.d-form-container textarea,
+.d-form-container select {
+  width: 100%;
+  padding: 22px 16px 10px;
+  background: var(--ground);
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+  color: var(--ink);
+}
+
+.d-form-container input:not([type="checkbox"]):focus,
+.d-form-container textarea:focus,
+.d-form-container select:focus {
+  outline: none;
+  border-color: var(--enae-granate);
+  box-shadow: 0 0 0 3px rgba(169,24,50,.15);
+}
+
+/* Hide default placeholder so label acts as placeholder */
+.d-form-container input::placeholder,
+.d-form-container textarea::placeholder {
+  color: transparent !important;
+}
+
+/* Phone field adjustments */
+.d-form-container .phoneCountryCode {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.d-form-container .phoneCountryCodeLabel {
+  display: none; /* Hide if we don't need it */
+}
+
+/* Floating labels */
+.d-form-container .textFormFieldBlock label,
+.d-form-container .phoneFormFieldBlock label,
+.d-form-container .lookupFormFieldBlock label,
+.d-form-container .optionSetFormFieldBlock label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  pointer-events: none;
+  transition: all .2s ease;
+  font-family: var(--font-body);
+  z-index: 2;
+  margin: 0;
+}
+
+.d-form-container .textFormFieldBlock[data-targetproperty="qualificationcomments"] label {
+  top: 22px;
+}
+
+/* Float label when focused or has value */
+.d-form-container .textFormFieldBlock:has(input:focus) label,
+.d-form-container .textFormFieldBlock:has(input:not(:placeholder-shown)) label,
+.d-form-container .phoneFormFieldBlock:has(input:focus) label,
+.d-form-container .phoneFormFieldBlock:has(input:not(:placeholder-shown)) label,
+.d-form-container .lookupFormFieldBlock:has(input:focus) label,
+.d-form-container .lookupFormFieldBlock:has(input:not(:placeholder-shown)) label,
+.d-form-container .textFormFieldBlock:has(textarea:focus) label,
+.d-form-container .textFormFieldBlock:has(textarea:not(:placeholder-shown)) label,
+.d-form-container .optionSetFormFieldBlock:has(select:focus) label,
+.d-form-container .optionSetFormFieldBlock:has(select:valid) label {
+  top: 11px;
+  transform: none;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--enae-granate);
+}
+
+/* Consent Block */
+.d-form-container .consentBlock {
+  padding: 10px 0 !important;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.d-form-container .consentBlock p {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0;
+}
+.d-form-container .consentBlock input[type="checkbox"] {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--enae-granate);
+}
+.d-form-container .consentBlock span,
+.d-form-container div[data-editorblocktype="Text"] p {
+  font-size: 12.5px !important;
+  line-height: 1.5 !important;
+  color: var(--ink-soft) !important;
+  margin: 0 !important;
+  font-family: var(--font-body) !important;
+}
+
+/* Submit Button */
+.d-form-container .submitButtonWrapper {
+  display: block !important;
+  text-align: left !important;
+  margin-top: 8px;
+}
+.d-form-container .submitButton {
+  background: var(--enae-granate);
+  color: #F8F9FA;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+.d-form-container .submitButton:hover {
+  background: #8c1025;
+  transform: translateY(-2px);
+}
+
+/* Dropdown specific */
+.d-form-container select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+@media (max-width: 600px) {
+  .d-form-container .columnContainer {
+    grid-template-columns: 1fr;
+  }
+}

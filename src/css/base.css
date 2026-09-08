@@ -115,7 +115,7 @@
     border-bottom:1px solid var(--hair);
   }
   .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:12px}
-  .brand-logo{height:34px;display:block}
+  .brand-logo{height:70px;display:block}
   .brand-logo svg{height:100%;width:auto;display:block}
   .nav-links{display:none;gap:26px;font-size:14px;color:var(--enae-negro);font-weight:700}
   .nav-links a{text-decoration:none;position:relative;padding-block:6px}

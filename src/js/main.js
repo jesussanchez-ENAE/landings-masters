@@ -350,6 +350,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   var canvas = document.getElementById('mba-radar-chart');
   if (!canvas) return;
+  canvas.style.opacity = '1';
 
   var ctx = canvas.getContext('2d');
   
