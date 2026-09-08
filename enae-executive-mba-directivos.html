@@ -681,13 +681,13 @@
   @media(min-width:800px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr}}
   .foot-brand svg{height:38px;width:auto;display:block;margin-bottom:14px}
   .foot-brand p{margin:0;max-width:36ch;line-height:1.55;font-weight:300}
-  .foot h4{
+  footer h4{
     margin:0 0 14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
     color: #F8F9FA;font-weight:700;
   }
-  .foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  .foot a{color:color-mix(in oklab, var(--enae-blanco) 78%, transparent);text-decoration:none;font-weight:300}
-  .foot a:hover{color:#ffd7a0}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  footer a{color:color-mix(in oklab, var(--enae-blanco) 78%, transparent);text-decoration:none;font-weight:300}
+  footer a:hover{color:#ffd7a0}
   .foot-bottom{
     max-width:var(--page-max);margin:36px auto 0;padding-inline:var(--gutter);padding-top:22px;
     border-top:1px solid color-mix(in oklab, var(--enae-blanco) 14%, transparent);
@@ -707,6 +707,7 @@
   }
 
   /* Logo colors */
+  .logo-white svg,
   .logo-white svg path,
   .logo-white svg rect{fill:#ffffff !important}
 </style>
@@ -785,88 +786,467 @@
   .js-ready .reveal.delay-2 { transition-delay: .3s }
   .js-ready .reveal.delay-3 { transition-delay: .45s }
 
-  /* Neural sphere — contained, subtle companion */
-  .hero-sphere {
+  /* Hero with background image */
+  /* Hero with background image */
+  .d-hero {
+    background: url('./src/img/hero_executive_mba.jpg') no-repeat center center !important;
+    background-size: cover !important;
     position: relative;
-    width: 100%;
-    aspect-ratio: 1;
   }
-  .hero-sphere canvas {
+  .d-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(17,18,17,0.92) 0%, rgba(32,34,33,0.86) 50%, rgba(94,15,30,0.78) 100%);
+    z-index: 1;
+  }
+  .d-hero-inner {
+    display: flex; gap: clamp(2.5rem, 5vw, 5rem); align-items: center;
+    justify-content: space-between; position: relative; z-index: 2;
+    padding-block: clamp(80px, 9vw, 130px) clamp(70px, 8vw, 110px);
+  }
+  .d-hero-content { flex: 1.25; color: #F8F9FA }
+  .d-hero-content .t-bold, .d-hero-content .t-serif { color: #F8F9FA }
+  .d-hero-content .t-serif { color: #ffd7a0 }
+  .d-hero-content .t-light {
+    display: block; font-family: var(--font-body); font-weight: 300;
+    font-size: clamp(15.5px, 1.8vw, 18px); color: rgba(255,255,255,.9);
+    margin-top: 18px; line-height: 1.6; max-width: 42ch;
+  }
+  .d-hero-content .cta-row {
+    margin-top: clamp(28px, 3.5vw, 42px);
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+  }
+  .d-hero-meta {
+    margin-top: clamp(36px, 4.5vw, 56px); padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.18);
+    display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 48px);
+  }
+  .d-hero-meta > div { display: flex; flex-direction: column; gap: 4px }
+  .d-hero-meta span {
+    display: block; font-family: var(--font-body); font-weight: 700;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.65);
+  }
+  .d-hero-meta strong { color: #F8F9FA; font-weight: 700; font-size: 14.5px }
+  .d-hero-visual {
+    flex: 0.85; position: relative;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .d-hero-img-wrap {
+    position: relative; width: 100%; aspect-ratio: 1;
+  }
+  .d-hero-img-wrap canvas {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     opacity: 0; transition: opacity 1.2s ease;
-    border-radius: 50%; touch-action: none; cursor: grab;
+    touch-action: none; cursor: grab;
   }
+
+  /* Orbit concept pills */
+  @keyframes float {
+    0%, 100% { transform: translateY(0) }
+    50% { transform: translateY(-12px) }
+  }
+  .orbit-concept {
+    position: absolute;
+    background: var(--enae-granate); color: white;
+    padding: 8px 18px; border-radius: 30px;
+    font-family: var(--font-body); font-weight: 700; font-size: 12px;
+    letter-spacing: .04em;
+    box-shadow: 0 4px 15px rgba(169,24,50,.3);
+    animation: float 4s ease-in-out infinite; z-index: 3;
+    white-space: nowrap;
+  }
+  .orbit-1 { top: 8%; left: 12%; animation-delay: 0s }
+  .orbit-2 { top: 18%; right: 2%; animation-delay: .5s }
+  .orbit-3 { top: 72%; left: 2%; animation-delay: 1s }
+  .orbit-4 { bottom: 8%; right: 12%; animation-delay: 1.5s }
+  .orbit-5 { top: 44%; right: -12%; animation-delay: 2s }
+  .orbit-6 { top: 48%; left: -8%; animation-delay: 2.5s }
 
   /* Rankings strip */
-  .d-rankings { width: 100vw; background: var(--enae-gris-claro); padding: 2.5rem 2rem; border-bottom: 1px solid var(--hair) }
+  .d-rankings {
+    width: 100%; background: var(--surface);
+    padding: clamp(32px, 3.5vw, 48px) 0;
+    border-bottom: 1px solid var(--hair);
+  }
   .d-rankings-title {
-    text-align: center; font-family: var(--font-body); font-size: .7rem;
-    text-transform: uppercase; letter-spacing: .15em; color: var(--enae-gris-oscuro); margin-bottom: 1.5rem;
+    text-align: center; font-family: var(--font-body); font-size: .75rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: .18em;
+    color: var(--enae-granate); margin-bottom: 1.8rem;
   }
   .d-rankings-strip {
-    max-width: 1100px; width: 100%; margin: 0 auto;
-    display: flex; align-items: stretch; justify-content: center;
+    max-width: var(--page-max); width: 100%; margin: 0 auto;
+    padding-inline: var(--gutter);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
   .d-ranking-item {
-    display: flex; align-items: center; gap: 1rem;
-    padding: 1rem 2rem; border-right: 1px solid rgba(0,0,0,.08);
-    flex: 1; justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1rem;
+    padding: 1.5rem 1.25rem;
+    background: var(--ground);
+    border: 1px solid var(--hair);
+    border-radius: 8px;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
-  .d-ranking-item:last-child { border-right: none }
-  .d-ranking-item img, .d-ranking-item svg { height: 48px; width: auto; flex-shrink: 0 }
-  .d-ranking-info { display: flex; flex-direction: column; gap: 2px }
+  .d-ranking-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    border-color: rgba(169,24,49,.25);
+  }
+  .d-ranking-item img, .d-ranking-item svg { height: 50px; width: auto; flex-shrink: 0; object-fit: contain; }
+  .d-ranking-info { display: flex; flex-direction: column; gap: 4px; text-align: center; align-items: center; }
   .d-ranking-label {
-    font-size: .7rem; text-transform: uppercase; letter-spacing: .06em;
-    color: var(--enae-gris-oscuro); line-height: 1.3;
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--ink-soft); line-height: 1.25; font-weight: 600;
   }
   .d-ranking-value {
-    font-family: var(--font-heading); font-size: 1rem; font-weight: 700;
-    color: var(--enae-negro); line-height: 1.3;
+    font-family: var(--font-body); font-size: .95rem; font-weight: 800;
+    color: var(--ink); line-height: 1.3;
   }
-  .d-ranking-value span { color: var(--enae-gris-oscuro); font-weight: 400; font-size: .85rem }
+  .d-ranking-value span { color: var(--ink-soft); font-weight: 500; font-size: .85rem }
 
-  /* Contrast fix: #636363 on #dbdbdb = 4.3:1 (fails AA).
-     Override body text on light bgs to #404040 = 5.9:1 */
+  /* Contrast fix */
   .perfil-card p, .value-item p, .curric-note, .mode p,
-  .qa .a, .kpi-sub { color: var(--enae-gris-oscuro) }
+  .qa .a { color: var(--ink-soft) }
+
+  /* Method readability: diamond bullets and text on dark bg */
+  .method li::before { background: #ffd7a0 }
+  .method li { color: rgba(255,255,255,.92); font-size: 15.5px }
+
+  /* Value trio cards */
+  .value-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 32px);
+  }
+  .value-card {
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 12px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .value-card .vc-img {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: var(--hair);
+  }
+  .value-card .vc-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .value-card:hover .vc-img img {
+    transform: scale(1.05);
+  }
+  .value-card .vc-content {
+    padding: clamp(28px, 3vw, 36px);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .value-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(169,24,49,.3);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.06);
+  }
+  .value-card .vc-num {
+    font-family: var(--font-serif); font-style: italic; font-weight: 400;
+    color: var(--enae-granate); font-size: 24px; line-height: 1;
+  }
+  .value-card h3 {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: 22px; line-height: 1.25; margin: 0; color: var(--ink);
+  }
+  .value-card p {
+    margin: 0; color: var(--ink-soft); font-size: 15.5px; line-height: 1.6; font-weight: 300;
+  }
+
+  /* Claustro banner */
+  .claustro-banner {
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 16px;
+    display: grid; grid-template-columns: 1fr 1.25fr;
+    align-items: stretch;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+    overflow: hidden;
+  }
+  .claustro-img-col {
+    width: 100%;
+    min-height: 300px;
+    background: var(--hair);
+  }
+  .claustro-img-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .claustro-content-col {
+    padding: clamp(36px, 4.5vw, 56px);
+    display: flex; flex-direction: column; gap: clamp(32px, 5vw, 48px);
+    justify-content: center;
+  }
+  @media (max-width: 960px) {
+    .claustro-banner { grid-template-columns: 1fr; }
+    .claustro-img-col { min-height: 250px; }
+    .claustro-content-col { padding: 2rem; }
+  }
+  .claustro-facts-col {
+    display: flex; flex-direction: row; flex-wrap: wrap; gap: 24px;
+    border-top: 2px solid rgba(169,24,49,0.25);
+    padding-top: 24px;
+  }
+  .cf-item { flex: 1; min-width: 140px; display: flex; flex-direction: column; gap: 4px; }
+  .cf-num {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(28px, 3vw, 36px); line-height: 1.1;
+    color: var(--enae-granate); letter-spacing: -.02em;
+  }
+  .cf-text {
+    font-size: 14px; color: var(--ink-soft); line-height: 1.5; font-weight: 400; max-width: 34ch;
+  }
+
+  /* Metodología - Animated Service Cards Carousel */
+  .method-carousel-section {
+    padding-block: clamp(60px, 8vw, 100px);
+    position: relative;
+    overflow: hidden;
+  }
+  .method-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: clamp(32px, 4vw, 48px); gap: 20px;
+  }
+  .carousel-nav-controls {
+    display: flex; gap: 12px; align-items: center;
+  }
+  .carousel-nav-btn {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--surface); border: 1.5px solid var(--hair);
+    color: var(--ink); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all .2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .carousel-nav-btn:hover:not(:disabled) {
+    background: var(--enae-granate); border-color: var(--enae-granate);
+    color: #F8F9FA; transform: scale(1.05);
+  }
+  .carousel-nav-btn:disabled {
+    opacity: 0.35; cursor: not-allowed;
+  }
+  .method-carousel-viewport {
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-top: 36px;
+    padding-bottom: 50px;
+    margin-top: -24px;
+    margin-bottom: -32px;
+    cursor: grab;
+    /* Smooth gradient edge mask to dissolve cards seamlessly */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black clamp(20px, 4vw, 56px),
+      black calc(100% - clamp(60px, 12vw, 150px)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black clamp(20px, 4vw, 56px),
+      black calc(100% - clamp(60px, 12vw, 150px)),
+      transparent 100%
+    );
+  }
+  .method-carousel-viewport:active { cursor: grabbing; }
+  .method-carousel-viewport::-webkit-scrollbar { display: none; }
+  .method-carousel-track {
+    display: flex; gap: 24px;
+    align-items: stretch;
+    padding-right: clamp(60px, 12vw, 150px);
+  }
+  .method-service-card {
+    flex: 0 0 calc(33.333% - 16px);
+    min-width: 300px;
+    height: 440px;
+    border-radius: 24px;
+    padding: 34px 30px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    scroll-snap-align: start;
+    border: 1px solid rgba(255,255,255,0.09);
+    user-select: none;
+    transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow .4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color .35s ease,
+                background .4s ease;
+  }
+  @media (max-width: 1080px) {
+    .method-service-card { flex: 0 0 calc(50% - 12px); min-width: 280px; }
+  }
+  @media (max-width: 680px) {
+    .method-service-card { flex: 0 0 calc(100% - 20px); min-width: 260px; height: 410px; }
+  }
+
+  /* Hover micro-interactions */
+  .method-service-card:hover {
+    transform: translateY(-12px);
+    border-color: rgba(169, 24, 49, 0.75);
+    box-shadow: 0 28px 56px -12px rgba(0, 0, 0, 0.7),
+                0 0 36px -4px rgba(169, 24, 49, 0.4);
+  }
+  .method-service-card:hover .msc-glow {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  .method-service-card:hover .msc-number {
+    color: #ffd7a0;
+    letter-spacing: .12em;
+  }
+  .method-service-card:hover .msc-icon {
+    transform: scale(1.12) translateY(-2px);
+    background: rgba(169, 24, 49, 0.3);
+    color: #ffd7a0;
+    box-shadow: 0 0 25px rgba(169, 24, 49, 0.5);
+    border-color: rgba(255, 215, 160, 0.4);
+  }
+  .method-service-card:hover .msc-title {
+    color: #ffffff;
+  }
+  .method-service-card:hover .msc-desc {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .method-service-card.card-1 {
+    background: linear-gradient(150deg, #1b1316 0%, #2a1118 60%, #151012 100%);
+  }
+  .method-service-card.card-2 {
+    background: linear-gradient(150deg, #13171d 0%, #1c1c28 60%, #111216 100%);
+  }
+  .method-service-card.card-3 {
+    background: linear-gradient(150deg, #2b1118 0%, #1c0e12 60%, #120e10 100%);
+  }
+  .method-service-card.card-4 {
+    background: linear-gradient(150deg, #1f1b14 0%, #262017 60%, #141310 100%);
+  }
+  .msc-top {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: flex-start;
+    height: 110px;
+    margin-bottom: 30px;
+    flex-shrink: 0;
+  }
+  .msc-number {
+    font-family: monospace, SFMono-Regular, Menlo, Monaco, Consolas;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.5); letter-spacing: .08em;
+    line-height: 1;
+    transition: color .3s ease, letter-spacing .3s ease;
+  }
+  .msc-icon {
+    margin-top: 22px; width: 54px; height: 54px; border-radius: 14px;
+    background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;
+    color: #ffd7a0; backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1),
+                background .35s ease,
+                box-shadow .35s ease,
+                border-color .35s ease;
+  }
+  .msc-bottom {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    flex: 1;
+  }
+  .msc-title {
+    font-family: var(--font-body); font-weight: 800; font-size: 1.22rem;
+    text-transform: uppercase; letter-spacing: .04em; color: #F8F9FA;
+    margin: 0 0 12px; line-height: 1.35;
+    min-height: 3.3em;
+    display: flex; align-items: flex-start;
+    transition: color .3s ease;
+  }
+  .msc-desc {
+    font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.72);
+    font-weight: 300; margin: 0;
+    transition: color .3s ease;
+  }
+  .msc-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(circle at 85% 15%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    border-radius: 24px; opacity: 0.6;
+    transition: opacity .4s ease, transform .4s ease;
+  }
+
+  /* Final CTA 2-column conversion layout */
+  .final-container {
+    display: grid; grid-template-columns: 1.15fr 1fr;
+    gap: clamp(40px, 6vw, 80px); align-items: center;
+  }
+  .final-perks {
+    margin-top: 36px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .f-perk {
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .f-perk-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(255,215,160,.2); color: #ffd7a0;
+    font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .f-perk strong {
+    display: block; font-size: 15px; color: #F8F9FA; font-weight: 700;
+  }
+  .f-perk span {
+    font-size: 13.5px; color: rgba(255,255,255,.75); font-weight: 300;
+  }
 
   /* Form — editorial: sharp edges, no glassmorphism */
   .d-form-container {
-    background: var(--enae-blanco); border: 1px solid var(--hair);
-    padding: clamp(28px, 3vw, 40px);
-    width: 100%; max-width: 520px;
+    background: var(--surface); border: 1px solid var(--hair);
+    padding: clamp(32px, 3.5vw, 44px);
+    width: 100%; max-width: 520px; border-radius: 12px;
     color: var(--ink); text-align: left; margin: 0 auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
   }
-  .d-input-group { position: relative; margin-bottom: .5rem }
+  .d-input-group { position: relative; margin-bottom: .6rem }
   .d-input-floating {
     width: 100%; padding: 22px 16px 10px;
-    background: var(--surface); border: 1px solid var(--hair);
+    background: var(--ground); border: 1px solid var(--hair);
+    border-radius: 6px;
     font-family: var(--font-body); font-size: 15px;
     box-sizing: border-box; transition: border-color .2s ease; color: var(--ink);
   }
   .d-input-floating:focus {
     outline: none; border-color: var(--enae-granate);
-    box-shadow: 0 0 0 3px rgba(169,24,50,.1);
+    box-shadow: 0 0 0 3px rgba(169,24,50,.15);
   }
   .d-floating-label {
     position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-    font-size: 15px; color: var(--enae-gris-oscuro);
+    font-size: 14.5px; color: var(--ink-soft);
     pointer-events: none; transition: all .2s ease; font-family: var(--font-body);
   }
   .d-input-floating:focus + .d-floating-label,
   .d-input-floating:not(:placeholder-shown) + .d-floating-label {
-    top: 12px; font-size: 11px; font-weight: 700; color: var(--enae-granate);
+    top: 11px; font-size: 11px; font-weight: 700; color: var(--enae-granate);
   }
   .d-checkbox-label {
     display: flex; align-items: flex-start; gap: 12px;
-    padding: 12px; margin: 0 -12px; cursor: pointer; transition: background .2s ease;
+    padding: 10px 0; cursor: pointer; transition: background .2s ease;
   }
-  .d-checkbox-label:hover { background: rgba(0,0,0,.03) }
   .d-checkbox-label input[type="checkbox"] {
-    margin-top: 2px; width: 20px; height: 20px; cursor: pointer; accent-color: var(--enae-granate);
+    margin-top: 2px; width: 18px; height: 18px; cursor: pointer; accent-color: var(--enae-granate);
   }
-  .d-checkbox-text { font-size: 13px; line-height: 1.5; color: var(--enae-gris-oscuro) }
+  .d-checkbox-text { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft) }
   .form-status { text-align: center; padding: 2rem; display: none }
   .form-status.visible { display: block }
   .form-status .fs-msg {
@@ -878,6 +1258,7 @@
   .testimonial-frame {
     position: relative; width: 100%; padding-bottom: 56.25%;
     overflow: hidden; background: var(--enae-negro); border: 1px solid var(--hair);
+    border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.08);
   }
   .testimonial-frame iframe {
     position: absolute; inset: 0; width: 100%; height: 100%; border: none;
@@ -899,43 +1280,60 @@
   .enae-wm--programa::after { width: 600px; height: 600px; bottom: -150px; right: -120px; opacity: .03; transform: rotate(-20deg) }
   .enae-wm--final::after { width: 500px; height: 500px; top: -100px; left: 50%; margin-left: -250px; opacity: .05; transform: rotate(40deg) }
 
-  /* Responsive */
+  /* Responsive queries */
+  @media (max-width: 991px) {
+    .d-hero-inner { flex-direction: column; gap: 3rem; text-align: left }
+    .d-hero-visual { max-width: 380px; width: 100% }
+    .orbit-5, .orbit-6 { display: none }
+    .d-rankings-strip { grid-template-columns: repeat(2, 1fr); }
+    .faculty-grid { grid-template-columns: 1fr; gap: 36px; }
+    .final-container { grid-template-columns: 1fr; gap: 40px; }
+  }
   @media (max-width: 767px) {
-    .d-form-container { padding: 2rem }
-    .d-rankings { padding: 2rem 1.5rem }
-    .d-rankings-strip { flex-direction: column; gap: 0 }
-    .d-ranking-item { padding: 1rem 0; border-right: none; border-bottom: 1px solid rgba(0,0,0,.06); justify-content: flex-start }
-    .d-ranking-item:last-child { padding-bottom: 0; border-bottom: none }
+    .d-rankings { padding: 2rem 1rem }
+    .d-rankings-strip { grid-template-columns: 1fr; gap: 10px }
+    .value-grid { grid-template-columns: 1fr }
+    .d-form-container { padding: 2rem 1.5rem }
+  }
+  .btn:active { transform: translateY(1px); opacity: 0.9; }
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-concept { animation: none !important; transform: none !important; }
   }
 </style>
 <!-- END CUSTOM CSS DIRECTIVOS -->
 
 
 <!-- HERO -->
-<header class="hero enae-wm enae-wm--hero">
+<header class="hero d-hero enae-wm enae-wm--hero">
   <div class="pattern" aria-hidden="true">
     <span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span><span class="b5"></span>
   </div>
-  <div class="wrap hero-inner">
-    <div class="hero-grid">
-      <div class="reveal">
-        <h1 class="hero-title mix">
-          <span class="t-bold">Deja de gestionar tu área.</span>
-          <span class="t-serif">Dirige la empresa.</span>
-          <span class="t-light">Desarrolla una visión global del negocio y adquiere las herramientas para tomar decisiones estratégicas, liderar equipos y generar impacto.</span>
-        </h1>
-        <div class="cta-row" style="margin-top:32px;">
-          <a href="#solicitar" class="btn">Quiero dar el salto <span class="arrow">&rarr;</span></a>
-          <a href="#programa" class="btn ghost">Ver el programa <span class="arrow">&rarr;</span></a>
-        </div>
-        <div class="hero-meta">
-          <div><span>Experiencia</span><strong>Más de 35 años</strong></div>
-          <div><span>Duración</span><strong>60 ECTS</strong></div>
-          <div><span>Formato</span><strong>Presencial / Virtual Live</strong></div>
-        </div>
+  <div class="wrap d-hero-inner reveal">
+    <div class="d-hero-content">
+      <h1 class="hero-title mix">
+        <span class="t-bold">Deja de gestionar tu área.</span>
+        <span class="t-serif">Dirige la empresa.</span>
+        <span class="t-light">Desarrolla una visión global del negocio y adquiere las herramientas para tomar decisiones estratégicas, liderar equipos y generar impacto.</span>
+      </h1>
+      <div class="cta-row" style="margin-top:32px;">
+        <a href="#solicitar" class="btn">Quiero dar el salto <span class="arrow">&rarr;</span></a>
+        <a href="#programa" class="btn ghost">Ver el programa <span class="arrow">&rarr;</span></a>
       </div>
-      <div class="hero-sphere reveal delay-1">
+      <div class="d-hero-meta">
+        <div><span>Experiencia</span><strong>Más de 35 años</strong></div>
+        <div><span>Duración</span><strong>60 ECTS</strong></div>
+        <div><span>Formato</span><strong>Presencial / Virtual Live</strong></div>
+      </div>
+    </div>
+    <div class="d-hero-visual reveal delay-1">
+      <div class="d-hero-img-wrap">
         <canvas id="cobe-globe"></canvas>
+        <div class="orbit-concept orbit-1">ESTRATEGIA</div>
+        <div class="orbit-concept orbit-2">FINANZAS</div>
+        <div class="orbit-concept orbit-3">TALENTO</div>
+        <div class="orbit-concept orbit-4">OPERACIONES</div>
+        <div class="orbit-concept orbit-5">MARKETING</div>
+        <div class="orbit-concept orbit-6">IA</div>
       </div>
     </div>
   </div>
@@ -979,26 +1377,41 @@
 <!-- BENEFICIOS -->
 <section class="enae-wm enae-wm--beneficio" id="beneficio">
   <div class="wrap">
-    <h2 class="mix reveal" style="margin-bottom:clamp(32px,4vw,52px);">
+    <h2 class="mix reveal" style="margin-bottom:clamp(36px,4vw,56px);">
       <span class="t-bold">Tres capacidades que separan</span>
-      <span class="t-serif">al gestor del director.</span>
+      <span class="t-serif">al gestor del directivo.</span>
     </h2>
-  </div>
-  <div class="value">
-    <div class="value-item reveal delay-1">
-      <span class="n">i</span>
-      <h3>Visión estratégica</h3>
-      <p>Comprende el negocio como un todo. Anticipa oportunidades donde otros ven operaciones aisladas.</p>
-    </div>
-    <div class="value-item reveal delay-2">
-      <span class="n">ii</span>
-      <h3>Decisiones de negocio</h3>
-      <p>Conecta estrategia, finanzas, operaciones, talento e IA para decidir con criterio y con datos.</p>
-    </div>
-    <div class="value-item reveal delay-3">
-      <span class="n">iii</span>
-      <h3>Liderazgo ejecutivo</h3>
-      <p>Lidera equipos, impulsa el cambio organizacional y genera impacto más allá de tu área funcional.</p>
+    <div class="value-grid">
+      <div class="value-card reveal delay-1">
+        <div class="vc-img">
+          <img src="./src/img/10042023-317A7390.jpg" alt="Visión estratégica" loading="lazy">
+        </div>
+        <div class="vc-content">
+          <span class="vc-num">01</span>
+          <h3>Visión estratégica</h3>
+          <p>Comprende el negocio como un todo. Anticipa oportunidades donde otros ven operaciones aisladas.</p>
+        </div>
+      </div>
+      <div class="value-card reveal delay-2">
+        <div class="vc-img">
+          <img src="./src/img/10042023-317A8104.jpg" alt="Decisiones de empresa" loading="lazy">
+        </div>
+        <div class="vc-content">
+          <span class="vc-num">02</span>
+          <h3>Decisiones de empresa</h3>
+          <p>Conecta estrategia, finanzas, operaciones, talento e IA para decidir con criterio y con datos.</p>
+        </div>
+      </div>
+      <div class="value-card reveal delay-3">
+        <div class="vc-img">
+          <img src="./src/img/Sesion_innegociable_-61.jpg" alt="Liderazgo ejecutivo" loading="lazy">
+        </div>
+        <div class="vc-content">
+          <span class="vc-num">03</span>
+          <h3>Liderazgo ejecutivo</h3>
+          <p>Lidera equipos, impulsa el cambio organizacional y genera impacto más allá de tu área funcional.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1041,41 +1454,130 @@
   </div>
 </section>
 
-<!-- CLAUSTRO Y MÉTODO -->
-<section id="porque" class="enae-wm enae-wm--porque">
+<!-- CLAUSTRO -->
+<section id="claustro" class="enae-wm enae-wm--porque">
   <div class="wrap">
-    <h2 class="mix reveal" style="margin-bottom:clamp(32px,4vw,52px);">
-      <span class="t-bold">35 años. 16.000 directivos.</span>
-      <span class="t-serif">Una convicción.</span>
-    </h2>
-  </div>
-  <div class="faculty reveal delay-1">
-    <div>
-      <blockquote class="quote">
-        El directivo del futuro no será el que más sepa de su área, sino el que mejor conecte todas las piezas del negocio.
-      </blockquote>
-      <p class="quote-attrib">Claustro Executive MBA &middot; ENAE Business School</p>
-      <p style="margin-top:28px;color:var(--enae-gris-oscuro);font-size:15px;font-weight:300;line-height:1.55;">
-        Profesorado vinculado al mundo empresarial y directivo. Cada módulo combina rigor académico con experiencia real en la toma de decisiones.
-      </p>
-      <p style="margin-top:14px;color:var(--enae-gris-oscuro);font-size:15px;font-weight:300;line-height:1.55;">
-        Un programa para profesionales que ya dirigen y necesitan herramientas avanzadas. No para empezar, sino para dar el siguiente paso.
-      </p>
-    </div>
-    <div class="method">
-      <div class="pattern" aria-hidden="true">
-        <span class="b1"></span><span class="b2"></span>
+    <div class="claustro-banner reveal">
+      <div class="claustro-img-col">
+        <img src="./src/img/entrega%20diplomas%20enae%20gnfoto2022%20(76).jpg" alt="Claustro ENAE" loading="lazy">
       </div>
-      <h3 class="mix">
-        <span class="t-bold">Metodología</span>
-        <span class="t-serif">que transforma</span>
-      </h3>
-      <ul>
-        <li><strong>Casos reales de empresa:</strong> situaciones y decisiones que forman parte de tu día a día como directivo.</li>
-        <li><strong>Visión transversal:</strong> estrategia, finanzas, operaciones, marketing, talento, transformación e IA.</li>
-        <li><strong>Aplicación inmediata:</strong> lo que aprendes el viernes, lo aplicas el lunes en tu empresa.</li>
-        <li><strong>Red de directivos:</strong> conecta con profesionales de diferentes sectores e industrias.</li>
-      </ul>
+      <div class="claustro-content-col">
+        <div class="claustro-quote-col">
+          <span class="eyebrow" style="margin-bottom:16px;"><span class="dot"></span> 35 años · 16.000 directivos <span class="rule"></span></span>
+          <blockquote class="quote">
+            El directivo del futuro no será el que más sepa de su área, sino el que mejor conecte todas las piezas del negocio.
+          </blockquote>
+          <p class="quote-attrib">Claustro Executive MBA &middot; ENAE Business School</p>
+        </div>
+        <div class="claustro-facts-col">
+          <div class="cf-item">
+            <span class="cf-num">100%</span>
+            <span class="cf-text">Claustro directivo en activo.</span>
+          </div>
+          <div class="cf-item">
+            <span class="cf-num">+300</span>
+            <span class="cf-text">Casos de dirección reales.</span>
+          </div>
+          <div class="cf-item">
+            <span class="cf-num">16k+</span>
+            <span class="cf-text">Alumni en red global.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGÍA QUE TRANSFORMA (Animated Service Cards Carousel) -->
+<section id="metodologia" class="method-carousel-section">
+  <div class="wrap">
+    <div class="method-header reveal">
+      <div>
+        <span class="eyebrow" style="color:var(--enae-granate); margin-bottom:12px;">
+          <span class="dot" style="background:var(--enae-granate)"></span> Modelo de aprendizaje directivo <span class="rule" style="background:rgba(169,24,49,0.3)"></span>
+        </span>
+        <h2 class="mix">
+          <span class="t-bold">Metodología</span>
+          <span class="t-serif">que transforma.</span>
+        </h2>
+      </div>
+      <div class="carousel-nav-controls">
+        <button class="carousel-nav-btn prev" id="method-prev" aria-label="Anterior pilar metodológico" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="carousel-nav-btn next" id="method-next" aria-label="Siguiente pilar metodológico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Carousel Viewport & Track -->
+    <div class="method-carousel-viewport" id="method-carousel" role="region" aria-roledescription="carousel">
+      <div class="method-carousel-track">
+        <!-- Card 1 -->
+        <div class="method-service-card card-1 reveal delay-1" role="group" aria-roledescription="slide">
+          <div class="msc-top">
+            <span class="msc-number">( 001 )</span>
+            <div class="msc-icon">
+              <!-- Briefcase Icon -->
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+          </div>
+          <div class="msc-bottom">
+            <h3 class="msc-title">Casos reales de empresa</h3>
+            <p class="msc-desc">Situaciones y decisiones complejas que forman parte de tu día a día como directivo. Sin marcos teóricos abstractos: dilemas empresariales reales analizados en equipo.</p>
+          </div>
+          <div class="msc-glow"></div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="method-service-card card-2 reveal delay-2" role="group" aria-roledescription="slide">
+          <div class="msc-top">
+            <span class="msc-number">( 002 )</span>
+            <div class="msc-icon">
+              <!-- Layers / Transversal Icon -->
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+          </div>
+          <div class="msc-bottom">
+            <h3 class="msc-title">Visión transversal 360º</h3>
+            <p class="msc-desc">Conexión estratégica entre finanzas, operaciones, marketing, talento, transformación e IA. Aprende a romper los silos departamentales y dirigir la compañía como un todo.</p>
+          </div>
+          <div class="msc-glow"></div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="method-service-card card-3 reveal delay-3" role="group" aria-roledescription="slide">
+          <div class="msc-top">
+            <span class="msc-number">( 003 )</span>
+            <div class="msc-icon">
+              <!-- Zap / Immediate Application Icon -->
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+          </div>
+          <div class="msc-bottom">
+            <h3 class="msc-title">Aplicación inmediata</h3>
+            <p class="msc-desc">Lo que aprendes y debates el fin de semana, lo aplicas el lunes en tu empresa. Cada sesión aporta herramientas prácticas con retorno directo e inmediato en tu organización.</p>
+          </div>
+          <div class="msc-glow"></div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="method-service-card card-4 reveal delay-1" role="group" aria-roledescription="slide">
+          <div class="msc-top">
+            <span class="msc-number">( 004 )</span>
+            <div class="msc-icon">
+              <!-- Users / High Impact Network Icon -->
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+          </div>
+          <div class="msc-bottom">
+            <h3 class="msc-title">Red de directivos</h3>
+            <p class="msc-desc">Conecta con líderes de diversos sectores e industrias. Genera alianzas de alto valor, comparte inquietudes comunes y consolida un networking directivo para toda la vida.</p>
+          </div>
+          <div class="msc-glow"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1145,7 +1647,7 @@
 </section>
 
 <!-- TESTIMONIOS -->
-<section id="testimonios" style="background:var(--enae-gris-claro);">
+<section id="testimonios" style="background:var(--surface);">
   <div class="wrap reveal" style="max-width:900px;">
     <h2 class="mix" style="margin-bottom:clamp(24px,3vw,40px);">
       <span class="t-serif">Quienes lo han vivido</span>
@@ -1195,47 +1697,76 @@
     <span class="b1"></span><span class="b2"></span><span class="b3"></span>
   </div>
   <div class="wrap" style="position:relative;z-index:2;">
-    <div class="reveal" style="max-width:520px;">
-      <h2 class="mix" style="margin-bottom:24px;">
-        <span class="t-bold">El Executive MBA</span>
-        <span class="t-serif">empieza con una conversación.</span>
-      </h2>
-      <p class="lede-final">
-        Cuéntanos sobre tu trayectoria y tus objetivos. Te explicamos el programa, el proceso de admisión y resolvemos tus dudas.
-      </p>
-    </div>
-    <div class="d-form-container reveal delay-1">
-      <form id="contact-form" method="POST">
-        <div style="display:flex;flex-direction:column;gap:.75rem;">
-          <div class="d-input-group">
-            <input type="text" id="form_name" name="name" placeholder=" " required class="d-input-floating" autocomplete="name">
-            <label for="form_name" class="d-floating-label">Nombre completo</label>
+    <div class="final-container">
+      <div class="final-info reveal">
+        <span class="eyebrow" style="margin-bottom:18px;">
+          <span class="dot"></span> Proceso de admisión abierto <span class="rule"></span>
+        </span>
+        <h2 class="mix" style="margin-bottom:20px; font-size:clamp(32px, 4vw, 54px);">
+          <span class="t-bold">El Executive MBA</span>
+          <span class="t-serif">empieza con una conversación.</span>
+        </h2>
+        <p class="lede-final">
+          Cuéntanos sobre tu trayectoria y tus objetivos. Un asesor directivo analizará tu perfil, te explicará las modalidades de estudio y resolverá todas tus preguntas sin compromiso.
+        </p>
+        <div class="final-perks">
+          <div class="f-perk">
+            <span class="f-perk-icon">✓</span>
+            <div>
+              <strong>Asesoramiento 1 a 1</strong>
+              <span>Revisión personalizada de tu perfil profesional.</span>
+            </div>
           </div>
-          <div class="d-input-group">
-            <input type="email" id="form_email" name="email" placeholder=" " required class="d-input-floating" autocomplete="email">
-            <label for="form_email" class="d-floating-label">Email</label>
+          <div class="f-perk">
+            <span class="f-perk-icon">✓</span>
+            <div>
+              <strong>Becas y Bonificaciones</strong>
+              <span>Consulta opciones de financiación y Fundae.</span>
+            </div>
           </div>
-          <div class="d-input-group">
-            <input type="tel" id="form_phone" name="phone" placeholder=" " required class="d-input-floating" autocomplete="tel">
-            <label for="form_phone" class="d-floating-label">Teléfono</label>
+          <div class="f-perk">
+            <span class="f-perk-icon">✓</span>
+            <div>
+              <strong>Plazas Limitadas</strong>
+              <span>Grupos reducidos para maximizar el networking directivo.</span>
+            </div>
           </div>
-          <div class="d-input-group">
-            <input type="text" id="form_company" name="company" placeholder=" " class="d-input-floating" autocomplete="organization">
-            <label for="form_company" class="d-floating-label">Empresa / Cargo actual</label>
-          </div>
-          <div style="margin-top:.5rem;">
-            <label class="d-checkbox-label">
-              <input type="checkbox" required>
-              <span class="d-checkbox-text">Acepto recibir información del Executive MBA y la política de privacidad de ENAE.</span>
-            </label>
-          </div>
-          <button type="submit" class="btn" style="width:100%;justify-content:center;margin-top:1rem;">
-            Solicitar información <span class="arrow">&rarr;</span>
-          </button>
         </div>
-      </form>
-      <div id="form-success" class="form-status">
-        <p class="fs-msg">Gracias. Nos pondremos en contacto contigo en las próximas 24 horas.</p>
+      </div>
+      <div class="d-form-container reveal delay-1">
+        <form id="contact-form" method="POST">
+          <h3 style="margin: 0 0 1.25rem; font-size: 1.25rem; font-weight: 800; color: var(--ink);">Solicita información</h3>
+          <div style="display:flex;flex-direction:column;gap:.75rem;">
+            <div class="d-input-group">
+              <input type="text" id="form_name" name="name" placeholder=" " required class="d-input-floating" autocomplete="name">
+              <label for="form_name" class="d-floating-label">Nombre completo</label>
+            </div>
+            <div class="d-input-group">
+              <input type="email" id="form_email" name="email" placeholder=" " required class="d-input-floating" autocomplete="email">
+              <label for="form_email" class="d-floating-label">Email profesional</label>
+            </div>
+            <div class="d-input-group">
+              <input type="tel" id="form_phone" name="phone" placeholder=" " required class="d-input-floating" autocomplete="tel">
+              <label for="form_phone" class="d-floating-label">Teléfono directo</label>
+            </div>
+            <div class="d-input-group">
+              <input type="text" id="form_company" name="company" placeholder=" " class="d-input-floating" autocomplete="organization">
+              <label for="form_company" class="d-floating-label">Empresa / Cargo actual</label>
+            </div>
+            <div style="margin-top:.5rem;">
+              <label class="d-checkbox-label">
+                <input type="checkbox" required>
+                <span class="d-checkbox-text">Acepto recibir información del Executive MBA y la política de privacidad de ENAE.</span>
+              </label>
+            </div>
+            <button type="submit" class="btn" style="width:100%;justify-content:center;margin-top:1rem;">
+              Solicitar información <span class="arrow">&rarr;</span>
+            </button>
+          </div>
+        </form>
+        <div id="form-success" class="form-status">
+          <p class="fs-msg">Gracias. Nos pondremos en contacto contigo en las próximas 24 horas.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1323,7 +1854,11 @@
         setTimeout(function() {
           form.style.display = 'none';
           var success = document.getElementById('form-success');
-          if (success) success.classList.add('visible');
+          if (success) {
+            success.classList.add('visible');
+            success.setAttribute('tabindex', '-1');
+            success.focus();
+          }
         }, 1200);
       });
     }
@@ -1560,6 +2095,94 @@
     });
     ro.observe(canvas);
   }
+})();
+
+// Metodología que transforma — Carousel controller (Embla-inspired with drag & snap)
+(function() {
+  var viewport = document.getElementById('method-carousel');
+  var prevBtn = document.getElementById('method-prev');
+  var nextBtn = document.getElementById('method-next');
+  if (!viewport || !prevBtn || !nextBtn) return;
+
+  function getStep() {
+    var firstCard = viewport.querySelector('.method-service-card');
+    return firstCard ? firstCard.offsetWidth + 24 : 340;
+  }
+
+  function updateControls() {
+    var sl = viewport.scrollLeft;
+    var max = viewport.scrollWidth - viewport.clientWidth;
+    prevBtn.disabled = sl <= 6;
+    nextBtn.disabled = sl >= max - 6;
+  }
+
+  prevBtn.addEventListener('click', function() {
+    viewport.scrollBy({ left: -getStep(), behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', function() {
+    viewport.scrollBy({ left: getStep(), behavior: 'smooth' });
+  });
+
+  viewport.addEventListener('scroll', updateControls, { passive: true });
+  window.addEventListener('resize', updateControls);
+
+  // Keyboard navigation
+  viewport.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      viewport.scrollBy({ left: -getStep(), behavior: 'smooth' });
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      viewport.scrollBy({ left: getStep(), behavior: 'smooth' });
+    }
+  });
+
+  // Drag to scroll functionality
+  var isDown = false;
+  var startX = 0;
+  var scrollLeftStart = 0;
+  var isDragging = false;
+
+  viewport.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return; // Only left click
+    isDown = true;
+    isDragging = false;
+    startX = e.pageX - viewport.offsetLeft;
+    scrollLeftStart = viewport.scrollLeft;
+    viewport.style.scrollBehavior = 'auto'; // instantaneous tracking
+    viewport.style.scrollSnapType = 'none'; // free-flow drag without snap stutter
+  });
+
+  window.addEventListener('mousemove', function(e) {
+    if (!isDown) return;
+    var x = e.pageX - viewport.offsetLeft;
+    var walk = (x - startX);
+    if (Math.abs(walk) > 4) {
+      isDragging = true;
+      viewport.style.cursor = 'grabbing';
+      document.body.style.userSelect = 'none';
+    }
+    if (isDragging) {
+      viewport.scrollLeft = scrollLeftStart - walk;
+    }
+  });
+
+  window.addEventListener('mouseup', function() {
+    if (!isDown) return;
+    isDown = false;
+    viewport.style.cursor = 'grab';
+    viewport.style.scrollBehavior = 'smooth';
+    viewport.style.scrollSnapType = 'x mandatory'; // re-enable snap
+    document.body.style.removeProperty('user-select');
+    updateControls();
+    setTimeout(function() {
+      isDragging = false;
+    }, 50);
+  });
+
+  // Initial check after DOM ready
+  setTimeout(updateControls, 100);
 })();
 </script>
 
