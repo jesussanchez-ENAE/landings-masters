@@ -770,590 +770,173 @@
 
 <!-- CUSTOM CSS DIRECTIVOS -->
 <style>
-  /* --- CUSTOM CSS PARA DIRECTIVOS --- */
   :root {
-    --enae-negro: #2D2D2D;
     --enae-gris-claro: #dbdbdb;
   }
 
-  
-  /* Animaciones y utilidades — fallback visible sin JS */
-  .reveal {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Reveal animations */
+  .reveal { opacity: 1; transform: translateY(0) }
   .js-ready .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0; transform: translateY(18px);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
   }
-  .js-ready .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .js-ready .reveal.delay-1 { transition-delay: 0.15s; }
-  .js-ready .reveal.delay-2 { transition-delay: 0.3s; }
-  .js-ready .reveal.delay-3 { transition-delay: 0.45s; }
-  
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-7px); }
-    100% { transform: translateY(0px); }
-  }
-  @keyframes float-alt {
-    0% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-5px) scale(1.03); }
-    100% { transform: translateY(0px) scale(1); }
-  }
-  
-  @keyframes arrow-down {
-    0% { transform: translateY(0); opacity: 0.5; }
-    50% { transform: translateY(10px); opacity: 1; }
-    100% { transform: translateY(0); opacity: 0.5; }
-  }
+  .js-ready .reveal.active { opacity: 1; transform: translateY(0) }
+  .js-ready .reveal.delay-1 { transition-delay: .15s }
+  .js-ready .reveal.delay-2 { transition-delay: .3s }
+  .js-ready .reveal.delay-3 { transition-delay: .45s }
 
-  /* Secciones específicas */
-  .d-hero {
-    position: relative;
-    overflow: hidden;
-    padding: 5rem 0;
-    background: url('./src/img/hero_executive_mba.jpg') no-repeat center center !important;
-    background-size: cover !important;
-  }
-  .d-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 1;
-  }
-  .d-hero-inner {
-    display: flex;
-    gap: 4rem;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 2;
-  }
-  .d-hero-content {
-    flex: 1.2;
-    color: #F8F9FA !important;
-  }
-  .d-hero-content .t-bold,
-  .d-hero-content .t-serif {
-    color: #F8F9FA !important;
-  }
-  .d-hero-content .lede {
-    color: rgba(255, 255, 255, 0.9) !important;
-  }
-  .d-hero-meta {
-    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
-  }
-  .d-hero-meta span {
-    color: rgba(255, 255, 255, 0.7) !important;
-  }
-  .d-hero-meta strong {
-    color: #F8F9FA !important;
-  }
-  .d-hero-visual {
-    flex: 0.8;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-  .d-hero-img-wrap {
-    position: relative;
-    width: 100%;
-    padding-bottom: 100%;
-    border-radius: 12px;
-  }
-  .d-hero-globe-wrap {
+  /* Neural sphere — contained, subtle companion */
+  .hero-sphere {
     position: relative;
     width: 100%;
     aspect-ratio: 1;
   }
-  .d-hero-globe-wrap canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .orbit-concept {
-    position: absolute;
-    background: var(--enae-rojo);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 12px;
-    box-shadow: 0 4px 15px rgba(169, 24, 50, 0.3);
-    animation: float 4s ease-in-out infinite;
-    z-index: 3;
-  }
-  .orbit-1 { top: 10%; left: 15%; animation: float 4s ease-in-out infinite; animation-delay: 0s; }
-  .orbit-2 { top: 20%; right: 5%; animation: float-alt 5s ease-in-out infinite; animation-delay: 0.5s; }
-  .orbit-3 { top: 75%; left: 5%; animation: float 4.5s ease-in-out infinite; animation-delay: 1s; }
-  .orbit-4 { bottom: 10%; right: 15%; animation: float-alt 4s ease-in-out infinite; animation-delay: 1.5s; }
-  .orbit-5 { top: 45%; right: -10%; animation: float 5.5s ease-in-out infinite; animation-delay: 2s; }
-  .orbit-6 { top: 50%; left: -5%; animation: float-alt 4.2s ease-in-out infinite; animation-delay: 2.5s; }
-
-  /* El Problema */
-  .d-problema {
-    padding: 5rem 0;
-    background: #1A1A1D; /* Un negro un poco más suave para dar profundidad */
-    color: var(--enae-blanco);
-    text-align: center;
-  }
-  .d-problema-box {
-    background: rgba(255,255,255,0.05);
-    padding: 2.5rem;
-    border-radius: 12px;
-    width: 100%;
-    transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-  .d-problema-box.active-box {
-    background: var(--enae-rojo);
-    border-color: var(--enae-rojo);
-    box-shadow: 0 15px 40px rgba(169, 24, 50, 0.4);
-    transform: scale(1.02);
-  }
-  .d-arrow-down {
-    font-size: 32px;
-    margin: 2rem 0;
-    color: var(--enae-rojo);
-    animation: arrow-down 2s infinite;
+  .hero-sphere canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0; transition: opacity 1.2s ease;
+    border-radius: 50%; touch-action: none; cursor: grab;
   }
 
-  /* Tarjetas Beneficios y Programa */
-  .d-card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    margin-top: 4rem;
+  /* Rankings strip */
+  .d-rankings { width: 100vw; background: var(--enae-gris-claro); padding: 2.5rem 2rem; border-bottom: 1px solid var(--hair) }
+  .d-rankings-title {
+    text-align: center; font-family: var(--font-body); font-size: .7rem;
+    text-transform: uppercase; letter-spacing: .15em; color: var(--enae-gris-oscuro); margin-bottom: 1.5rem;
   }
-  .d-card {
-    background: var(--enae-gris-claro);
-    padding: 3rem 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.06);
+  .d-rankings-strip {
+    max-width: 1100px; width: 100%; margin: 0 auto;
+    display: flex; align-items: stretch; justify-content: center;
   }
-  .d-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 32px rgba(0,0,0,0.07);
-    border-color: rgba(169,24,50,0.15);
+  .d-ranking-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 2rem; border-right: 1px solid rgba(0,0,0,.08);
+    flex: 1; justify-content: center;
   }
-  .d-card-icon {
-    font-size: 56px;
-    color: var(--enae-rojo);
-    opacity: 0.15;
-    font-family: var(--font-heading);
-    margin-bottom: 1.5rem;
-    display: block;
-    transition: opacity 0.3s ease;
+  .d-ranking-item:last-child { border-right: none }
+  .d-ranking-item img, .d-ranking-item svg { height: 48px; width: auto; flex-shrink: 0 }
+  .d-ranking-info { display: flex; flex-direction: column; gap: 2px }
+  .d-ranking-label {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--enae-gris-oscuro); line-height: 1.3;
   }
-  .d-card:hover .d-card-icon {
-    opacity: 0.3;
+  .d-ranking-value {
+    font-family: var(--font-heading); font-size: 1rem; font-weight: 700;
+    color: var(--enae-negro); line-height: 1.3;
   }
+  .d-ranking-value span { color: var(--enae-gris-oscuro); font-weight: 400; font-size: .85rem }
 
-  .d-programa-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 4rem;
-    margin-bottom: 2.5rem;
-  }
-  .d-prog-card {
-    background: var(--enae-gris-claro);
-    padding: 2.5rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-    border: 1px solid rgba(0,0,0,0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  }
-  .d-prog-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(169,24,50,0.2);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.07);
-  }
+  /* Contrast fix: #636363 on #dbdbdb = 4.3:1 (fails AA).
+     Override body text on light bgs to #404040 = 5.9:1 */
+  .perfil-card p, .value-item p, .curric-note, .mode p,
+  .qa .a, .kpi-sub { color: var(--enae-gris-oscuro) }
 
-  /* Formulario */
+  /* Form — editorial: sharp edges, no glassmorphism */
   .d-form-container {
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 3.5rem;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 550px;
-    color: var(--enae-negro);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-    text-align: left;
-    margin: 0 auto;
+    background: var(--enae-blanco); border: 1px solid var(--hair);
+    padding: clamp(28px, 3vw, 40px);
+    width: 100%; max-width: 520px;
+    color: var(--ink); text-align: left; margin: 0 auto;
   }
-  .d-input {
-    width: 100%;
-    padding: 14px 16px;
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    font-family: var(--font-body);
-    font-size: 15px;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-    color: var(--enae-negro);
-  }
-  .d-input:focus {
-    outline: none;
-    background: var(--enae-gris-claro);
-    border-color: var(--enae-rojo);
-    box-shadow: 0 0 0 3px rgba(169, 24, 50, 0.1);
-  }
-  
-  
-  
-  .d-section-head {
-    text-align: center;
-    margin-bottom: 3.5rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .d-section-head .mix {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-  }
-  .d-section-head .mix .t-bold {
-    font-size: 2.5rem; /* Larger */
-    line-height: 1.1;
-  }
-  .d-section-head .mix .t-serif {
-    font-size: 3.5rem; /* Even larger and red */
-    color: var(--enae-rojo);
-    font-style: italic;
-    font-weight: 400;
-  }
-  @media (max-width: 768px) {
-    .d-section-head .mix .t-bold { font-size: 2rem; }
-    .d-section-head .mix .t-serif { font-size: 2.5rem; }
-  }
-
-  /* --- UX/UI PRO MAX FIXES --- */
-  /* Focus States para Navegación por Teclado */
-  a:focus-visible, button:focus-visible, .d-card:focus-visible, .d-prog-card:focus-visible, input:focus-visible {
-    outline: 3px solid var(--enae-rojo);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-  
-  /* Floating Labels para el Formulario */
-  .d-input-group {
-    position: relative;
-    margin-bottom: 0.5rem;
-  }
+  .d-input-group { position: relative; margin-bottom: .5rem }
   .d-input-floating {
-    width: 100%;
-    padding: 22px 16px 10px 16px;
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    font-family: var(--font-body);
-    font-size: 15px;
-    box-sizing: border-box;
-    transition: all 0.2s ease;
-    color: var(--enae-negro);
+    width: 100%; padding: 22px 16px 10px;
+    background: var(--surface); border: 1px solid var(--hair);
+    font-family: var(--font-body); font-size: 15px;
+    box-sizing: border-box; transition: border-color .2s ease; color: var(--ink);
   }
   .d-input-floating:focus {
-    outline: none;
-    background: var(--enae-gris-claro);
-    border-color: var(--enae-rojo);
-    box-shadow: 0 0 0 3px rgba(169, 24, 50, 0.1);
+    outline: none; border-color: var(--enae-granate);
+    box-shadow: 0 0 0 3px rgba(169,24,50,.1);
   }
   .d-floating-label {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 15px;
-    color: var(--enae-gris-medio);
-    pointer-events: none;
-    transition: all 0.2s ease;
-    font-family: var(--font-body);
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    font-size: 15px; color: var(--enae-gris-oscuro);
+    pointer-events: none; transition: all .2s ease; font-family: var(--font-body);
   }
   .d-input-floating:focus + .d-floating-label,
   .d-input-floating:not(:placeholder-shown) + .d-floating-label {
-    top: 12px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--enae-rojo);
+    top: 12px; font-size: 11px; font-weight: 700; color: var(--enae-granate);
+  }
+  .d-checkbox-label {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px; margin: 0 -12px; cursor: pointer; transition: background .2s ease;
+  }
+  .d-checkbox-label:hover { background: rgba(0,0,0,.03) }
+  .d-checkbox-label input[type="checkbox"] {
+    margin-top: 2px; width: 20px; height: 20px; cursor: pointer; accent-color: var(--enae-granate);
+  }
+  .d-checkbox-text { font-size: 13px; line-height: 1.5; color: var(--enae-gris-oscuro) }
+  .form-status { text-align: center; padding: 2rem; display: none }
+  .form-status.visible { display: block }
+  .form-status .fs-msg {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 22px; color: var(--enae-granate); line-height: 1.3;
   }
 
-  /* Touch Target para el Checkbox */
-  .d-checkbox-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px;
-    margin: 0 -12px; /* Compensate padding so it aligns visually */
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s ease;
+  /* Testimonial frame */
+  .testimonial-frame {
+    position: relative; width: 100%; padding-bottom: 56.25%;
+    overflow: hidden; background: var(--enae-negro); border: 1px solid var(--hair);
   }
-  .d-checkbox-label:hover {
-    background: rgba(0,0,0,0.03);
+  .testimonial-frame iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: none;
   }
-  .d-checkbox-label input[type="checkbox"] {
-    margin-top: 2px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: var(--enae-rojo);
+
+  /* ENAE watermarks */
+  .enae-wm { position: relative; overflow: hidden }
+  .enae-wm::after {
+    content: ''; position: absolute;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 708.66 708.66'%3E%3Cpath fill='%23a91832' d='M481.8,435.18h-183.03c-5.44,0-9.84-4.41-9.84-9.84v-85.17c0-5.44,4.41-9.84,9.84-9.84h147.67c5.44,0,9.84-4.41,9.84-9.84v-39.75c0-5.44-4.41-9.84-9.84-9.84h-147.67c-5.44,0-9.84-4.41-9.84-9.84v-77.32c0-5.44,4.41-9.84,9.84-9.84h177.14c5.44,0,9.84-4.41,9.84-9.84v-40.31c0-5.44-4.41-9.84-9.84-9.84H226.87c-5.44,0-9.84,4.41-9.84,9.84V485.34c0,5.44,4.41,9.84,9.84,9.84h254.93c5.44,0,9.84-4.41,9.84-9.84v-40.31c0-5.44-4.41-9.84-9.84-9.84'/%3E%3Cpath fill='%23a91832' d='M485.94,554.51H222.72c-3.13,0-5.69,2.56-5.69,5.7v28.87c0,3.13,2.56,5.7,5.69,5.7H485.94c3.13,0,5.7-2.56,5.7-5.7v-28.87c0-3.13-2.56-5.7-5.7-5.7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-size: contain;
+    pointer-events: none; z-index: 0;
   }
-  .d-checkbox-text {
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--enae-gris-medio);
-  }
-  /* --------------------------- */
+  .enae-wm > * { position: relative; z-index: 1 }
+  .enae-wm--hero::after { width: 500px; height: 500px; bottom: -80px; right: -60px; opacity: .04; transform: rotate(-15deg) }
+  .enae-wm--problema::after { width: 400px; height: 400px; top: -50px; left: -80px; opacity: .04; transform: rotate(25deg) }
+  .enae-wm--beneficio::after { width: 550px; height: 550px; bottom: -120px; right: -100px; opacity: .035; transform: rotate(-35deg) }
+  .enae-wm--porque::after { width: 450px; height: 450px; top: -60px; left: -70px; opacity: .04; transform: rotate(12deg) }
+  .enae-wm--programa::after { width: 600px; height: 600px; bottom: -150px; right: -120px; opacity: .03; transform: rotate(-20deg) }
+  .enae-wm--final::after { width: 500px; height: 500px; top: -100px; left: 50%; margin-left: -250px; opacity: .05; transform: rotate(40deg) }
 
   /* Responsive */
-  @media (max-width: 991px) {
-    .d-hero-inner {
-      flex-direction: column;
-      text-align: center;
-    }
-    .d-hero-meta {
-      grid-template-columns: 1fr !important;
-      gap: 1rem;
-    }
-    .d-card-grid, .d-programa-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .d-reasons-grid {
-      grid-template-columns: 1fr !important;
-    }
-    .d-stats-grid {
-      grid-template-columns: 1fr !important;
-    }
-  }
   @media (max-width: 767px) {
-    .d-card-grid, .d-programa-grid {
-      grid-template-columns: 1fr;
-    }
-    .d-hero-img-wrap {
-      width: 90%;
-      margin: 0 auto;
-    }
-    .d-hero-globe-wrap {
-      width: 70%;
-      max-width: 350px;
-      margin: 0 auto;
-    }
-    .orbit-concept {
-      font-size: 10px;
-      padding: 6px 10px;
-    }
-    .d-form-container {
-      padding: 2rem;
-    }
-    .d-rankings {
-      padding: 2rem 1.5rem;
-    }
-    .d-rankings-strip {
-      flex-direction: column;
-      gap: 0;
-    }
-    .d-ranking-item {
-      padding: 1rem 0;
-      border-right: none;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      justify-content: flex-start;
-    }
-    .d-ranking-item:last-child {
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-  }
-
-  /* Rankings section */
-  .d-rankings {
-    width: 100vw;
-    background: var(--enae-gris-claro, #dbdbdb);
-    padding: 3rem 2rem;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-  .d-rankings-title {
-    text-align: center;
-    font-family: var(--font-heading, 'SFUIDisplay', sans-serif);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--enae-gris-medio, #636363);
-    margin-bottom: 2rem;
-  }
-  .d-rankings-strip {
-    max-width: 1100px;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: center;
-    gap: 0;
-  }
-  .d-ranking-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 2rem;
-    border-right: 1px solid rgba(0,0,0,0.08);
-    flex: 1;
-    justify-content: center;
-  }
-  .d-ranking-item:last-child {
-    border-right: none;
-  }
-  .d-ranking-item img,
-  .d-ranking-item svg {
-    height: 56px;
-    width: auto;
-    flex-shrink: 0;
-  }
-  .d-ranking-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .d-ranking-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--enae-gris-medio, #636363);
-    line-height: 1.3;
-  }
-  .d-ranking-value {
-    font-family: var(--font-heading, 'SFUIDisplay', sans-serif);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--enae-negro, #2D2D2D);
-    line-height: 1.3;
-  }
-  .d-ranking-value span {
-    color: var(--enae-gris-medio, #636363);
-    font-weight: 400;
-    font-size: 0.85rem;
-  }
-
-  /* ENAE symbol watermark */
-  .enae-wm {
-    position: relative;
-    overflow: hidden;
-  }
-  .enae-wm::before {
-    content: '';
-    position: absolute;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 708.66 708.66'%3E%3Cpath fill='%23a91832' d='M481.8,435.18h-183.03c-5.44,0-9.84-4.41-9.84-9.84v-85.17c0-5.44,4.41-9.84,9.84-9.84h147.67c5.44,0,9.84-4.41,9.84-9.84v-39.75c0-5.44-4.41-9.84-9.84-9.84h-147.67c-5.44,0-9.84-4.41-9.84-9.84v-77.32c0-5.44,4.41-9.84,9.84-9.84h177.14c5.44,0,9.84-4.41,9.84-9.84v-40.31c0-5.44-4.41-9.84-9.84-9.84H226.87c-5.44,0-9.84,4.41-9.84,9.84V485.34c0,5.44,4.41,9.84,9.84,9.84h254.93c5.44,0,9.84-4.41,9.84-9.84v-40.31c0-5.44-4.41-9.84-9.84-9.84'/%3E%3Cpath fill='%23a91832' d='M485.94,554.51H222.72c-3.13,0-5.69,2.56-5.69,5.7v28.87c0,3.13,2.56,5.7,5.69,5.7H485.94c3.13,0,5.7-2.56,5.7-5.7v-28.87c0-3.13-2.56-5.7-5.7-5.7'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: contain;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .enae-wm > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Position variants */
-  .enae-wm--hero::before {
-    width: 500px; height: 500px;
-    bottom: -80px; right: -60px;
-    opacity: 0.04;
-    transform: rotate(-15deg);
-  }
-  .enae-wm--problema::before {
-    width: 400px; height: 400px;
-    top: -50px; left: -80px;
-    opacity: 0.04;
-    transform: rotate(25deg);
-  }
-  .enae-wm--beneficio::before {
-    width: 550px; height: 550px;
-    bottom: -120px; right: -100px;
-    opacity: 0.035;
-    transform: rotate(-35deg);
-  }
-  .enae-wm--porque::before {
-    width: 450px; height: 450px;
-    top: -60px; left: -70px;
-    opacity: 0.04;
-    transform: rotate(12deg);
-  }
-  .enae-wm--programa::before {
-    width: 600px; height: 600px;
-    bottom: -150px; right: -120px;
-    opacity: 0.03;
-    transform: rotate(-20deg);
-  }
-  .enae-wm--final::before {
-    width: 500px; height: 500px;
-    top: -100px; left: 50%;
-    margin-left: -250px;
-    opacity: 0.05;
-    transform: rotate(40deg);
+    .d-form-container { padding: 2rem }
+    .d-rankings { padding: 2rem 1.5rem }
+    .d-rankings-strip { flex-direction: column; gap: 0 }
+    .d-ranking-item { padding: 1rem 0; border-right: none; border-bottom: 1px solid rgba(0,0,0,.06); justify-content: flex-start }
+    .d-ranking-item:last-child { padding-bottom: 0; border-bottom: none }
   }
 </style>
 <!-- END CUSTOM CSS DIRECTIVOS -->
 
 
 <!-- HERO -->
-<header class="hero d-hero enae-wm enae-wm--hero">
+<header class="hero enae-wm enae-wm--hero">
   <div class="pattern" aria-hidden="true">
     <span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span><span class="b5"></span>
   </div>
-  <div class="wrap d-hero-inner reveal">
-    <div class="d-hero-content">
-      <h1 class="mix hero-title" style="margin-bottom: 2rem;">
-        <span class="t-bold" style="display:block; margin-bottom: 10px;">Deja de gestionar tu área.</span>
-        <span class="t-serif" style="display:block;">Dirige la empresa.</span>
-      </h1>
-      <p class="lede" style="font-weight:300; margin-bottom: 2rem;">
-        Desarrolla una <strong>visión global del negocio</strong> y adquiere las herramientas para tomar decisiones estratégicas, liderar equipos y generar impacto.
-      </p>
-      
-      <p class="lede" style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom: 2rem; color:var(--enae-rojo);">
-        EXECUTIVE MBA · ENAE
-      </p>
-
-      <div class="cta-row" style="margin-bottom: 2rem;">
-        <a href="#solicitar" class="btn" style="padding: 1.25rem 2rem; font-size: 16px;">Quiero dar el salto <span class="arrow">→</span></a>
-      </div>
-      <div class="hero-meta d-hero-meta" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding-top: 1.5rem;">
-        <div><span>Experiencia</span><strong>Más de 35 años formando directivos</strong></div>
-        <div><span>Duración</span><strong>60 ECTS</strong></div>
-        <div><span>Formato</span><strong>Presencial / Virtual Live</strong></div>
-      </div>
-    </div>
-    
-    <div class="d-hero-visual reveal delay-1">
-        <div class="d-hero-globe-wrap">
-            <canvas id="cobe-globe" style="width:100%;height:100%;cursor:grab;opacity:0;transition:opacity 1.2s ease;border-radius:50%;touch-action:none;"></canvas>
-            <div class="orbit-concept orbit-1">ESTRATEGIA</div>
-            <div class="orbit-concept orbit-2">FINANZAS</div>
-            <div class="orbit-concept orbit-3">TALENTO</div>
-            <div class="orbit-concept orbit-4">OPERACIONES</div>
-            <div class="orbit-concept orbit-5">MARKETING</div>
-            <div class="orbit-concept orbit-6">IA</div>
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <div class="reveal">
+        <h1 class="hero-title mix">
+          <span class="t-bold">Deja de gestionar tu área.</span>
+          <span class="t-serif">Dirige la empresa.</span>
+          <span class="t-light">Desarrolla una visión global del negocio y adquiere las herramientas para tomar decisiones estratégicas, liderar equipos y generar impacto.</span>
+        </h1>
+        <div class="cta-row" style="margin-top:32px;">
+          <a href="#solicitar" class="btn">Quiero dar el salto <span class="arrow">&rarr;</span></a>
+          <a href="#programa" class="btn ghost">Ver el programa <span class="arrow">&rarr;</span></a>
         </div>
+        <div class="hero-meta">
+          <div><span>Experiencia</span><strong>Más de 35 años</strong></div>
+          <div><span>Duración</span><strong>60 ECTS</strong></div>
+          <div><span>Formato</span><strong>Presencial / Virtual Live</strong></div>
+        </div>
+      </div>
+      <div class="hero-sphere reveal delay-1">
+        <canvas id="cobe-globe"></canvas>
+      </div>
     </div>
   </div>
 </header>
@@ -1366,7 +949,7 @@
       <img src="./src/rankings/QS_2026_MBA_EUROPE.png" alt="QS MBA Rankings 2026" loading="lazy">
       <div class="d-ranking-info">
         <span class="d-ranking-label">QS Global MBA 2026</span>
-        <span class="d-ranking-value">#9 España <span>· #70 Europa</span></span>
+        <span class="d-ranking-value">#9 España <span>&middot; #70 Europa</span></span>
       </div>
     </div>
     <div class="d-ranking-item reveal delay-2">
@@ -1379,7 +962,7 @@
     <div class="d-ranking-item reveal delay-3">
       <img src="./src/rankings/el_mundo.svg" alt="Guía MBA El Mundo" loading="lazy">
       <div class="d-ranking-info">
-        <span class="d-ranking-label">Guía MBA · El Mundo</span>
+        <span class="d-ranking-label">Guía MBA &middot; El Mundo</span>
         <span class="d-ranking-value">Top 10 España</span>
       </div>
     </div>
@@ -1393,223 +976,271 @@
   </div>
 </section>
 
-<!-- EL PROBLEMA -->
-<section class="d-problema enae-wm enae-wm--problema">
-  <div class="wrap reveal">
-    <h2 class="mix" style="margin-bottom: 2rem; color: #F8F9FA;">
-      <span class="t-bold" style="font-size: 42px; display:block;">Conocer tu área ya no es suficiente.</span>
+<!-- BENEFICIOS -->
+<section class="enae-wm enae-wm--beneficio" id="beneficio">
+  <div class="wrap">
+    <h2 class="mix reveal" style="margin-bottom:clamp(32px,4vw,52px);">
+      <span class="t-bold">Tres capacidades que separan</span>
+      <span class="t-serif">al gestor del director.</span>
     </h2>
-    <p class="lede" style="max-width: 65ch; margin: 0 auto 4rem; opacity: 0.9; font-weight:300;">
-      Cuando diriges una empresa, cada decisión afecta al conjunto. Aprende a conectar las áreas del negocio y a tomar decisiones con una visión global.
+  </div>
+  <div class="value">
+    <div class="value-item reveal delay-1">
+      <span class="n">i</span>
+      <h3>Visión estratégica</h3>
+      <p>Comprende el negocio como un todo. Anticipa oportunidades donde otros ven operaciones aisladas.</p>
+    </div>
+    <div class="value-item reveal delay-2">
+      <span class="n">ii</span>
+      <h3>Decisiones de negocio</h3>
+      <p>Conecta estrategia, finanzas, operaciones, talento e IA para decidir con criterio y con datos.</p>
+    </div>
+    <div class="value-item reveal delay-3">
+      <span class="n">iii</span>
+      <h3>Liderazgo ejecutivo</h3>
+      <p>Lidera equipos, impulsa el cambio organizacional y genera impacto más allá de tu área funcional.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACTO / STATS -->
+<section class="stats enae-wm enae-wm--problema">
+  <div class="pattern" aria-hidden="true">
+    <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+  </div>
+  <div class="wrap" style="position:relative;z-index:2;">
+    <h2 class="mix reveal" style="margin-bottom:clamp(24px,3vw,40px);">
+      <span class="t-bold">¿Cuántas decisiones tomas al día</span>
+      <span class="t-serif">que afectan a toda la empresa?</span>
+    </h2>
+    <p class="reveal" style="color:color-mix(in oklab, var(--enae-blanco) 85%, transparent);max-width:58ch;font-weight:300;font-size:17px;line-height:1.55;margin-bottom:clamp(32px,4vw,52px);">
+      Cuando diriges, cada decisión conecta con el conjunto. El Executive MBA de ENAE te prepara para pensar en esos términos: no como especialista, sino como director general.
     </p>
-    
-    <div style="display: flex; flex-direction: column; align-items: center; max-width: 600px; margin: 0 auto;">
-      <div class="d-problema-box reveal delay-1">
-        <div style="font-family:var(--font-heading); font-size:24px; font-weight:700; margin-bottom: 0.5rem;">TU ÁREA</div>
-        <div style="color:rgba(255,255,255,0.6); font-family:var(--font-body); font-weight:700;">Marketing / Finanzas / RRHH / Operaciones</div>
-      </div>
-      
-      <div class="d-arrow-down reveal delay-2">↓</div>
-      
-      <div class="d-problema-box reveal delay-3" id="problema-destino">
-        <div style="font-family:var(--font-heading); font-size:28px; font-weight:700; margin-bottom: 0.5rem; color: white;">LA EMPRESA</div>
-        <div style="color:rgba(255,255,255,0.85); font-family:var(--font-body); font-weight:700;">Una visión. Una estrategia. Una dirección.</div>
-      </div>
+  </div>
+  <div class="stats-grid reveal delay-1">
+    <div>
+      <div class="kpi-num-lg">35<span class="u">+</span></div>
+      <div class="kpi-label">años</div>
+      <span class="kpi-sub">formando directivos en España</span>
+    </div>
+    <div>
+      <div class="kpi-num-lg">16k<span class="u">+</span></div>
+      <div class="kpi-label">profesionales</div>
+      <span class="kpi-sub">en nuestra comunidad ejecutiva</span>
+    </div>
+    <div>
+      <div class="kpi-num-lg">95<span class="u">%</span></div>
+      <div class="kpi-label">mejora</div>
+      <span class="kpi-sub">su situación profesional</span>
+    </div>
+    <div>
+      <div class="kpi-num-lg">60<span class="u">ECTS</span></div>
+      <div class="kpi-label">programa</div>
+      <span class="kpi-sub">presencial y virtual live</span>
     </div>
   </div>
 </section>
 
-<!-- BENEFICIO PRINCIPAL -->
-<section class="perfil-section enae-wm enae-wm--beneficio" id="beneficio" style="padding: 5rem 0; background: var(--enae-gris-claro);">
+<!-- CLAUSTRO Y MÉTODO -->
+<section id="porque" class="enae-wm enae-wm--porque">
   <div class="wrap">
-    <div class="d-section-head reveal">
-      <h2 class="mix">
-        <span class="t-bold" style="display:block; margin-bottom:1rem;">Lo que cambia cuando</span>
-        <span class="t-serif">empiezas a pensar como director</span>
-      </h2>
-    </div>
-    
-    <div class="d-card-grid">
-      <div class="d-card reveal delay-1">
-        <span class="d-card-icon">01</span>
-        <h3 style="font-size:24px; margin-bottom:1rem; font-weight:800;">Visión estratégica</h3>
-        <p style="color:var(--enae-gris-medio);">Comprende el negocio como un todo y anticipa oportunidades.</p>
-      </div>
-      <div class="d-card reveal delay-2">
-        <span class="d-card-icon">02</span>
-        <h3 style="font-size:24px; margin-bottom:1rem; font-weight:800;">Decisiones de negocio</h3>
-        <p style="color:var(--enae-gris-medio);">Conecta estrategia, finanzas, operaciones, talento e IA para decidir mejor.</p>
-      </div>
-      <div class="d-card reveal delay-3">
-        <span class="d-card-icon">03</span>
-        <h3 style="font-size:24px; margin-bottom:1rem; font-weight:800;">Liderazgo</h3>
-        <p style="color:var(--enae-gris-medio);">Lidera equipos, impulsa el cambio y genera impacto más allá de tu área.</p>
-      </div>
-    </div>
+    <h2 class="mix reveal" style="margin-bottom:clamp(32px,4vw,52px);">
+      <span class="t-bold">35 años. 16.000 directivos.</span>
+      <span class="t-serif">Una convicción.</span>
+    </h2>
   </div>
-</section>
-
-<!-- POR QUE ESTE MBA -->
-<section id="porque" class="enae-wm enae-wm--porque" style="padding: 5rem 0; background: var(--enae-blanco);">
-  <div class="wrap">
-    <div class="d-section-head reveal">
-      <h2 class="mix">
-        <span class="t-bold">Un MBA pensado para</span>
-        <span class="t-serif">quienes ya están dirigiendo</span>
-      </h2>
+  <div class="faculty reveal delay-1">
+    <div>
+      <blockquote class="quote">
+        El directivo del futuro no será el que más sepa de su área, sino el que mejor conecte todas las piezas del negocio.
+      </blockquote>
+      <p class="quote-attrib">Claustro Executive MBA &middot; ENAE Business School</p>
+      <p style="margin-top:28px;color:var(--enae-gris-oscuro);font-size:15px;font-weight:300;line-height:1.55;">
+        Profesorado vinculado al mundo empresarial y directivo. Cada módulo combina rigor académico con experiencia real en la toma de decisiones.
+      </p>
+      <p style="margin-top:14px;color:var(--enae-gris-oscuro);font-size:15px;font-weight:300;line-height:1.55;">
+        Un programa para profesionales que ya dirigen y necesitan herramientas avanzadas. No para empezar, sino para dar el siguiente paso.
+      </p>
     </div>
-    
-    <div class="d-reasons-grid reveal delay-1" style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 4rem; margin-top: 4rem;">
-      <div>
-        <div style="margin-bottom: 2rem;">
-          <h3 style="font-family:var(--font-heading); font-size:22px; font-weight:800; margin-bottom:0.75rem; color:var(--enae-negro);"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--enae-rojo)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block; margin-top:-4px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Experiencia real</h3>
-          <p style="color:var(--enae-gris-medio); line-height:1.6; font-size:16px;">Profesorado vinculado al mundo empresarial y directivo.</p>
-        </div>
-        <div>
-          <h3 style="font-family:var(--font-heading); font-size:22px; font-weight:800; margin-bottom:0.75rem; color:var(--enae-negro);"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--enae-rojo)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block; margin-top:-4px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Visión transversal</h3>
-          <p style="color:var(--enae-gris-medio); line-height:1.6; font-size:16px;">Estrategia, finanzas, operaciones, marketing, talento, transformación e IA.</p>
-        </div>
+    <div class="method">
+      <div class="pattern" aria-hidden="true">
+        <span class="b1"></span><span class="b2"></span>
       </div>
-      <div>
-        <div style="margin-bottom: 2rem;">
-          <h3 style="font-family:var(--font-heading); font-size:22px; font-weight:800; margin-bottom:0.75rem; color:var(--enae-negro);"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--enae-rojo)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block; margin-top:-4px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Aplicación inmediata</h3>
-          <p style="color:var(--enae-gris-medio); line-height:1.6; font-size:16px;">Aprende sobre situaciones y decisiones que forman parte de tu día a día.</p>
-        </div>
-        <div>
-          <h3 style="font-family:var(--font-heading); font-size:22px; font-weight:800; margin-bottom:0.75rem; color:var(--enae-negro);"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--enae-rojo)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block; margin-top:-4px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Red profesional</h3>
-          <p style="color:var(--enae-gris-medio); line-height:1.6; font-size:16px;">Conecta con directivos y profesionales de diferentes sectores.</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="reveal delay-2" style="margin-top: 5rem; padding-top: 4rem; border-top: 1px solid rgba(0,0,0,0.08); text-align:center;">
-       <div style="font-family:var(--font-heading); font-size:72px; font-weight:800; color:var(--enae-rojo); letter-spacing:-0.03em; line-height:1;">Más de 35 años</div>
-       <div style="font-family:var(--font-body); font-size:20px; font-weight:700; margin-top: 1rem; color: var(--enae-negro);">formando líderes y profesionales</div>
-    </div>
-  </div>
-</section>
-
-<!-- PRUEBA SOCIAL -->
-<section id="testimonios" style="padding: 5rem 0; background: var(--enae-gris-claro);">
-  <div class="wrap reveal" style="max-width: 900px; text-align:center;">
-    
-    <div class="d-section-head" style="margin-bottom: 2rem;">
-      <h2 class="mix" style="display:flex; flex-direction:column; align-items:center;">
-        <span class="t-bold" style="font-size: 36px; line-height: 1.1;">Experiencias que</span>
-        <span class="t-serif" style="font-size: 52px; font-style: italic; font-weight: 400; color: var(--enae-rojo); margin-top: -5px;">hablan por sí solas</span>
-      </h2>
-    </div>
-
-    <!-- Video Container -->
-    <div style="position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.15); margin-bottom: 5rem; background: var(--enae-gris-claro);">
-      <iframe id="random-testimonial-video" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Testimonio de alumno Executive MBA"></iframe>
-    </div>
-    
-    <div class="d-stats-grid reveal delay-1" style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 4rem;">
-        <div>
-            <div style="font-family:var(--font-heading); font-size:56px; font-weight:800; color:var(--enae-rojo); line-height:1;">95%</div>
-            <div style="font-family:var(--font-body); font-size:16px; font-weight:700; margin-top:1rem; color:var(--enae-gris-medio);">de nuestros alumnos mejora su situación profesional</div>
-        </div>
-        <div>
-            <div style="font-family:var(--font-heading); font-size:56px; font-weight:800; color:var(--enae-rojo); line-height:1;">+16.000</div>
-            <div style="font-family:var(--font-body); font-size:16px; font-weight:700; margin-top:1rem; color:var(--enae-gris-medio);">directivos y profesionales en nuestra comunidad</div>
-        </div>
+      <h3 class="mix">
+        <span class="t-bold">Metodología</span>
+        <span class="t-serif">que transforma</span>
+      </h3>
+      <ul>
+        <li><strong>Casos reales de empresa:</strong> situaciones y decisiones que forman parte de tu día a día como directivo.</li>
+        <li><strong>Visión transversal:</strong> estrategia, finanzas, operaciones, marketing, talento, transformación e IA.</li>
+        <li><strong>Aplicación inmediata:</strong> lo que aprendes el viernes, lo aplicas el lunes en tu empresa.</li>
+        <li><strong>Red de directivos:</strong> conecta con profesionales de diferentes sectores e industrias.</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <!-- EL PROGRAMA -->
-<section class="programa-section enae-wm enae-wm--programa" id="programa" style="padding: 5rem 0; background: var(--enae-blanco);">
+<section class="curric-wrap enae-wm enae-wm--programa" id="programa">
   <div class="wrap">
-    <div class="d-section-head reveal">
-      <h2 class="mix">
-        <span class="t-bold">Todo lo que necesitas</span>
-        <span class="t-serif">para dirigir mejor</span>
-      </h2>
-    </div>
-    
-    <div class="d-programa-grid">
-      <div class="d-prog-card reveal delay-1">
-        <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:var(--enae-rojo); margin-bottom:0.75rem;">ESTRATEGIA</h3>
-        <p style="font-size:15px; margin:0; color:var(--enae-gris-medio); line-height:1.5;">Diseña y ejecuta la estrategia empresarial.</p>
+    <h2 class="mix reveal" style="margin-bottom:clamp(32px,4vw,52px);">
+      <span class="t-bold">El programa.</span>
+      <span class="t-serif">60 ECTS que cambian tu perspectiva.</span>
+    </h2>
+  </div>
+  <div class="curric-pillars reveal delay-1">
+    <details class="pillar" open>
+      <summary>Estrategia y Dirección General <span class="p-count">4 módulos</span></summary>
+      <div class="p-modules">
+        <div class="p-mod"><span class="m-num">i</span><span class="m-name">Dirección Estratégica</span></div>
+        <div class="p-mod"><span class="m-num">ii</span><span class="m-name">Análisis del Entorno Competitivo</span></div>
+        <div class="p-mod"><span class="m-num">iii</span><span class="m-name">Innovación y Modelos de Negocio</span></div>
+        <div class="p-mod"><span class="m-num">iv</span><span class="m-name">Gobierno Corporativo</span></div>
       </div>
-      <div class="d-prog-card reveal delay-2">
-        <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:var(--enae-rojo); margin-bottom:0.75rem;">FINANZAS</h3>
-        <p style="font-size:15px; margin:0; color:var(--enae-gris-medio); line-height:1.5;">Interpreta los números y decide con criterio.</p>
+    </details>
+    <details class="pillar">
+      <summary>Finanzas y Control de Gestión <span class="p-count">3 módulos</span></summary>
+      <div class="p-modules">
+        <div class="p-mod"><span class="m-num">i</span><span class="m-name">Contabilidad y Finanzas para Directivos</span></div>
+        <div class="p-mod"><span class="m-num">ii</span><span class="m-name">Control de Gestión y Cuadro de Mando</span></div>
+        <div class="p-mod"><span class="m-num">iii</span><span class="m-name">Valoración de Empresas e Inversiones</span></div>
       </div>
-      <div class="d-prog-card reveal delay-3">
-        <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:var(--enae-rojo); margin-bottom:0.75rem;">OPERACIONES</h3>
-        <p style="font-size:15px; margin:0; color:var(--enae-gris-medio); line-height:1.5;">Optimiza procesos y mejora resultados.</p>
+    </details>
+    <details class="pillar">
+      <summary>Operaciones y Cadena de Valor <span class="p-count">3 módulos</span></summary>
+      <div class="p-modules">
+        <div class="p-mod"><span class="m-num">i</span><span class="m-name">Dirección de Operaciones</span></div>
+        <div class="p-mod"><span class="m-num">ii</span><span class="m-name">Gestión de la Cadena de Suministro</span></div>
+        <div class="p-mod"><span class="m-num">iii</span><span class="m-name">Calidad y Mejora Continua</span></div>
       </div>
-      <div class="d-prog-card reveal delay-1">
-        <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:var(--enae-rojo); margin-bottom:0.75rem;">MARKETING & CLIENTE</h3>
-        <p style="font-size:15px; margin:0; color:var(--enae-gris-medio); line-height:1.5;">Entiende el mercado y genera crecimiento.</p>
+    </details>
+    <details class="pillar">
+      <summary>Marketing y Orientación al Cliente <span class="p-count">3 módulos</span></summary>
+      <div class="p-modules">
+        <div class="p-mod"><span class="m-num">i</span><span class="m-name">Dirección de Marketing Estratégico</span></div>
+        <div class="p-mod"><span class="m-num">ii</span><span class="m-name">Experiencia de Cliente y CRM</span></div>
+        <div class="p-mod"><span class="m-num">iii</span><span class="m-name">Marketing Digital y Datos</span></div>
       </div>
-      <div class="d-prog-card reveal delay-2">
-        <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:var(--enae-rojo); margin-bottom:0.75rem;">PERSONAS</h3>
-        <p style="font-size:15px; margin:0; color:var(--enae-gris-medio); line-height:1.5;">Lidera talento y equipos de alto rendimiento.</p>
+    </details>
+    <details class="pillar">
+      <summary>Personas y Liderazgo <span class="p-count">3 módulos</span></summary>
+      <div class="p-modules">
+        <div class="p-mod"><span class="m-num">i</span><span class="m-name">Dirección de Personas y Talento</span></div>
+        <div class="p-mod"><span class="m-num">ii</span><span class="m-name">Liderazgo y Gestión del Cambio</span></div>
+        <div class="p-mod"><span class="m-num">iii</span><span class="m-name">Negociación y Comunicación Ejecutiva</span></div>
       </div>
-      <div class="d-prog-card reveal delay-3">
-        <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:var(--enae-rojo); margin-bottom:0.75rem;">IA & TRANSFORMACIÓN</h3>
-        <p style="font-size:15px; margin:0; color:var(--enae-gris-medio); line-height:1.5;">Integra la IA en la toma de decisiones y en el negocio.</p>
+    </details>
+    <details class="pillar">
+      <summary>IA y Transformación Digital <span class="p-count">3 módulos</span></summary>
+      <div class="p-modules">
+        <div class="p-mod"><span class="m-num">i</span><span class="m-name">Inteligencia Artificial para la Dirección</span></div>
+        <div class="p-mod"><span class="m-num">ii</span><span class="m-name">Transformación Digital del Negocio</span></div>
+        <div class="p-mod"><span class="m-num">iii</span><span class="m-name">Analítica de Datos y Toma de Decisiones</span></div>
       </div>
-    </div>
-    
-    <div class="reveal delay-2" style="text-align:center;">
-        <a href="#solicitar" class="btn ghost" style="padding: 1.25rem 2.5rem; border-color: var(--enae-rojo); color: var(--enae-rojo); font-size:16px;">Ver el programa completo</a>
+    </details>
+  </div>
+  <p class="curric-note reveal delay-2">
+    El plan de estudios incluye además un proyecto fin de máster tutorizado y sesiones con directivos invitados. Programa sujeto a posibles actualizaciones.
+  </p>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios" style="background:var(--enae-gris-claro);">
+  <div class="wrap reveal" style="max-width:900px;">
+    <h2 class="mix" style="margin-bottom:clamp(24px,3vw,40px);">
+      <span class="t-serif">Quienes lo han vivido</span>
+      <span class="t-bold">lo explican mejor.</span>
+    </h2>
+    <div class="testimonial-frame">
+      <iframe id="random-testimonial-video" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Testimonio de alumno Executive MBA"></iframe>
     </div>
   </div>
 </section>
 
-<!-- CIERRE / CTA -->
-<section class="final enae-wm enae-wm--final" id="solicitar" style="padding: 5rem 0; background: #1A1A1D; color: var(--enae-blanco); text-align: center; position:relative; overflow:hidden;">
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <h2 class="mix reveal" style="margin-bottom:clamp(32px,4vw,52px);">
+      <span class="t-bold">Preguntas</span>
+      <span class="t-serif">frecuentes.</span>
+    </h2>
+  </div>
+  <div class="faq reveal delay-1">
+    <details class="qa">
+      <summary>¿A quién va dirigido el Executive MBA?</summary>
+      <div class="a">A profesionales con experiencia directiva o de gestión que buscan una visión global del negocio. El perfil medio tiene entre 8 y 15 años de trayectoria profesional y responsabilidad sobre equipos o áreas funcionales.</div>
+    </details>
+    <details class="qa">
+      <summary>¿Cuánto dura el programa y cuál es el formato?</summary>
+      <div class="a">El programa tiene una carga de <em>60 ECTS</em> y se imparte en formato presencial y Virtual Live. Las sesiones se concentran en fines de semana para compatibilizar con la actividad profesional.</div>
+    </details>
+    <details class="qa">
+      <summary>¿Cuál es la inversión económica?</summary>
+      <div class="a">Contacta con nosotros para recibir información detallada sobre la inversión, opciones de financiación y posibles bonificaciones para empresas. El programa es bonificable a través de FUNDAE.</div>
+    </details>
+    <details class="qa">
+      <summary>¿Qué diferencia este MBA de otros programas?</summary>
+      <div class="a">Más de 35 años de experiencia, un claustro vinculado al mundo empresarial, y un enfoque práctico basado en casos reales. Además, integramos la <em>inteligencia artificial</em> de forma transversal en todo el programa, no como un módulo aislado.</div>
+    </details>
+    <details class="qa">
+      <summary>¿Cómo es el proceso de admisión?</summary>
+      <div class="a">El proceso incluye una entrevista personal con la dirección del programa. Buscamos perfiles con experiencia profesional consolidada y motivación para dar el salto a la dirección general. Solicita información y te guiaremos en cada paso.</div>
+    </details>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final enae-wm enae-wm--final" id="solicitar">
   <div class="pattern" aria-hidden="true">
     <span class="b1"></span><span class="b2"></span><span class="b3"></span>
   </div>
-  <div class="wrap reveal" style="max-width: 900px; margin: 0 auto; display:flex; flex-direction:column; align-items:center; position:relative; z-index:2;">
-    <h2 class="mix" style="margin-bottom: 2rem; color: #F8F9FA;">
-      <span class="t-bold" style="display:block;">Tu próximo paso profesional no es gestionar más.</span>
-      <span class="t-serif" style="display:block; font-size:56px; margin-top:10px;">Es dirigir mejor.</span>
-    </h2>
-    <p class="lede-final" style="font-size:18px; opacity:0.9; font-weight:300; margin-bottom: 2.5rem; max-width: 65ch;">
-      Da el salto al Executive MBA de ENAE. Solicita información y descubre si este programa encaja contigo.
-    </p>
-    
+  <div class="wrap" style="position:relative;z-index:2;">
+    <div class="reveal" style="max-width:520px;">
+      <h2 class="mix" style="margin-bottom:24px;">
+        <span class="t-bold">El Executive MBA</span>
+        <span class="t-serif">empieza con una conversación.</span>
+      </h2>
+      <p class="lede-final">
+        Cuéntanos sobre tu trayectoria y tus objetivos. Te explicamos el programa, el proceso de admisión y resolvemos tus dudas.
+      </p>
+    </div>
     <div class="d-form-container reveal delay-1">
-        <h3 style="font-family:var(--font-heading); font-size:26px; font-weight:800; margin-bottom: 2.5rem; text-align:center;">¿Preparado para dar el salto?</h3>
-        
-        <form action="#" method="POST" style="display:flex; flex-direction:column; gap: 0.75rem;">
-            <div class="d-input-group">
-                <input type="text" id="form_name" placeholder=" " required class="d-input-floating">
-                <label for="form_name" class="d-floating-label">Nombre completo</label>
-            </div>
-            <div class="d-input-group">
-                <input type="email" id="form_email" placeholder=" " required class="d-input-floating">
-                <label for="form_email" class="d-floating-label">Email corporativo o personal</label>
-            </div>
-            <div class="d-input-group">
-                <input type="tel" id="form_phone" placeholder=" " required class="d-input-floating">
-                <label for="form_phone" class="d-floating-label">Teléfono móvil</label>
-            </div>
-            <div class="d-input-group">
-                <input type="text" id="form_company" placeholder=" " class="d-input-floating">
-                <label for="form_company" class="d-floating-label">Empresa / Cargo actual</label>
-            </div>
-            
-            <div style="margin-top: 0.5rem;">
-                <label class="d-checkbox-label">
-                    <input type="checkbox" required>
-                    <span class="d-checkbox-text">Quiero recibir información del Executive MBA y acepto la política de privacidad de ENAE.</span>
-                </label>
-            </div>
-            
-            <button type="submit" class="btn" style="width:100%; justify-content:center; margin-top: 1rem; padding: 1.25rem; font-size: 16px; font-weight:800; text-transform:uppercase; letter-spacing:1px; background: linear-gradient(135deg, var(--enae-rojo) 0%, #8a1328 100%); border: none; box-shadow: 0 8px 20px rgba(169, 24, 50, 0.3);">
-                Quiero información
-            </button>
-        </form>
+      <form id="contact-form" method="POST">
+        <div style="display:flex;flex-direction:column;gap:.75rem;">
+          <div class="d-input-group">
+            <input type="text" id="form_name" name="name" placeholder=" " required class="d-input-floating" autocomplete="name">
+            <label for="form_name" class="d-floating-label">Nombre completo</label>
+          </div>
+          <div class="d-input-group">
+            <input type="email" id="form_email" name="email" placeholder=" " required class="d-input-floating" autocomplete="email">
+            <label for="form_email" class="d-floating-label">Email</label>
+          </div>
+          <div class="d-input-group">
+            <input type="tel" id="form_phone" name="phone" placeholder=" " required class="d-input-floating" autocomplete="tel">
+            <label for="form_phone" class="d-floating-label">Teléfono</label>
+          </div>
+          <div class="d-input-group">
+            <input type="text" id="form_company" name="company" placeholder=" " class="d-input-floating" autocomplete="organization">
+            <label for="form_company" class="d-floating-label">Empresa / Cargo actual</label>
+          </div>
+          <div style="margin-top:.5rem;">
+            <label class="d-checkbox-label">
+              <input type="checkbox" required>
+              <span class="d-checkbox-text">Acepto recibir información del Executive MBA y la política de privacidad de ENAE.</span>
+            </label>
+          </div>
+          <button type="submit" class="btn" style="width:100%;justify-content:center;margin-top:1rem;">
+            Solicitar información <span class="arrow">&rarr;</span>
+          </button>
+        </div>
+      </form>
+      <div id="form-success" class="form-status">
+        <p class="fs-msg">Gracias. Nos pondremos en contacto contigo en las próximas 24 horas.</p>
+      </div>
     </div>
   </div>
 </section>
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -1651,86 +1282,72 @@
 <!-- CUSTOM JS DIRECTIVOS -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Enable JS-dependent animations
     document.documentElement.classList.add('js-ready');
 
-    // Intersection Observer for scroll reveal animations
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
+    var revealElements = document.querySelectorAll('.reveal');
+    var revealObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
           observer.unobserve(entry.target);
         }
       });
-    }, {
-      root: null,
-      threshold: 0.1,
-      rootMargin: "0px 0px -40px 0px"
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealElements.forEach(function(el) { revealObserver.observe(el); });
 
-    revealElements.forEach(el => {
-      revealObserver.observe(el);
-    });
-
-    // Activate "problema-destino" box dynamically on scroll
-    const destino = document.getElementById('problema-destino');
-    if (destino) {
-      const destinoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            destino.classList.add('active-box');
-            destinoObserver.unobserve(destino);
-          }
-        });
-      }, { threshold: 0.3 });
-      destinoObserver.observe(destino);
-    }
-
-    // Show floating CTA only after scrolling past hero
-    const floatWrap = document.querySelector('.float-wrap');
+    var floatWrap = document.querySelector('.float-wrap');
     if (floatWrap) {
       floatWrap.style.opacity = '0';
       floatWrap.style.transition = 'opacity 0.4s ease';
       floatWrap.style.pointerEvents = 'none';
-      const heroEl = document.querySelector('.d-hero');
+      var heroEl = document.querySelector('.hero');
       if (heroEl) {
-        const floatObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-              floatWrap.style.opacity = '1';
-              floatWrap.style.pointerEvents = 'auto';
-            } else {
-              floatWrap.style.opacity = '0';
-              floatWrap.style.pointerEvents = 'none';
-            }
+        new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            floatWrap.style.opacity = entry.isIntersecting ? '0' : '1';
+            floatWrap.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
           });
-        }, { threshold: 0 });
-        floatObserver.observe(heroEl);
+        }, { threshold: 0 }).observe(heroEl);
       }
+    }
+
+    var form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        var origText = btn.innerHTML;
+        btn.textContent = 'Enviando…';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+        setTimeout(function() {
+          form.style.display = 'none';
+          var success = document.getElementById('form-success');
+          if (success) success.classList.add('visible');
+        }, 1200);
+      });
     }
   });
 </script>
 
-<!-- YOUTUBE RANDOM TESTIMONIAL SCRIPT -->
+<!-- YOUTUBE RANDOM TESTIMONIAL -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const videoIds = [
-      "2T0A5SGVtA4", "8AcfkIh5YVY", "BUYyotdKEvs", "CkE-EuoyteQ",
-      "DwtJ9eh56v4", "HamrB9F-2kE", "HfUJcGfEnI0", "HgihrYXC1OQ",
-      "HpggmVElsMI", "HsV1E92ANq4", "IYVfbEHHZG8", "J6FLEsZ3inI",
-      "N5yi6EHH1ks", "SUSoz6o5v2s", "Ts9V-OJMqQ4", "Vuh5Xx2SqfQ",
-      "YRgrMlRWhFU", "YertN_4BlTg", "_G6AtJ4CQSE", "_b-068CGg1c",
-      "ayzCkb97d2c", "d3X8gVQwFmo", "eLL0270JSB0", "fowTYTg0XXo",
-      "gwWqMYW5-T4", "iJUqiLE8yb4", "jH3QBeILZBs", "n48UXasy1UA",
-      "nnpK0_PyZWE", "p7buS5mXaEY", "pc8z18H18es", "rwmB94RiaHo",
-      "xyIfglpd4Eg", "ysVbmLYDJW4"
+  document.addEventListener('DOMContentLoaded', function() {
+    var videoIds = [
+      '2T0A5SGVtA4', '8AcfkIh5YVY', 'BUYyotdKEvs', 'CkE-EuoyteQ',
+      'DwtJ9eh56v4', 'HamrB9F-2kE', 'HfUJcGfEnI0', 'HgihrYXC1OQ',
+      'HpggmVElsMI', 'HsV1E92ANq4', 'IYVfbEHHZG8', 'J6FLEsZ3inI',
+      'N5yi6EHH1ks', 'SUSoz6o5v2s', 'Ts9V-OJMqQ4', 'Vuh5Xx2SqfQ',
+      'YRgrMlRWhFU', 'YertN_4BlTg', '_G6AtJ4CQSE', '_b-068CGg1c',
+      'ayzCkb97d2c', 'd3X8gVQwFmo', 'eLL0270JSB0', 'fowTYTg0XXo',
+      'gwWqMYW5-T4', 'iJUqiLE8yb4', 'jH3QBeILZBs', 'n48UXasy1UA',
+      'nnpK0_PyZWE', 'p7buS5mXaEY', 'pc8z18H18es', 'rwmB94RiaHo',
+      'xyIfglpd4Eg', 'ysVbmLYDJW4'
     ];
-    const randomId = videoIds[Math.floor(Math.random() * videoIds.length)];
-    const iframe = document.getElementById("random-testimonial-video");
+    var randomId = videoIds[Math.floor(Math.random() * videoIds.length)];
+    var iframe = document.getElementById('random-testimonial-video');
     if (iframe) {
-      iframe.src = "https://www.youtube.com/embed/" + randomId + "?rel=0&modestbranding=1&origin=https://www.enae.es";
+      iframe.src = 'https://www.youtube.com/embed/' + randomId + '?rel=0&modestbranding=1';
     }
   });
 </script>
@@ -1740,8 +1357,13 @@
 (function() {
   var canvas = document.getElementById('cobe-globe');
   if (!canvas) return;
-  var ctx = canvas.getContext('2d');
 
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.opacity = '0.6';
+    return;
+  }
+
+  var ctx = canvas.getContext('2d');
   var NODE_COUNT = 120;
   var CONNECT_DIST = 0.55;
   var PULSE_COUNT = 12;
@@ -1751,11 +1373,11 @@
   var dragOffset = { x: 0, y: 0 };
   var baseRotY = 0, baseRotX = 0.3;
   var paused = false;
+  var sphereVisible = true;
   var nodes = [];
   var edges = [];
   var pulses = [];
 
-  // Fibonacci sphere distribution
   var golden = (1 + Math.sqrt(5)) / 2;
   for (var i = 0; i < NODE_COUNT; i++) {
     var theta = Math.acos(1 - 2 * (i + 0.5) / NODE_COUNT);
@@ -1768,28 +1390,22 @@
     });
   }
 
-  // Pre-compute edges
   for (var i = 0; i < NODE_COUNT; i++) {
     for (var j = i + 1; j < NODE_COUNT; j++) {
       var dx = nodes[i].x - nodes[j].x;
       var dy = nodes[i].y - nodes[j].y;
       var dz = nodes[i].z - nodes[j].z;
       var d = Math.sqrt(dx*dx + dy*dy + dz*dz);
-      if (d < CONNECT_DIST) {
-        edges.push({ a: i, b: j, dist: d });
-      }
+      if (d < CONNECT_DIST) edges.push({ a: i, b: j, dist: d });
     }
   }
 
-  // Init pulses
   function spawnPulse() {
     var e = edges[Math.floor(Math.random() * edges.length)];
     return { edge: e, t: 0, speed: 0.008 + Math.random() * 0.012, forward: Math.random() > 0.5 };
   }
   for (var i = 0; i < PULSE_COUNT; i++) {
-    var p = spawnPulse();
-    p.t = Math.random();
-    pulses.push(p);
+    var p = spawnPulse(); p.t = Math.random(); pulses.push(p);
   }
 
   function rotatePoint(px, py, pz) {
@@ -1814,111 +1430,94 @@
   }
 
   function draw() {
+    if (!sphereVisible) { requestAnimationFrame(draw); return; }
     if (!paused) rotY += autoSpeed;
 
-    var w = canvas.width;
-    var h = canvas.height;
-    var cx = w / 2;
-    var cy = h / 2;
+    var w = canvas.width, h = canvas.height;
+    var cx = w / 2, cy = h / 2;
     var radius = w * 0.38;
 
     ctx.clearRect(0, 0, w, h);
 
-    // Subtle outer glow only — no solid background
-    var glowGrad = ctx.createRadialGradient(cx, cy, radius * 0.7, cx, cy, radius * 1.15);
-    glowGrad.addColorStop(0, 'rgba(169,24,50,0.04)');
-    glowGrad.addColorStop(1, 'rgba(169,24,50,0)');
+    var veilGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 1.05);
+    veilGrad.addColorStop(0, 'rgba(0,0,0,0.35)');
+    veilGrad.addColorStop(0.75, 'rgba(0,0,0,0.2)');
+    veilGrad.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.beginPath();
-    ctx.arc(cx, cy, radius * 1.15, 0, Math.PI * 2);
-    ctx.fillStyle = glowGrad;
+    ctx.arc(cx, cy, radius * 1.05, 0, Math.PI * 2);
+    ctx.fillStyle = veilGrad;
     ctx.fill();
 
-    // Project all nodes
     var projected = [];
     for (var i = 0; i < nodes.length; i++) {
       var n = nodes[i];
       var r = rotatePoint(n.x, n.y, n.z);
       var depth = (r.z + 1) / 2;
-      projected.push({
-        x: cx + r.x * radius,
-        y: cy + r.y * radius,
-        z: r.z,
-        depth: depth,
-        size: n.size
-      });
+      projected.push({ x: cx + r.x * radius, y: cy + r.y * radius, z: r.z, depth: depth, size: n.size });
     }
 
-    // Draw edges (back first, then front)
     for (var pass = 0; pass < 2; pass++) {
       for (var i = 0; i < edges.length; i++) {
         var e = edges[i];
-        var a = projected[e.a];
-        var b = projected[e.b];
+        var a = projected[e.a], b = projected[e.b];
         var avgZ = (a.z + b.z) / 2;
         if (pass === 0 && avgZ > -0.05) continue;
         if (pass === 1 && avgZ <= -0.05) continue;
         var alpha = Math.max(0, Math.min(1, (avgZ + 1) / 2));
-        alpha = alpha * alpha * 0.35;
+        alpha = alpha * alpha * 0.6;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = 'rgba(169,24,50,' + (alpha * 1.5).toFixed(3) + ')';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(255,255,255,' + Math.min(1, alpha * 3).toFixed(3) + ')';
+        ctx.lineWidth = 1.2;
         ctx.stroke();
       }
     }
 
-    // Draw pulses
     for (var i = 0; i < pulses.length; i++) {
-      var p = pulses[i];
-      var e = p.edge;
-      var a = projected[e.a];
-      var b = projected[e.b];
+      var p = pulses[i], e = p.edge;
+      var a = projected[e.a], b = projected[e.b];
       var t = p.forward ? p.t : 1 - p.t;
       var px = a.x + (b.x - a.x) * t;
       var py = a.y + (b.y - a.y) * t;
       var pz = a.z + (b.z - a.z) * t;
       var depth = (pz + 1) / 2;
       if (depth > 0.3) {
-        var glow = ctx.createRadialGradient(px, py, 0, px, py, 6 * (w/800));
-        glow.addColorStop(0, 'rgba(169,24,50,' + (depth * 0.9).toFixed(2) + ')');
-        glow.addColorStop(1, 'rgba(169,24,50,0)');
+        var glow = ctx.createRadialGradient(px, py, 0, px, py, 8 * (w/800));
+        glow.addColorStop(0, 'rgba(255,255,255,' + Math.min(1, depth * 1.2).toFixed(2) + ')');
+        glow.addColorStop(1, 'rgba(255,255,255,0)');
         ctx.beginPath();
-        ctx.arc(px, py, 6 * (w/800), 0, Math.PI * 2);
+        ctx.arc(px, py, 8 * (w/800), 0, Math.PI * 2);
         ctx.fillStyle = glow;
         ctx.fill();
       }
       p.t += p.speed;
-      if (p.t >= 1) { pulses[i] = spawnPulse(); }
+      if (p.t >= 1) pulses[i] = spawnPulse();
     }
 
-    // Draw nodes (back to front)
     var sorted = projected.slice().sort(function(a, b) { return a.z - b.z; });
     for (var i = 0; i < sorted.length; i++) {
       var n = sorted[i];
-      var alpha = Math.max(0.12, n.depth);
-      var r = n.size * (0.6 + n.depth * 0.8) * (w / 800);
-      // Node glow
-      if (n.depth > 0.4) {
-        var glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4);
-        glow.addColorStop(0, 'rgba(169,24,50,' + (alpha * 0.5).toFixed(3) + ')');
-        glow.addColorStop(1, 'rgba(169,24,50,0)');
+      var alpha = Math.max(0.15, n.depth * 1.2);
+      var r = n.size * (0.7 + n.depth * 1) * (w / 800);
+      if (n.depth > 0.35) {
+        var glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 5);
+        glow.addColorStop(0, 'rgba(255,255,255,' + (alpha * 0.6).toFixed(3) + ')');
+        glow.addColorStop(1, 'rgba(255,255,255,0)');
         ctx.beginPath();
-        ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, r * 5, 0, Math.PI * 2);
         ctx.fillStyle = glow;
         ctx.fill();
       }
-      // Node core
       ctx.beginPath();
       ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,' + alpha.toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(255,255,255,' + Math.min(1, alpha * 1.3).toFixed(3) + ')';
       ctx.fill();
     }
 
     requestAnimationFrame(draw);
   }
 
-  // Interaction
   canvas.addEventListener('pointerdown', function(e) {
     pointerDown = { x: e.clientX, y: e.clientY };
     canvas.style.cursor = 'grabbing';
@@ -1933,15 +1532,17 @@
     }
   }, { passive: true });
   window.addEventListener('pointerup', function() {
-    if (pointerDown) {
-      baseRotY = rotY;
-      baseRotX = rotX;
-      dragOffset = { x: 0, y: 0 };
-    }
+    if (pointerDown) { baseRotY = rotY; baseRotX = rotX; dragOffset = { x: 0, y: 0 }; }
     pointerDown = null;
     canvas.style.cursor = 'grab';
     paused = false;
   }, { passive: true });
+
+  new IntersectionObserver(function(entries) {
+    sphereVisible = entries[0].isIntersecting;
+  }, { threshold: 0 }).observe(canvas);
+
+  window.addEventListener('resize', resize);
 
   function start() {
     if (!resize()) return false;
@@ -1949,8 +1550,6 @@
     draw();
     return true;
   }
-
-  window.addEventListener('resize', resize);
 
   if (!start()) {
     var ro = new ResizeObserver(function(entries) {
@@ -1963,3 +1562,4 @@
   }
 })();
 </script>
+
