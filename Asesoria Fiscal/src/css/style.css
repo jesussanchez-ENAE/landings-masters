@@ -96,7 +96,7 @@
     border-bottom: 1px solid var(--hair);
   }
   .d-rankings-title {
-    text-align: center; font-family: var(--font-body); font-size: .75rem;
+    text-align: center; font-family: var(--font-body); font-size: 1.2rem;
     font-weight: 700; text-transform: uppercase; letter-spacing: .18em;
     color: var(--enae-granate); margin-bottom: 1.8rem;
   }
@@ -526,6 +526,8 @@
   }
   .btn:active { transform: translateY(1px); opacity: 0.9; }
   @media (prefers-reduced-motion: reduce) {
+    /* empty or missing */
+  }
 
 /* CEO Landing Hero Overrides */
 .d-hero--ceo::before {
@@ -533,180 +535,353 @@
   background: linear-gradient(135deg, rgba(17,18,17,0.7) 0%, rgba(32,34,33,0.5) 50%, rgba(94,15,30,0.6) 100%);
 }
 
-/* Dynamics Form overrides for 2 columns & landing style */
+/* ============================================================
+   ENAE · Executive MBA — Restyle del formulario de contacto
+   Formulario embebido (Microsoft Dynamics 365 Marketing / "marketingForm")
+   Alcance: solo dentro de .d-form-container, para no afectar
+   a otros formularios ni al resto del sitio.
+   ============================================================ */
+
+/* ---------- Contenedor de la tarjeta ---------- */
+/* Corrección para bug de dropdown (jQuery UI Autocomplete) de Dynamics:
+   Elimina la transformación para evitar que este contenedor actúe como 
+   marco de referencia absoluto para el menú desplegable */
+.d-form-container.reveal,
+.d-form-container.reveal.active {
+  transform: none !important;
+}
+
+.d-form-container {
+  background: #ffffff;
+  border: 1px solid var(--hair, #e7e7e7);
+  border-radius: 10px;
+  /* Menos padding que la primera versión: más compacto y deja más
+     ancho real a los campos. */
+  padding: 30px 32px 28px;
+  box-shadow: 0 24px 60px rgba(17, 18, 17, .14);
+  /* Ensancha un poco la tarjeta respecto al ancho original (520px):
+     con 2 columnas de campos necesita más aire. Solo tiene efecto
+     cuando el layout de la sección le deja sitio de sobra. El sitio
+     define este mismo max-width con un selector más específico
+     (dentro de la sección), así que hace falta !important. */
+  max-width: 640px !important;
+  /* Contenedor de tamaño: el grid de campos decide 1 o 2 columnas
+     según el ancho REAL de la tarjeta, no del viewport. Esto evita
+     que la franja intermedia (~992-1150px), donde la sección pasa a
+     2 columnas pero dispone de poco sitio, herede un grid de campos
+     demasiado estrecho. */
+  container-type: inline-size;
+}
+
+.d-form-container h3 {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--enae-negro);
+  margin: 0 0 16px;
+  letter-spacing: -.01em;
+}
+
+/* En pantallas ≥992px, cede algo de ancho del panel de texto a la
+   tarjeta del formulario (antes 1.15fr/1fr, ahora al revés) para que
+   quepan cómodamente 2 columnas de campos. Solo dentro de este
+   media query: así nunca compite con la regla propia del sitio que
+   apila la sección a 1 columna por debajo de 992px. */
+@media (min-width: 992px) {
+  .final-container {
+    grid-template-columns: 1fr 1.15fr !important;
+  }
+}
+
+/* ---------- Grid de 2 columnas ----------
+   El widget de Dynamics 365 aplica estilos inline (display:flex,
+   width:560px) directamente sobre .columnContainer, así que aquí
+   hace falta !important para poder sustituirlos. Por defecto, 1
+   columna; a partir de los 430px de ancho REAL disponible dentro
+   de la tarjeta (container query sobre el content-box, es decir
+   ya descontado el padding), pasa a 2. Este umbral es el que evita
+   columnas demasiado estrechas en la franja de viewport en la que
+   la sección pasa a 2 columnas pero la tarjeta todavía dispone de
+   poco sitio (~992-1150px de ancho de ventana). */
 .d-form-container .columnContainer {
   display: grid !important;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr !important;
   width: 100% !important;
-  padding: 0 !important;
+  column-gap: 14px;
 }
 
-.d-form-container .textFormFieldBlock,
-.d-form-container .phoneFormFieldBlock,
-.d-form-container .lookupFormFieldBlock,
-.d-form-container .optionSetFormFieldBlock {
-  position: relative;
-  width: 100%;
+@container (min-width: 400px) {
+  .d-form-container .columnContainer {
+    grid-template-columns: 1fr 1fr !important;
+  }
 }
 
-/* Full width elements */
-.d-form-container .textFormFieldBlock[data-targetproperty="qualificationcomments"],
+.d-form-container .wrap-section {
+  width: 100% !important;
+}
+
+/* Campos que deben ocupar el ancho completo */
+.d-form-container .textFormFieldBlock:has(textarea),
 .d-form-container .consentBlock,
-.d-form-container div[data-editorblocktype="Text"],
-.d-form-container .submitButtonWrapper {
+.d-form-container .submitButtonWrapper,
+.d-form-container .columnContainer > div:not([class]) {
   grid-column: 1 / -1;
 }
 
-/* Hidden elements */
-.d-form-container [data-hide="hide"],
-.d-form-container .optionSetFormFieldBlock[data-hide="hide"] {
-  display: none !important;
+/* ---------- Bloques de campo ----------
+   El propio widget ya estructura cada bloque como flex-column con
+   gap:16px (ese gap, no el margin del label, es el que separa el
+   label del input): se sobrescribe aquí a 4px, que es el verdadero
+   control de la compactación vertical dentro de cada campo. */
+.d-form-container .textFormFieldBlock,
+.d-form-container .phoneFormFieldBlock,
+.d-form-container .lookupFormFieldBlock,
+.d-form-container .optionSetFormFieldBlock,
+.d-form-container .dateTimeFormFieldBlock,
+.d-form-container .twoOptionFormFieldBlock,
+.d-form-container .passesBlock,
+.d-form-container .multiOptionSetFormFieldBlock {
+  padding: 10px 0 4px 0 !important;
+  gap: 4px !important;
 }
 
-/* Inputs, Textareas, Selects */
-.d-form-container input:not([type="checkbox"]),
-.d-form-container textarea,
-.d-form-container select {
-  width: 100%;
-  padding: 22px 16px 10px;
-  background: var(--ground);
-  border: 1px solid var(--hair);
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-size: 15px;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease;
-  color: var(--ink);
-}
-
-.d-form-container input:not([type="checkbox"]):focus,
-.d-form-container textarea:focus,
-.d-form-container select:focus {
-  outline: none;
-  border-color: var(--enae-granate);
-  box-shadow: 0 0 0 3px rgba(169,24,50,.15);
-}
-
-/* Hide default placeholder so label acts as placeholder */
-.d-form-container input::placeholder,
-.d-form-container textarea::placeholder {
-  color: transparent !important;
-}
-
-/* Phone field adjustments */
-.d-form-container .phoneCountryCode {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-.d-form-container .phoneCountryCodeLabel {
-  display: none; /* Hide if we don't need it */
-}
-
-/* Floating labels */
+/* El widget trae su propio estilo de label ("Segoe UI", 14px, 600,
+   #323130) con selectors compuestos por tipo de campo (p.ej.
+   ".optionSetFormFieldBlock label.block-label") que en checkboxes,
+   selects, fechas y "passes" tienen más especificidad que un simple
+   ".d-form-container label" y ganarían sin !important. Se listan
+   explícitamente esas variantes -junto con los descendientes del
+   label ("label *"), que es donde el widget mete el texto real en
+   algunos tipos- para que todos los labels del formulario, sea cual
+   sea el tipo de campo, salgan con la misma tipografía de marca. */
+.d-form-container label,
 .d-form-container .textFormFieldBlock label,
-.d-form-container .phoneFormFieldBlock label,
+.d-form-container .dateTimeFormFieldBlock label,
 .d-form-container .lookupFormFieldBlock label,
-.d-form-container .optionSetFormFieldBlock label {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 14.5px;
-  color: var(--ink-soft);
-  pointer-events: none;
-  transition: all .2s ease;
-  font-family: var(--font-body);
-  z-index: 2;
-  margin: 0;
+.d-form-container .twoOptionFormFieldBlock label.block-label,
+.d-form-container .optionSetFormFieldBlock label.block-label,
+.d-form-container .multiOptionSetFormFieldBlock label.block-label,
+.d-form-container .passesBlock label,
+.d-form-container .consentBlock label p,
+.d-form-container .textFormFieldBlock label *,
+.d-form-container .dateTimeFormFieldBlock label *,
+.d-form-container .lookupFormFieldBlock label *,
+.d-form-container .twoOptionFormFieldBlock label.block-label *,
+.d-form-container .optionSetFormFieldBlock label.block-label *,
+.d-form-container .multiOptionSetFormFieldBlock label.block-label * {
+  display: inline-block;
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--enae-gris-oscuro) !important;
+  /* El espacio real label→input lo da el gap del bloque (arriba), no
+     este margin; se deja en 0 para no sumar espacio por duplicado. */
+  margin-bottom: 0 !important;
 }
 
-.d-form-container .textFormFieldBlock[data-targetproperty="qualificationcomments"] label {
-  top: 22px;
-}
-
-/* Float label when focused or has value */
-.d-form-container .textFormFieldBlock:has(input:focus) label,
-.d-form-container .textFormFieldBlock:has(input:not(:placeholder-shown)) label,
-.d-form-container .phoneFormFieldBlock:has(input:focus) label,
-.d-form-container .phoneFormFieldBlock:has(input:not(:placeholder-shown)) label,
-.d-form-container .lookupFormFieldBlock:has(input:focus) label,
-.d-form-container .lookupFormFieldBlock:has(input:not(:placeholder-shown)) label,
-.d-form-container .textFormFieldBlock:has(textarea:focus) label,
-.d-form-container .textFormFieldBlock:has(textarea:not(:placeholder-shown)) label,
-.d-form-container .optionSetFormFieldBlock:has(select:focus) label,
-.d-form-container .optionSetFormFieldBlock:has(select:valid) label {
-  top: 11px;
-  transform: none;
-  font-size: 11px;
-  font-weight: 700;
+/* Recolorea el asterisco de obligatoriedad si el propio widget lo genera */
+.d-form-container label::after {
   color: var(--enae-granate);
 }
 
-/* Consent Block */
-.d-form-container .consentBlock {
-  padding: 10px 0 !important;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-.d-form-container .consentBlock p {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 0;
-}
-.d-form-container .consentBlock input[type="checkbox"] {
-  margin-top: 2px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  accent-color: var(--enae-granate);
-}
-.d-form-container .consentBlock span,
-.d-form-container div[data-editorblocktype="Text"] p {
-  font-size: 12.5px !important;
-  line-height: 1.5 !important;
-  color: var(--ink-soft) !important;
-  margin: 0 !important;
-  font-family: var(--font-body) !important;
-}
-
-/* Submit Button */
-.d-form-container .submitButtonWrapper {
-  display: block !important;
-  text-align: left !important;
-  margin-top: 8px;
-}
-.d-form-container .submitButton {
-  background: var(--enae-granate);
-  color: #F8F9FA;
-  border: none;
-  padding: 14px 32px;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
+/* ---------- Inputs, select y textarea ---------- */
+.d-form-container input[type="text"],
+.d-form-container input[type="email"],
+.d-form-container input[type="tel"],
+.d-form-container input[type="url"],
+.d-form-container input[type="number"],
+.d-form-container input[type="date"],
+.d-form-container input[type="datetime-local"],
+.d-form-container select,
+.d-form-container textarea {
   width: 100%;
-}
-.d-form-container .submitButton:hover {
-  background: #8c1025;
-  transform: translateY(-2px);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--enae-negro);
+  background-color: #ffffff;
+  /* Borde más oscuro y grueso que en la v1: el campo tiene que
+     distinguirse del fondo de la tarjeta de un vistazo. */
+  border: 1.5px solid #b7bbc0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  transition: border-color .15s ease, box-shadow .15s ease;
 }
 
-/* Dropdown specific */
+/* Para los select, añadimos la flechita personalizada y quitamos el estilo nativo */
 .d-form-container select {
   appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right 1rem center;
+  background-position: right 12px center;
   background-size: 1em;
+  padding-right: 32px;
 }
 
-@media (max-width: 600px) {
-  .d-form-container .columnContainer {
-    grid-template-columns: 1fr;
-  }
+.d-form-container input:focus,
+.d-form-container select:focus,
+.d-form-container textarea:focus {
+  border-color: var(--enae-granate);
+  box-shadow: 0 0 0 3px rgba(169, 24, 49, .12);
+  outline: none;
+}
+
+.d-form-container textarea {
+  min-height: 76px;
+  resize: vertical;
+  padding: 9px 12px !important;
+}
+
+.d-form-container ::placeholder {
+  color: var(--enae-gris-medio);
+  opacity: 1;
+}
+
+/* Campos "lookup" (País de residencia, Nacionalidad): conservan su icono
+   de búsqueda (background-image propio del widget), solo se ajusta
+   el color de fondo y el hueco para el icono. */
+.d-form-container input.lookup-behavior {
+  background-color: #ffffff;
+  padding-right: 32px;
+}
+
+/* ---------- Teléfono móvil ---------- */
+.d-form-container .phoneCountryCode {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid #b7bbc0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.d-form-container .phoneCountryCodeLabel {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--enae-gris-oscuro);
+  background: var(--enae-gris-suave);
+  border-right: 1px solid var(--hair, #e7e7e7);
+  white-space: nowrap;
+}
+
+.d-form-container .phoneFormFieldBlock input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.d-form-container .phoneFormFieldBlock input:focus {
+  box-shadow: none;
+}
+
+.d-form-container .phoneFormFieldBlock:focus-within .phoneCountryCode {
+  border-color: var(--enae-granate);
+  box-shadow: 0 0 0 3px rgba(169, 24, 49, .12);
+}
+
+/* ---------- Consentimiento y textos legales ----------
+   El widget separa el checkbox (1er <p>, con el label del *
+   obligatorio) del texto de consentimiento (2º <p>, en un <span>).
+   Se superpone el 1er <p> en posición absoluta junto al texto para
+   que se lean como una sola línea de casilla + texto. */
+.d-form-container .consentBlock {
+  position: relative;
+  margin-top: 4px;
+  padding: 14px 0 4px 0 !important;
+  border-top: 1px dashed var(--hair, #e7e7e7);
+}
+
+.d-form-container .consentBlock p:first-child {
+  position: absolute;
+  left: 0;
+  top: 15px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.d-form-container .consentBlock p:nth-child(2) {
+  padding-left: 28px;
+  margin: 0 0 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--enae-negro);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.d-form-container .consentBlock input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  accent-color: var(--enae-granate);
+  flex-shrink: 0;
+}
+
+/* Texto legal (RGPD): vive en un <div> sin clase, hermano del resto
+   de bloques de campo dentro de .columnContainer, así que también
+   se le da ancho completo (ver regla de "grid-column: 1 / -1" más
+   arriba) y tipografía consistente con el resto de textos legales. */
+.d-form-container .columnContainer > div:not([class]) p {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--enae-gris-medio);
+  margin: 0 0 10px;
+}
+
+/* Los enlaces del widget (p.ej. "política de privacidad") llegan con
+   color inline heredado de un editor de texto externo; hace falta
+   !important para sustituirlo por el granate corporativo. */
+.d-form-container form a {
+  color: var(--enae-granate) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+}
+
+/* ---------- Botón de envío ---------- */
+.d-form-container .submitButtonWrapper {
+  margin-top: 16px;
+  text-align: left;
+  display: block !important;
+  width: 100%;
+}
+
+.d-form-container .submitButton {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100% !important;
+  background: var(--enae-granate);
+  color: #F8F9FA;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  padding: 13px 22px;
+  border: 1.5px solid var(--enae-granate);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .2s ease, transform .15s ease, border-color .2s ease;
+}
+
+.d-form-container .submitButton::after {
+  content: "\2192"; /* → */
+  font-size: 15px;
+}
+
+.d-form-container .submitButton:hover {
+  background: var(--enae-negro);
+  border-color: var(--enae-negro);
+  transform: translateY(-1px);
 }

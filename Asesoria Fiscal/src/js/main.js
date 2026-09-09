@@ -17,15 +17,32 @@
       floatWrap.style.opacity = '0';
       floatWrap.style.transition = 'opacity 0.4s ease';
       floatWrap.style.pointerEvents = 'none';
+      
       var heroEl = document.querySelector('.hero');
-      if (heroEl) {
-        new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            floatWrap.style.opacity = entry.isIntersecting ? '0' : '1';
-            floatWrap.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
-          });
-        }, { threshold: 0 }).observe(heroEl);
+      var finalEl = document.querySelector('.final');
+      
+      var state = { heroVisible: true, finalVisible: false };
+      
+      function updateFloatVisibility() {
+        if (state.heroVisible || state.finalVisible) {
+          floatWrap.style.opacity = '0';
+          floatWrap.style.pointerEvents = 'none';
+        } else {
+          floatWrap.style.opacity = '1';
+          floatWrap.style.pointerEvents = 'auto';
+        }
       }
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.target === heroEl) state.heroVisible = entry.isIntersecting;
+          if (entry.target === finalEl) state.finalVisible = entry.isIntersecting;
+        });
+        updateFloatVisibility();
+      }, { threshold: 0.05 });
+      
+      if (heroEl) observer.observe(heroEl);
+      if (finalEl) observer.observe(finalEl);
     }
 
 

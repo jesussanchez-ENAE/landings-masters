@@ -1,0 +1,887 @@
+  :root {
+    --enae-gris-claro: #dbdbdb;
+  }
+
+  /* Reveal animations */
+  .reveal { opacity: 1; transform: translateY(0) }
+  .js-ready .reveal {
+    opacity: 0; transform: translateY(18px);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+  }
+  .js-ready .reveal.active { opacity: 1; transform: translateY(0) }
+  .js-ready .reveal.delay-1 { transition-delay: .15s }
+  .js-ready .reveal.delay-2 { transition-delay: .3s }
+  .js-ready .reveal.delay-3 { transition-delay: .45s }
+
+  /* Hero with background image */
+  .d-hero {
+    background: url('../img/hero_executive_mba.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+  }
+  .d-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(17,18,17,0.92) 0%, rgba(32,34,33,0.86) 50%, rgba(94,15,30,0.78) 100%);
+    z-index: 1;
+  }
+  .d-hero-inner {
+    display: flex; gap: clamp(2.5rem, 5vw, 5rem); align-items: center;
+    justify-content: space-between; position: relative; z-index: 2;
+    padding-block: clamp(80px, 9vw, 130px) clamp(70px, 8vw, 110px);
+  }
+  .d-hero-content { flex: 1.25; color: #F8F9FA }
+  .d-hero-content .t-bold, .d-hero-content .t-serif { color: #F8F9FA }
+  .d-hero-content .t-serif { color: #ffd7a0 }
+  .d-hero-content .t-light {
+    display: block; font-family: var(--font-body); font-weight: 300;
+    font-size: clamp(15.5px, 1.8vw, 18px); color: rgba(255,255,255,.9);
+    margin-top: 18px; line-height: 1.6; max-width: 42ch;
+  }
+  .d-hero-content .cta-row {
+    margin-top: clamp(28px, 3.5vw, 42px);
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+  }
+  .d-hero-meta {
+    margin-top: clamp(36px, 4.5vw, 56px); padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.18);
+    display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 48px);
+  }
+  .d-hero-meta > div { display: flex; flex-direction: column; gap: 4px }
+  .d-hero-meta span {
+    display: block; font-family: var(--font-body); font-weight: 700;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.65);
+  }
+  .d-hero-meta strong { color: #F8F9FA; font-weight: 700; font-size: 14.5px }
+  .d-hero-visual {
+    flex: 0.85; position: relative;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .d-hero-img-wrap {
+    position: relative; width: 100%; aspect-ratio: 1;
+  }
+  .d-hero-img-wrap canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0; transition: opacity 1.2s ease;
+    touch-action: none; cursor: grab;
+  }
+
+  /* Orbit concept pills */
+  @keyframes float {
+    0%, 100% { transform: translateY(0) }
+    50% { transform: translateY(-12px) }
+  }
+  .orbit-concept {
+    position: absolute;
+    background: var(--enae-granate); color: white;
+    padding: 8px 18px; border-radius: 30px;
+    font-family: var(--font-body); font-weight: 700; font-size: 12px;
+    letter-spacing: .04em;
+    box-shadow: 0 4px 15px rgba(169,24,50,.3);
+    animation: float 4s ease-in-out infinite; z-index: 3;
+    white-space: nowrap;
+  }
+  .orbit-1 { top: 8%; left: 12%; animation-delay: 0s }
+  .orbit-2 { top: 18%; right: 2%; animation-delay: .5s }
+  .orbit-3 { top: 72%; left: 2%; animation-delay: 1s }
+  .orbit-4 { bottom: 8%; right: 12%; animation-delay: 1.5s }
+  .orbit-5 { top: 44%; right: -12%; animation-delay: 2s }
+  .orbit-6 { top: 48%; left: -8%; animation-delay: 2.5s }
+
+  /* Rankings strip */
+  .d-rankings {
+    width: 100%; background: var(--surface);
+    padding: clamp(32px, 3.5vw, 48px) 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .d-rankings-title {
+    text-align: center; font-family: var(--font-body); font-size: 1.2rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: .18em;
+    color: var(--enae-granate); margin-bottom: 1.8rem;
+  }
+  .d-rankings-strip {
+    max-width: var(--page-max); width: 100%; margin: 0 auto;
+    padding-inline: var(--gutter);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .d-ranking-item {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1rem;
+    padding: 1.5rem 1.25rem;
+    background: var(--ground);
+    border: 1px solid var(--hair);
+    border-radius: 8px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .d-ranking-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    border-color: rgba(169,24,49,.25);
+  }
+  .d-ranking-item img, .d-ranking-item svg { height: 100px; max-width: 100%; width: auto; flex-shrink: 0; object-fit: contain; }
+  .d-ranking-info { display: flex; flex-direction: column; gap: 6px; text-align: center; align-items: center; margin-top: 4px; }
+  .d-ranking-label {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--ink-soft); line-height: 1.25; font-weight: 600;
+  }
+  .d-ranking-value {
+    font-family: var(--font-body); font-size: 1rem; font-weight: 800;
+    color: var(--ink); line-height: 1.3;
+  }
+  .d-ranking-value span { color: var(--ink-soft); font-weight: 500; font-size: .85rem }
+
+  /* Contrast fix */
+  .perfil-card p, .value-item p, .curric-note, .mode p,
+  .qa .a { color: var(--ink-soft) }
+
+  /* Method readability: diamond bullets and text on dark bg */
+  .method li::before { background: #ffd7a0 }
+  .method li { color: rgba(255,255,255,.92); font-size: 15.5px }
+
+  /* Value trio cards */
+  .value-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 32px);
+  }
+  .value-card {
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 12px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .value-card .vc-img {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: var(--hair);
+  }
+  .value-card .vc-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .value-card:hover .vc-img img {
+    transform: scale(1.05);
+  }
+  .value-card .vc-content {
+    padding: clamp(28px, 3vw, 36px);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .value-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(169,24,49,.3);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.06);
+  }
+  .value-card .vc-num {
+    font-family: var(--font-serif); font-style: italic; font-weight: 400;
+    color: var(--enae-granate); font-size: 24px; line-height: 1;
+  }
+  .value-card h3 {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: 22px; line-height: 1.25; margin: 0; color: var(--ink);
+  }
+  .value-card p {
+    margin: 0; color: var(--ink-soft); font-size: 15.5px; line-height: 1.6; font-weight: 300;
+  }
+
+  /* Claustro banner */
+  .claustro-banner {
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 16px;
+    display: grid; grid-template-columns: 1fr 1.25fr;
+    align-items: stretch;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+    overflow: hidden;
+  }
+  .claustro-img-col {
+    width: 100%;
+    min-height: 300px;
+    background: var(--hair);
+  }
+  .claustro-img-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .claustro-content-col {
+    padding: clamp(36px, 4.5vw, 56px);
+    display: flex; flex-direction: column; gap: clamp(32px, 5vw, 48px);
+    justify-content: center;
+  }
+  @media (max-width: 960px) {
+    .claustro-banner { grid-template-columns: 1fr; }
+    .claustro-img-col { min-height: 250px; }
+    .claustro-content-col { padding: 2rem; }
+  }
+  .claustro-facts-col {
+    display: flex; flex-direction: row; flex-wrap: wrap; gap: 24px;
+    border-top: 2px solid rgba(169,24,49,0.25);
+    padding-top: 24px;
+  }
+  .cf-item { flex: 1; min-width: 140px; display: flex; flex-direction: column; gap: 4px; }
+  .cf-num {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(28px, 3vw, 36px); line-height: 1.1;
+    color: var(--enae-granate); letter-spacing: -.02em;
+  }
+  .cf-text {
+    font-size: 14px; color: var(--ink-soft); line-height: 1.5; font-weight: 400; max-width: 34ch;
+  }
+
+  /* Metodología - Animated Service Cards Carousel */
+  .method-carousel-section {
+    padding-block: clamp(60px, 8vw, 100px);
+    position: relative;
+    overflow: hidden;
+  }
+  .method-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: clamp(32px, 4vw, 48px); gap: 20px;
+  }
+  .carousel-nav-controls {
+    display: flex; gap: 12px; align-items: center;
+  }
+  .carousel-nav-btn {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--surface); border: 1.5px solid var(--hair);
+    color: var(--ink); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all .2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .carousel-nav-btn:hover:not(:disabled) {
+    background: var(--enae-granate); border-color: var(--enae-granate);
+    color: #F8F9FA; transform: scale(1.05);
+  }
+  .carousel-nav-btn:disabled {
+    opacity: 0.35; cursor: not-allowed;
+  }
+  .method-carousel-viewport {
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-top: 36px;
+    padding-bottom: 50px;
+    margin-top: -24px;
+    margin-bottom: -32px;
+    cursor: grab;
+    /* Smooth gradient edge mask to dissolve cards seamlessly */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black clamp(20px, 4vw, 56px),
+      black calc(100% - clamp(60px, 12vw, 150px)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black clamp(20px, 4vw, 56px),
+      black calc(100% - clamp(60px, 12vw, 150px)),
+      transparent 100%
+    );
+  }
+  .method-carousel-viewport:active { cursor: grabbing; }
+  .method-carousel-viewport::-webkit-scrollbar { display: none; }
+  .method-carousel-track {
+    display: flex; gap: 24px;
+    align-items: stretch;
+    padding-right: clamp(60px, 12vw, 150px);
+  }
+  .method-service-card {
+    flex: 0 0 calc(33.333% - 16px);
+    min-width: 300px;
+    height: 440px;
+    border-radius: 24px;
+    padding: 34px 30px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    scroll-snap-align: start;
+    border: 1px solid rgba(255,255,255,0.09);
+    user-select: none;
+    transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow .4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color .35s ease,
+                background .4s ease;
+  }
+  @media (max-width: 1080px) {
+    .method-service-card { flex: 0 0 calc(50% - 12px); min-width: 280px; }
+  }
+  @media (max-width: 680px) {
+    .method-service-card { flex: 0 0 calc(100% - 20px); min-width: 260px; height: 410px; }
+  }
+
+  /* Hover micro-interactions */
+  .method-service-card:hover {
+    transform: translateY(-12px);
+    border-color: rgba(169, 24, 49, 0.75);
+    box-shadow: 0 28px 56px -12px rgba(0, 0, 0, 0.7),
+                0 0 36px -4px rgba(169, 24, 49, 0.4);
+  }
+  .method-service-card:hover .msc-glow {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  .method-service-card:hover .msc-number {
+    color: #ffd7a0;
+    letter-spacing: .12em;
+  }
+  .method-service-card:hover .msc-icon {
+    transform: scale(1.12) translateY(-2px);
+    background: rgba(169, 24, 49, 0.3);
+    color: #ffd7a0;
+    box-shadow: 0 0 25px rgba(169, 24, 49, 0.5);
+    border-color: rgba(255, 215, 160, 0.4);
+  }
+  .method-service-card:hover .msc-title {
+    color: #ffffff;
+  }
+  .method-service-card:hover .msc-desc {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .method-service-card.card-1 {
+    background: linear-gradient(150deg, #1b1316 0%, #2a1118 60%, #151012 100%);
+  }
+  .method-service-card.card-2 {
+    background: linear-gradient(150deg, #13171d 0%, #1c1c28 60%, #111216 100%);
+  }
+  .method-service-card.card-3 {
+    background: linear-gradient(150deg, #2b1118 0%, #1c0e12 60%, #120e10 100%);
+  }
+  .method-service-card.card-4 {
+    background: linear-gradient(150deg, #1f1b14 0%, #262017 60%, #141310 100%);
+  }
+  .msc-top {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: flex-start;
+    height: 110px;
+    margin-bottom: 30px;
+    flex-shrink: 0;
+  }
+  .msc-number {
+    font-family: monospace, SFMono-Regular, Menlo, Monaco, Consolas;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.5); letter-spacing: .08em;
+    line-height: 1;
+    transition: color .3s ease, letter-spacing .3s ease;
+  }
+  .msc-icon {
+    margin-top: 22px; width: 54px; height: 54px; border-radius: 14px;
+    background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;
+    color: #ffd7a0; backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1),
+                background .35s ease,
+                box-shadow .35s ease,
+                border-color .35s ease;
+  }
+  .msc-bottom {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    flex: 1;
+  }
+  .msc-title {
+    font-family: var(--font-body); font-weight: 800; font-size: 1.22rem;
+    text-transform: uppercase; letter-spacing: .04em; color: #F8F9FA;
+    margin: 0 0 12px; line-height: 1.35;
+    min-height: 3.3em;
+    display: flex; align-items: flex-start;
+    transition: color .3s ease;
+  }
+  .msc-desc {
+    font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.72);
+    font-weight: 300; margin: 0;
+    transition: color .3s ease;
+  }
+  .msc-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(circle at 85% 15%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    border-radius: 24px; opacity: 0.6;
+    transition: opacity .4s ease, transform .4s ease;
+  }
+
+  /* Final CTA 2-column conversion layout */
+  .final-container {
+    display: grid; grid-template-columns: 1.15fr 1fr;
+    gap: clamp(40px, 6vw, 80px); align-items: start;
+  }
+  .final-info {
+    margin-top: 10%;
+  }
+  .final-perks {
+    margin-top: 36px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .f-perk {
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .f-perk-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(255,215,160,.2); color: #ffd7a0;
+    font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .f-perk strong {
+    display: block; font-size: 15px; color: #F8F9FA; font-weight: 700;
+  }
+  .f-perk span {
+    font-size: 13.5px; color: rgba(255,255,255,.75); font-weight: 300;
+  }
+
+  /* Form — editorial: sharp edges, no glassmorphism */
+  .d-form-container {
+    background: var(--surface); border: 1px solid var(--hair);
+    padding: clamp(32px, 3.5vw, 44px);
+    width: 100%; max-width: 520px; border-radius: 12px;
+    color: var(--ink); text-align: left; margin: 0 auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+  }
+  .d-input-group { position: relative; margin-bottom: .6rem }
+  .d-input-floating {
+    width: 100%; padding: 22px 16px 10px;
+    background: var(--ground); border: 1px solid var(--hair);
+    border-radius: 6px;
+    font-family: var(--font-body); font-size: 15px;
+    box-sizing: border-box; transition: border-color .2s ease; color: var(--ink);
+  }
+  .d-input-floating:focus {
+    outline: none; border-color: var(--enae-granate);
+    box-shadow: 0 0 0 3px rgba(169,24,50,.15);
+  }
+  .d-floating-label {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    font-size: 14.5px; color: var(--ink-soft);
+    pointer-events: none; transition: all .2s ease; font-family: var(--font-body);
+  }
+  .d-input-floating:focus + .d-floating-label,
+  .d-input-floating:not(:placeholder-shown) + .d-floating-label {
+    top: 11px; font-size: 11px; font-weight: 700; color: var(--enae-granate);
+  }
+  .d-checkbox-label {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0; cursor: pointer; transition: background .2s ease;
+  }
+  .d-checkbox-label input[type="checkbox"] {
+    margin-top: 2px; width: 18px; height: 18px; cursor: pointer; accent-color: var(--enae-granate);
+  }
+  .d-checkbox-text { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft) }
+  .form-status { text-align: center; padding: 2rem; display: none }
+  .form-status.visible { display: block }
+  .form-status .fs-msg {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 22px; color: var(--enae-granate); line-height: 1.3;
+  }
+
+  /* Testimonial frame */
+  .testimonial-frame {
+    position: relative; width: 100%; padding-bottom: 56.25%;
+    overflow: hidden; background: var(--enae-negro); border: 1px solid var(--hair);
+    border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+  }
+  .testimonial-frame iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+  }
+
+  /* ENAE watermarks */
+  .enae-wm { position: relative; overflow: hidden }
+  .enae-wm::after {
+    content: ''; position: absolute;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 708.66 708.66'%3E%3Cpath fill='%23a91832' d='M481.8,435.18h-183.03c-5.44,0-9.84-4.41-9.84-9.84v-85.17c0-5.44,4.41-9.84,9.84-9.84h147.67c5.44,0,9.84-4.41,9.84-9.84v-39.75c0-5.44-4.41-9.84-9.84-9.84h-147.67c-5.44,0-9.84-4.41-9.84-9.84v-77.32c0-5.44,4.41-9.84,9.84-9.84h177.14c5.44,0,9.84-4.41,9.84-9.84v-40.31c0-5.44-4.41-9.84-9.84-9.84H226.87c-5.44,0-9.84,4.41-9.84,9.84V485.34c0,5.44,4.41,9.84,9.84,9.84h254.93c5.44,0,9.84-4.41,9.84-9.84v-40.31c0-5.44-4.41-9.84-9.84-9.84'/%3E%3Cpath fill='%23a91832' d='M485.94,554.51H222.72c-3.13,0-5.69,2.56-5.69,5.7v28.87c0,3.13,2.56,5.7,5.69,5.7H485.94c3.13,0,5.7-2.56,5.7-5.7v-28.87c0-3.13-2.56-5.7-5.7-5.7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-size: contain;
+    pointer-events: none; z-index: 0;
+  }
+  .enae-wm > * { position: relative; z-index: 1 }
+  .enae-wm--hero::after { width: 500px; height: 500px; bottom: -80px; right: -60px; opacity: .04; transform: rotate(-15deg) }
+  .enae-wm--problema::after { width: 400px; height: 400px; top: -50px; left: -80px; opacity: .04; transform: rotate(25deg) }
+  .enae-wm--beneficio::after { width: 550px; height: 550px; bottom: -120px; right: -100px; opacity: .035; transform: rotate(-35deg) }
+  .enae-wm--porque::after { width: 450px; height: 450px; top: -60px; left: -70px; opacity: .04; transform: rotate(12deg) }
+  .enae-wm--programa::after { width: 600px; height: 600px; bottom: -150px; right: -120px; opacity: .03; transform: rotate(-20deg) }
+  .enae-wm--final::after { width: 500px; height: 500px; top: -100px; left: 50%; margin-left: -250px; opacity: .05; transform: rotate(40deg) }
+
+  /* Responsive queries */
+  @media (max-width: 991px) {
+    .d-hero-inner { flex-direction: column; gap: 3rem; text-align: left }
+    .d-hero-visual { max-width: 380px; width: 100% }
+    .orbit-5, .orbit-6 { display: none }
+    .d-rankings-strip { grid-template-columns: repeat(2, 1fr); }
+    .faculty-grid { grid-template-columns: 1fr; gap: 36px; }
+    .final-container { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 767px) {
+    .d-rankings { padding: 2rem 1rem }
+    .d-rankings-strip { grid-template-columns: 1fr; gap: 10px }
+    .value-grid { grid-template-columns: 1fr }
+    .d-form-container { padding: 2rem 1.5rem }
+  }
+  .btn:active { transform: translateY(1px); opacity: 0.9; }
+  @media (prefers-reduced-motion: reduce) {
+    /* empty or missing */
+  }
+
+/* CEO Landing Hero Overrides */
+.d-hero--ceo::before {
+  /* Lighter gradient so the CEO image is visible, but text remains readable */
+  background: linear-gradient(135deg, rgba(17,18,17,0.7) 0%, rgba(32,34,33,0.5) 50%, rgba(94,15,30,0.6) 100%);
+}
+
+/* ============================================================
+   ENAE · Executive MBA — Restyle del formulario de contacto
+   Formulario embebido (Microsoft Dynamics 365 Marketing / "marketingForm")
+   Alcance: solo dentro de .d-form-container, para no afectar
+   a otros formularios ni al resto del sitio.
+   ============================================================ */
+
+/* ---------- Contenedor de la tarjeta ---------- */
+/* Corrección para bug de dropdown (jQuery UI Autocomplete) de Dynamics:
+   Elimina la transformación para evitar que este contenedor actúe como 
+   marco de referencia absoluto para el menú desplegable */
+.d-form-container.reveal,
+.d-form-container.reveal.active {
+  transform: none !important;
+}
+
+.d-form-container {
+  background: #ffffff;
+  border: 1px solid var(--hair, #e7e7e7);
+  border-radius: 10px;
+  /* Menos padding que la primera versión: más compacto y deja más
+     ancho real a los campos. */
+  padding: 30px 32px 28px;
+  box-shadow: 0 24px 60px rgba(17, 18, 17, .14);
+  /* Ensancha un poco la tarjeta respecto al ancho original (520px):
+     con 2 columnas de campos necesita más aire. Solo tiene efecto
+     cuando el layout de la sección le deja sitio de sobra. El sitio
+     define este mismo max-width con un selector más específico
+     (dentro de la sección), así que hace falta !important. */
+  max-width: 640px !important;
+  /* Contenedor de tamaño: el grid de campos decide 1 o 2 columnas
+     según el ancho REAL de la tarjeta, no del viewport. Esto evita
+     que la franja intermedia (~992-1150px), donde la sección pasa a
+     2 columnas pero dispone de poco sitio, herede un grid de campos
+     demasiado estrecho. */
+  container-type: inline-size;
+}
+
+.d-form-container h3 {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--enae-negro);
+  margin: 0 0 16px;
+  letter-spacing: -.01em;
+}
+
+/* En pantallas ≥992px, cede algo de ancho del panel de texto a la
+   tarjeta del formulario (antes 1.15fr/1fr, ahora al revés) para que
+   quepan cómodamente 2 columnas de campos. Solo dentro de este
+   media query: así nunca compite con la regla propia del sitio que
+   apila la sección a 1 columna por debajo de 992px. */
+@media (min-width: 992px) {
+  .final-container {
+    grid-template-columns: 1fr 1.15fr !important;
+  }
+}
+
+/* ---------- Grid de 2 columnas ----------
+   El widget de Dynamics 365 aplica estilos inline (display:flex,
+   width:560px) directamente sobre .columnContainer, así que aquí
+   hace falta !important para poder sustituirlos. Por defecto, 1
+   columna; a partir de los 430px de ancho REAL disponible dentro
+   de la tarjeta (container query sobre el content-box, es decir
+   ya descontado el padding), pasa a 2. Este umbral es el que evita
+   columnas demasiado estrechas en la franja de viewport en la que
+   la sección pasa a 2 columnas pero la tarjeta todavía dispone de
+   poco sitio (~992-1150px de ancho de ventana). */
+.d-form-container .columnContainer {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  width: 100% !important;
+  column-gap: 14px;
+}
+
+@container (min-width: 400px) {
+  .d-form-container .columnContainer {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+.d-form-container .wrap-section {
+  width: 100% !important;
+}
+
+/* Campos que deben ocupar el ancho completo */
+.d-form-container .textFormFieldBlock:has(textarea),
+.d-form-container .consentBlock,
+.d-form-container .submitButtonWrapper,
+.d-form-container .columnContainer > div:not([class]) {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Bloques de campo ----------
+   El propio widget ya estructura cada bloque como flex-column con
+   gap:16px (ese gap, no el margin del label, es el que separa el
+   label del input): se sobrescribe aquí a 4px, que es el verdadero
+   control de la compactación vertical dentro de cada campo. */
+.d-form-container .textFormFieldBlock,
+.d-form-container .phoneFormFieldBlock,
+.d-form-container .lookupFormFieldBlock,
+.d-form-container .optionSetFormFieldBlock,
+.d-form-container .dateTimeFormFieldBlock,
+.d-form-container .twoOptionFormFieldBlock,
+.d-form-container .passesBlock,
+.d-form-container .multiOptionSetFormFieldBlock {
+  padding: 10px 0 4px 0 !important;
+  gap: 4px !important;
+}
+
+/* El widget trae su propio estilo de label ("Segoe UI", 14px, 600,
+   #323130) con selectors compuestos por tipo de campo (p.ej.
+   ".optionSetFormFieldBlock label.block-label") que en checkboxes,
+   selects, fechas y "passes" tienen más especificidad que un simple
+   ".d-form-container label" y ganarían sin !important. Se listan
+   explícitamente esas variantes -junto con los descendientes del
+   label ("label *"), que es donde el widget mete el texto real en
+   algunos tipos- para que todos los labels del formulario, sea cual
+   sea el tipo de campo, salgan con la misma tipografía de marca. */
+.d-form-container label,
+.d-form-container .textFormFieldBlock label,
+.d-form-container .dateTimeFormFieldBlock label,
+.d-form-container .lookupFormFieldBlock label,
+.d-form-container .twoOptionFormFieldBlock label.block-label,
+.d-form-container .optionSetFormFieldBlock label.block-label,
+.d-form-container .multiOptionSetFormFieldBlock label.block-label,
+.d-form-container .passesBlock label,
+.d-form-container .consentBlock label p,
+.d-form-container .textFormFieldBlock label *,
+.d-form-container .dateTimeFormFieldBlock label *,
+.d-form-container .lookupFormFieldBlock label *,
+.d-form-container .twoOptionFormFieldBlock label.block-label *,
+.d-form-container .optionSetFormFieldBlock label.block-label *,
+.d-form-container .multiOptionSetFormFieldBlock label.block-label * {
+  display: inline-block;
+  font-family: var(--font-body) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--enae-gris-oscuro) !important;
+  /* El espacio real label→input lo da el gap del bloque (arriba), no
+     este margin; se deja en 0 para no sumar espacio por duplicado. */
+  margin-bottom: 0 !important;
+}
+
+/* Recolorea el asterisco de obligatoriedad si el propio widget lo genera */
+.d-form-container label::after {
+  color: var(--enae-granate);
+}
+
+/* ---------- Inputs, select y textarea ---------- */
+.d-form-container input[type="text"],
+.d-form-container input[type="email"],
+.d-form-container input[type="tel"],
+.d-form-container input[type="url"],
+.d-form-container input[type="number"],
+.d-form-container input[type="date"],
+.d-form-container input[type="datetime-local"],
+.d-form-container select,
+.d-form-container textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--enae-negro);
+  background-color: #ffffff;
+  /* Borde más oscuro y grueso que en la v1: el campo tiene que
+     distinguirse del fondo de la tarjeta de un vistazo. */
+  border: 1.5px solid #b7bbc0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+/* Para los select, añadimos la flechita personalizada y quitamos el estilo nativo */
+.d-form-container select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 1em;
+  padding-right: 32px;
+}
+
+.d-form-container input:focus,
+.d-form-container select:focus,
+.d-form-container textarea:focus {
+  border-color: var(--enae-granate);
+  box-shadow: 0 0 0 3px rgba(169, 24, 49, .12);
+  outline: none;
+}
+
+.d-form-container textarea {
+  min-height: 76px;
+  resize: vertical;
+  padding: 9px 12px !important;
+}
+
+.d-form-container ::placeholder {
+  color: var(--enae-gris-medio);
+  opacity: 1;
+}
+
+/* Campos "lookup" (País de residencia, Nacionalidad): conservan su icono
+   de búsqueda (background-image propio del widget), solo se ajusta
+   el color de fondo y el hueco para el icono. */
+.d-form-container input.lookup-behavior {
+  background-color: #ffffff;
+  padding-right: 32px;
+}
+
+/* ---------- Teléfono móvil ---------- */
+.d-form-container .phoneCountryCode {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid #b7bbc0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.d-form-container .phoneCountryCodeLabel {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--enae-gris-oscuro);
+  background: var(--enae-gris-suave);
+  border-right: 1px solid var(--hair, #e7e7e7);
+  white-space: nowrap;
+}
+
+.d-form-container .phoneFormFieldBlock input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.d-form-container .phoneFormFieldBlock input:focus {
+  box-shadow: none;
+}
+
+.d-form-container .phoneFormFieldBlock:focus-within .phoneCountryCode {
+  border-color: var(--enae-granate);
+  box-shadow: 0 0 0 3px rgba(169, 24, 49, .12);
+}
+
+/* ---------- Consentimiento y textos legales ----------
+   El widget separa el checkbox (1er <p>, con el label del *
+   obligatorio) del texto de consentimiento (2º <p>, en un <span>).
+   Se superpone el 1er <p> en posición absoluta junto al texto para
+   que se lean como una sola línea de casilla + texto. */
+.d-form-container .consentBlock {
+  position: relative;
+  margin-top: 4px;
+  padding: 14px 0 4px 0 !important;
+  border-top: 1px dashed var(--hair, #e7e7e7);
+}
+
+.d-form-container .consentBlock p:first-child {
+  position: absolute;
+  left: 0;
+  top: 15px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.d-form-container .consentBlock p:nth-child(2) {
+  padding-left: 28px;
+  margin: 0 0 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--enae-negro);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.d-form-container .consentBlock input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  accent-color: var(--enae-granate);
+  flex-shrink: 0;
+}
+
+/* Texto legal (RGPD): vive en un <div> sin clase, hermano del resto
+   de bloques de campo dentro de .columnContainer, así que también
+   se le da ancho completo (ver regla de "grid-column: 1 / -1" más
+   arriba) y tipografía consistente con el resto de textos legales. */
+.d-form-container .columnContainer > div:not([class]) p {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--enae-gris-medio);
+  margin: 0 0 10px;
+}
+
+/* Los enlaces del widget (p.ej. "política de privacidad") llegan con
+   color inline heredado de un editor de texto externo; hace falta
+   !important para sustituirlo por el granate corporativo. */
+.d-form-container form a {
+  color: var(--enae-granate) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+}
+
+/* ---------- Botón de envío ---------- */
+.d-form-container .submitButtonWrapper {
+  margin-top: 16px;
+  text-align: left;
+  display: block !important;
+  width: 100%;
+}
+
+.d-form-container .submitButton {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100% !important;
+  background: var(--enae-granate);
+  color: #F8F9FA;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  padding: 13px 22px;
+  border: 1.5px solid var(--enae-granate);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .2s ease, transform .15s ease, border-color .2s ease;
+}
+
+.d-form-container .submitButton::after {
+  content: "\2192"; /* → */
+  font-size: 15px;
+}
+
+.d-form-container .submitButton:hover {
+  background: var(--enae-negro);
+  border-color: var(--enae-negro);
+  transform: translateY(-1px);
+}
