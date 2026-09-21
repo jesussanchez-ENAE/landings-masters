@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "Asesoria-fiscal/asesoria-fiscal-colegio-abogados.html"
+        ],
+        "createdAt": "2026-09-11T12:35:38.507Z",
+        "reason": "Intentional: .dark-bg is a decorative background image element designed to be clipped by overflow:hidden parent"
+      }
+    ]
+  }
+}

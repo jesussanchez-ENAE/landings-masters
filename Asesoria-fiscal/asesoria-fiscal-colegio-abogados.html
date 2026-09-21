@@ -1,8 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Máster en Asesoría Fiscal para Abogados · ENAE</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="./src/css/base.css">
+<link rel="stylesheet" href="./src/css/base.css">
 
 <!-- ENAE Logo inline SVG (path definitions reused) -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
@@ -50,180 +49,124 @@
       <svg viewBox="0 0 370.4 127.12" fill="#a91832" aria-hidden="true"><use href="#enae-logo"/></svg>
     </a>
     <div class="nav-links">
-      <a href="#beneficio">Beneficios</a>
       <a href="#programa">Programa</a>
+      <a href="#dudas">Preguntas</a>
       <a href="#solicitar">Contacto</a>
     </div>
     <a href="#solicitar" class="btn">Solicitar información <span class="arrow">→</span></a>
   </div>
 </nav>
 
-
-
-
-<!-- CUSTOM CSS DIRECTIVOS -->
-  <link rel="stylesheet" href="./src/css/style.css">
+<link rel="stylesheet" href="./src/css/style.css">
 
 <style>
-.network-effect {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 564 / 410;
-  max-width: 500px;
-  margin: 0 auto;
-}
+  /* ── Overrides para esta landing ── */
 
-.network-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.network-static-path {
-  stroke: rgba(255, 255, 255, 0.15);
-  stroke-width: 1;
-  fill: none;
-}
-
-.network-anim-path {
-  stroke: url(#grad-line);
-  stroke-width: 2;
-  fill: none;
-  stroke-dasharray: 40 160;
-  stroke-dashoffset: 200;
-  animation: dashAnim 4s linear infinite;
-}
-
-@keyframes dashAnim {
-  to {
-    stroke-dashoffset: -200;
+  /* Accordion FAQ */
+  .faq-item { border-bottom: 1px solid #e5e7eb; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-trigger {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 0; gap: 1rem; text-align: left;
   }
-}
+  .faq-trigger h3 {
+    font-family: var(--font-serif); font-size: 1.25rem; font-style: italic;
+    color: var(--ink); margin: 0; font-weight: 400; flex: 1;
+  }
+  .faq-trigger .faq-icon {
+    width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+    background: var(--surface); display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; color: var(--enae-granate); font-weight: 300;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--enae-granate); color: #fff; }
+  .faq-body {
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+  }
+  .faq-item.open .faq-body { grid-template-rows: 1fr; }
+  .faq-body > div {
+    overflow: hidden;
+  }
+  .faq-body p:last-child { margin-bottom: 0; }
+  .faq-body p { font-size: 1rem; line-height: 1.6; color: var(--text); margin: 0 0 0.75rem; }
+  .faq-body p:last-child { margin-bottom: 0; }
+  .faq-body strong { color: var(--ink); }
+  .faq-highlight {
+    background: rgba(169, 24, 50, 0.06); padding: 1rem 1.25rem; border-radius: 8px;
+    font-weight: 700; color: var(--enae-granate); font-size: 0.9375rem; text-align: center;
+    margin-top: 0.75rem;
+  }
 
-.network-center-node {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: #fff;
-  padding: 8px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-}
+  /* H2 mix: reducir gap entre t-bold y t-serif */
+  h2.mix .t-serif { margin-top: -0.1em; }
 
-.network-center-inner {
-  border: 1px solid rgba(0,0,0,0.1);
-  padding: 8px 12px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-}
+  /* Compact grid sections */
+  .grid-section { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 768px) { .grid-section { grid-template-columns: 1fr 1fr; gap: 4rem; } }
 
-.network-center-pulse {
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  border: 2px solid rgba(169, 24, 50, 0.5);
-  animation: pulseAnim 3s infinite;
-}
+  /* Compact pill tags */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag-cloud span {
+    background: #fff; padding: 8px 14px; border-radius: 6px;
+    font-weight: 700; color: var(--ink); font-size: 0.8125rem;
+    border: 1px solid #e5e7eb;
+  }
 
-@keyframes pulseAnim {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.25); opacity: 0; }
-  100% { transform: scale(1); opacity: 0; }
-}
+  /* Before/After compact */
+  .ba-grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 768px) { .ba-grid { grid-template-columns: 1fr 1fr; } }
+  .ba-card { padding: 2rem; border-radius: 16px; }
+  .ba-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .ba-card li { display: flex; gap: 0.75rem; align-items: baseline; font-size: 0.9375rem; line-height: 1.5; }
+  .ba-card li .marker { flex-shrink: 0; font-weight: 800; font-size: 0.75rem; }
 
-.network-node {
-  position: absolute;
-  z-index: 10;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  animation: floatNode 4s ease-in-out infinite;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: default;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.network-node {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: default;
-  transition: all 0.3s ease;
-}
-.network-node:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translate(-50%, -55%) scale(1.05);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-}
-.network-node svg {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.network-node:hover svg {
-  transform: scale(1.2) rotate(5deg);
-  color: #ffb5b5;
-}
+  /* Responsive images */
+  .section-img {
+    width: 100%; border-radius: 16px; object-fit: cover;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  }
 
+  /* Dark section tighter */
+  .dark-compact { padding: 4rem 0; background: var(--enae-negro); color: #fff; position: relative; overflow: hidden; }
+  .dark-compact .dark-bg {
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    opacity: 0.22; mask-image: linear-gradient(to right, transparent 10%, black 50%);
+    -webkit-mask-image: linear-gradient(to right, transparent 10%, black 50%);
+  }
 
-@keyframes floatNode {
-  0%, 100% { transform: translate(-50%, -50%); }
-  50% { transform: translate(-50%, -60%); }
-}
-
-.network-node.n1 { animation-delay: 0s; }
-.network-node.n2 { animation-delay: -1s; }
-.network-node.n3 { animation-delay: -2s; }
-.network-node.n4 { animation-delay: -3s; }
-.network-node.n5 { animation-delay: -0.5s; }
-.network-node.n6 { animation-delay: -1.5s; }
+  /* Hero tighter */
+  .hero-campaign { min-height: 75vh; }
 </style>
 
-<!-- END CUSTOM CSS DIRECTIVOS -->
 
-
-<!-- HERO -->
-<header class="hero d-hero enae-wm enae-wm--hero" style="background: url('./src/img/hero_asesoria_fiscal_directivos.jpg') no-repeat center center; background-size: cover; position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+<!-- ═══════════════════════════════════════════════════════
+     HERO — Mensaje de campaña como titular principal
+     ═══════════════════════════════════════════════════════ -->
+<header class="hero d-hero enae-wm enae-wm--hero hero-campaign" style="background: url('./src/img/hero_asesoria_incamur.png') no-repeat center center; background-size: cover; position: relative; display: flex; align-items: center; justify-content: center; text-align: center;">
   <div class="pattern" aria-hidden="true" style="opacity: 0.5;">
     <span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span><span class="b5"></span>
   </div>
-  <div class="wrap reveal" style="position: relative; z-index: 2; max-width: 1000px; padding-top: 80px;">
-    <span class="eyebrow" style="margin-bottom:24px; justify-content: center;">
-      <span class="dot"></span> ¿LA PARTE FISCAL TIENES QUE CONSULTARLA? <span class="rule" style="display: none;"></span>
-    </span>
-    <h1 class="hero-title mix" style="font-size: clamp(40px, 6vw, 72px); line-height: 1.1; margin-bottom: 32px;">
-      <span class="t-bold">Añade la perspectiva fiscal a</span><br>
-      <span class="t-serif" style="color: #fff;">tu conocimiento jurídico.</span>
-    </h1>
-    <p style="font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto 3rem;">
-      <strong>Máster en Asesoría Fiscal de ENAE Business School</strong><br>
-      Amplía tu capacidad de análisis y aporta más valor a tus clientes.
+  <div class="wrap reveal" style="position: relative; z-index: 2; max-width: 860px; padding-top: 80px; padding-bottom: 2rem;">
+    <p style="font-size: clamp(1.05rem, 1.8vw, 1.3rem); font-weight: 400; line-height: 1.5; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 1.5rem; font-family: var(--font-serif); font-style: italic;">
+      ¿Cuántas veces has tenido que decir<br>
+      «la parte fiscal tengo que consultarla»?
     </p>
-    
-    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4rem;">
-      <a href="#solicitar" class="btn" style="padding: 1rem 2.5rem; font-size: 1.125rem;">Solicita información <span class="arrow">&rarr;</span></a>
-      <a href="#programa" class="btn ghost" style="padding: 1rem 2.5rem; font-size: 1.125rem; border-color: rgba(255,255,255,0.3);">Ver el programa</a>
+    <h1 class="hero-title mix" style="margin-bottom: 1.25rem;">
+      <span class="t-bold" style="font-size: clamp(1.75rem, 4vw, 2.75rem);">Añade la perspectiva fiscal a</span><br>
+      <span class="t-serif" style="color: #fff; font-size: clamp(1.85rem, 4.2vw, 2.9rem);">tu conocimiento jurídico.</span>
+    </h1>
+    <p style="font-size: clamp(0.95rem, 1.5vw, 1.125rem); font-weight: 300; line-height: 1.55; color: rgba(255,255,255,0.8); max-width: 580px; margin: 0 auto 2rem;">
+      Muchas de las decisiones jurídicas que tomas para tus clientes tienen también consecuencias fiscales. Amplía tu capacidad de asesoramiento.
+    </p>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem;">
+      <a href="#solicitar" class="btn" style="padding: 0.875rem 2rem;">Solicita información <span class="arrow">&rarr;</span></a>
+      <a href="#programa" class="btn ghost" style="padding: 0.875rem 2rem; border-color: rgba(255,255,255,0.3);">Ver el programa</a>
     </div>
 
-    <div class="d-hero-meta" style="justify-content: center; flex-wrap: wrap; gap: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+    <div class="d-hero-meta" style="justify-content: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.25rem;">
       <div style="text-align: center;"><span>Máster en</span><strong>Asesoría Fiscal</strong></div>
       <div style="text-align: center;"><span>Edición</span><strong>36ª edición</strong></div>
       <div style="text-align: center;"><span>Duración</span><strong>60 ECTS</strong></div>
@@ -232,353 +175,331 @@
   </div>
 </header>
 
-<!-- BANNER DESTACADO BECAS -->
-<div class="ia-banner reveal" style="background: #111; color: #fff; padding: 1.5rem 2rem; text-align: center; margin: -2.5rem auto 5rem; width: 90%; max-width: 1000px; border-radius: 16px; box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; position:relative; z-index:10; border: 1px solid rgba(212, 175, 55, 0.3);">
-  <span style="background: linear-gradient(135deg, #dfc26a, #c09d3b); color: #111; padding: 6px 16px; border-radius: 30px; font-weight: 800; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Exclusivo Colegiados</span>
-  <span style="font-size: clamp(17px, 2vw, 21px); font-family: var(--font-serif); font-weight: 400; line-height: 1.3;">Disfruta de una <strong>beca del 20%</strong> exclusiva para miembros del <strong>Colegio de Abogados de la Región de Murcia</strong>.</span>
+
+<!-- ═══════════════════════════════════════════════════════
+     ALIANZA ICAMUR + BECA (se mantiene — funciona bien)
+     ═══════════════════════════════════════════════════════ -->
+<div class="wrap reveal" style="position:relative; z-index:10; margin-top: -2.5rem; margin-bottom: 3rem;">
+  <div style="background: #fff; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; overflow: hidden; display: flex; flex-wrap: wrap;">
+    <div style="flex: 1 1 480px; padding: 2rem 2.5rem; border-right: 1px solid #e5e7eb;">
+      <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+        <img src="./src/img/logo_icamur.png" alt="Ilustre Colegio de Abogados de Murcia" style="height: 54px; object-fit: contain;">
+        <div style="height: 48px; width: 1px; background: #e5e7eb;"></div>
+        <svg viewBox="0 0 370.4 127.12" fill="#a91832" aria-hidden="true" style="height: 70px; width: auto;"><use href="#enae-logo"/></svg>
+      </div>
+      <p style="font-size: 0.9375rem; line-height: 1.55; color: var(--text); margin: 0;">
+        <strong>ENAE</strong> y el <a href="https://www.icamur.org/" target="_blank" style="color: var(--enae-granate); text-decoration: none; font-weight: 700;">Ilustre Colegio de Abogados de Murcia (ICAMUR)</a> comparten objetivo: mantener actualizados a sus colegiados en un entorno normativo cada vez más complejo.
+      </p>
+    </div>
+    <div style="flex: 1 1 300px; background: #111; color: #fff; padding: 2rem 2.5rem; display: flex; flex-direction: column; justify-content: center; position: relative;">
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.15), transparent 70%); pointer-events: none;"></div>
+      <span style="align-self: flex-start; background: linear-gradient(135deg, #dfc26a, #c09d3b); color: #111; padding: 8px 16px; border-radius: 30px; font-weight: 800; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.75rem;">Ventaja Colegiados</span>
+      <h3 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 0.5rem; line-height: 1.1;">Beca del 20%</h3>
+      <p style="font-size: 0.9375rem; line-height: 1.5; color: rgba(255,255,255,0.8); margin: 0;">
+        Ayuda exclusiva en la matrícula para miembros colegiados de ICAMUR.
+      </p>
+    </div>
+  </div>
 </div>
 
-<!-- SECTION 1: CONTEXT (Image + Text) -->
-<section class="enae-wm" style="padding: 4rem 0 8rem; background: var(--surface);">
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTEXTO — Tu cliente no separa lo jurídico de lo fiscal
+     (Fusión de las antiguas secciones Intro + Contexto)
+     ═══════════════════════════════════════════════════════ -->
+<section class="enae-wm" style="padding: 3.5rem 0; background: var(--surface);">
   <div class="wrap">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;">
+    <div class="grid-section">
       <div class="reveal">
-        <h2 class="mix" style="margin-bottom: 2.5rem; font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.1;">
-          <span class="t-bold" style="color: var(--ink);">Tu cliente no ve</span><br>
-          <span class="t-serif" style="color: var(--enae-granate);">la parte jurídica y la fiscal por separado.</span>
+        <h2 class="mix" style="margin-bottom: 1.25rem; ">
+          <span class="t-bold" style="color: var(--ink);">Tu cliente no separa</span>
+          <span class="t-serif" style="color: var(--enae-granate);">lo jurídico de lo fiscal.</span>
         </h2>
-        <div style="font-size: 1.125rem; line-height: 1.8; color: var(--text);">
-          <ul style="list-style: none; padding: 0; margin: 0 0 2rem; border-left: 1px solid #e5e7eb; padding-left: 2rem;">
-            <li style="margin-bottom: 1rem; position: relative;">Una compraventa no es solo un contrato.</li>
-            <li style="margin-bottom: 1rem; position: relative;">Una reestructuración no es solo una operación societaria.</li>
-            <li style="margin-bottom: 0; position: relative;">Una sucesión no es solo una cuestión patrimonial.</li>
-          </ul>
-          <p style="margin-bottom: 2rem; font-weight: 700; font-size: 1.375rem; color: var(--ink); line-height: 1.4;">Muchas de las decisiones que asesores jurídicamente tienen también consecuencias fiscales.</p>
-          <p style="margin-bottom: 3rem;">Y cuanto mejor comprendas ambas dimensiones, mejor podrás analizar la operación en su conjunto.</p>
-          <div style="background: #fff; padding: 2rem; border-radius: 12px; border-left: 4px solid var(--enae-granate); box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
-            <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--enae-granate); margin: 0 0 0.5rem;">Porque conocer la ley es fundamental.</h3>
-            <p style="font-weight: 700; color: var(--ink); margin: 0; font-size: 1.125rem;">Entender su impacto fiscal puede marcar la diferencia.</p>
+        <div style="font-size: 0.9375rem; line-height: 1.6; color: var(--text);">
+          <p style="margin: 0 0 1rem;">Una compraventa no es solo un contrato. Una reestructuración no es solo una operación societaria. Una sucesión no es solo una cuestión patrimonial.</p>
+          <p style="margin: 0 0 1.25rem; font-weight: 700; font-size: 1.0625rem; color: var(--ink); line-height: 1.4;">Muchas de las decisiones que asesores jurídicamente tienen también consecuencias fiscales.</p>
+          <p style="margin: 0 0 1.5rem;">Cuanto mejor comprendas ambas dimensiones, mejor podrás analizar la operación en su conjunto.</p>
+          <div style="background: #fff; padding: 1.25rem 1.5rem; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+            <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.125rem; color: var(--enae-granate); margin: 0 0 0.25rem;">Conocer la ley es fundamental.</p>
+            <p style="font-weight: 700; color: var(--ink); margin: 0; font-size: 0.9375rem;">Entender su impacto fiscal marca la diferencia.</p>
           </div>
         </div>
       </div>
-      <div class="reveal delay-1" style="position: relative;">
-        <div style="position: absolute; top: -2rem; left: -2rem; width: 100%; height: 100%; border: 1px solid var(--enae-granate); border-radius: 24px; opacity: 0.2;"></div>
-        <img src="./src/img/10042023-317A8104.jpg" alt="Profesionales en ENAE" style="width: 100%; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.15); position: relative; z-index: 2; object-fit: cover; aspect-ratio: 4/5;">
+      <div class="reveal delay-1">
+        <img src="./src/img/10042023-317A8104.jpg" alt="Profesionales en ENAE" class="section-img" style="aspect-ratio: 3/2;">
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 2: PAIN POINTS (Dark background) -->
-<section class="enae-wm" style="padding: 8rem 0; background: var(--enae-negro); color: #fff; position: relative; overflow: hidden;">
-  <div style="position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: url('./src/img/10042023-317A7390.jpg') no-repeat center center; background-size: cover; opacity: 0.1; mask-image: linear-gradient(to right, transparent, black); -webkit-mask-image: linear-gradient(to right, transparent, black);"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     RETO + CASOS DE USO — Sección dark compacta
+     (Fusión de las antiguas secciones Pain Points + Use Cases)
+     ═══════════════════════════════════════════════════════ -->
+<section class="dark-compact enae-wm">
+  <div class="dark-bg" style="background-image: url('./src/img/10042023-317A7390.jpg');"></div>
   <div class="wrap" style="position: relative; z-index: 2;">
-    <div style="max-width: 600px;">
-      <span class="eyebrow" style="margin-bottom:1rem; color: rgba(255,255,255,0.5);">El reto actual</span>
-      <h2 class="mix reveal" style="margin-bottom: 3rem;">
-        <span class="t-bold" style="color: #fff;">¿Cuánto de tu asesoramiento</span><br>
-        <span class="t-serif" style="color: var(--enae-granate);">depende hoy de otros especialistas?</span>
-      </h2>
-      <p class="reveal delay-1" style="font-size: 1.25rem; line-height: 1.6; color: rgba(255,255,255,0.7); margin-bottom: 1rem;">No se trata de sustituir al asesor fiscal.</p>
-      <p class="reveal delay-1" style="font-size: 1.75rem; font-family: var(--font-serif); color: #fff; line-height: 1.4; margin-bottom: 3rem;">
-        Se trata de <strong>entender la fiscalidad</strong> lo suficiente como para <span style="color: var(--enae-granate);">participar en la conversación con criterio.</span>
-      </p>
-      
-      <div class="reveal delay-2" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 3rem; border-radius: 16px; backdrop-filter: blur(10px);">
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.5rem;">
-          <li style="display: flex; gap: 1rem; align-items: flex-start; color: rgba(255,255,255,0.9); font-size: 1.125rem;">
-            <span style="color: var(--enae-granate); font-weight: 800;">01.</span>
-            <span>Para detectar las preguntas adecuadas.</span>
-          </li>
-          <li style="display: flex; gap: 1rem; align-items: flex-start; color: rgba(255,255,255,0.9); font-size: 1.125rem;">
-            <span style="color: var(--enae-granate); font-weight: 800;">02.</span>
-            <span>Para identificar posibles implicaciones tributarias.</span>
-          </li>
-          <li style="display: flex; gap: 1rem; align-items: flex-start; color: rgba(255,255,255,0.9); font-size: 1.125rem;">
-            <span style="color: var(--enae-granate); font-weight: 800;">03.</span>
-            <span>Para entender las alternativas y anticiparte.</span>
-          </li>
-          <li style="display: flex; gap: 1rem; align-items: flex-start; color: #fff; font-size: 1.25rem; font-weight: 700; margin-top: 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
-            <span style="color: var(--enae-granate);">→</span>
-            <span>Y para ofrecer a tu cliente una visión más completa.</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 3: BEFORE / AFTER -->
-<section class="enae-wm" style="padding: 8rem 0; background: #fff;">
-  <div class="wrap">
-    <div style="text-align: center; margin-bottom: 5rem; max-width: 800px; margin-inline: auto;">
-      <h2 class="mix reveal">
-        <span class="t-bold">AMPLÍA LO QUE PUEDES</span>
-        <span class="t-serif">HACER POR TUS CLIENTES</span>
-      </h2>
-    </div>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; max-width: 1100px; margin: 0 auto;">
-      <!-- Antes -->
-      <div class="reveal delay-1" style="background: var(--surface); padding: 4rem 3rem; border-radius: 24px; border: 1px solid #e5e7eb;">
-        <h3 style="font-family: var(--font-serif); font-size: 2.5rem; color: #9ca3af; margin-bottom: 1.5rem; opacity: 0.5;">Antes</h3>
-        <p style="font-weight: 700; color: var(--ink); margin-bottom: 2.5rem; font-size: 1.25rem; line-height: 1.5;">Tu conocimiento jurídico es el punto de partida. Pero ante determinadas operaciones:</p>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.5rem; color: var(--text);">
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: #e5e7eb; color: #6b7280; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; margin-top: 4px;">✕</div>
-            <span style="font-size: 1.125rem; line-height: 1.5;">Tienes que consultar sus implicaciones fiscales.</span>
-          </li>
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: #e5e7eb; color: #6b7280; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; margin-top: 4px;">✕</div>
-            <span style="font-size: 1.125rem; line-height: 1.5;">Hay cuestiones que necesitas derivar a otros especialistas.</span>
-          </li>
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: #e5e7eb; color: #6b7280; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; margin-top: 4px;">✕</div>
-            <span style="font-size: 1.125rem; line-height: 1.5;">Parte del análisis queda fuera de tu ámbito.</span>
-          </li>
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: #e5e7eb; color: #6b7280; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; margin-top: 4px;">✕</div>
-            <span style="font-size: 1.125rem; line-height: 1.5;">Puedes necesitar apoyo para valorar alternativas.</span>
-          </li>
-        </ul>
-      </div>
-      
-      <!-- Después -->
-      <div class="reveal delay-2" style="background: #fff; padding: 4rem 3rem; border-radius: 24px; box-shadow: 0 40px 80px rgba(169, 24, 50, 0.08); position: relative; border: 1px solid rgba(169, 24, 50, 0.1);">
-        <div style="position: absolute; top: -16px; left: 3rem; background: var(--enae-granate); color: #fff; padding: 8px 24px; border-radius: 30px; font-weight: 800; font-size: 0.875rem; letter-spacing: 1px; text-transform: uppercase;">Con el Máster</div>
-        <h3 style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--enae-granate); margin-bottom: 1.5rem;">Después</h3>
-        <p style="font-weight: 700; color: var(--ink); margin-bottom: 2.5rem; font-size: 1.25rem; line-height: 1.5;">Incorporas la perspectiva fiscal a tu análisis jurídico.</p>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.5rem; color: var(--ink);">
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(169, 24, 50, 0.1); color: var(--enae-granate); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 4px;">✓</div>
-            <span style="font-size: 1.125rem; line-height: 1.5;">Comprendes mejor las consecuencias tributarias.</span>
-          </li>
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(169, 24, 50, 0.1); color: var(--enae-granate); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 4px;">✓</div>
-            <span style="font-size: 1.125rem; line-height: 1.5;">Detectas implicaciones antes de tomar decisiones.</span>
-          </li>
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(169, 24, 50, 0.1); color: var(--enae-granate); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 4px;">✓</div>
-            <span style="font-size: 1.125rem; line-height: 1.5;">Puedes plantear mejores preguntas y alternativas.</span>
-          </li>
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: rgba(169, 24, 50, 0.1); color: var(--enae-granate); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 4px;">✓</div>
-            <span style="font-size: 1.125rem; line-height: 1.5;">Te comunicas con mayor criterio con asesores.</span>
-          </li>
-          <li style="display: flex; gap: 1.25rem; align-items: flex-start;">
-            <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--enae-granate); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 4px; box-shadow: 0 4px 12px rgba(169, 24, 50, 0.3);">✓</div>
-            <span style="font-size: 1.125rem; line-height: 1.5; font-weight: 700;">Aportas una visión más completa al cliente.</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    
-    <div class="reveal delay-3" style="text-align: center; margin-top: 6rem;">
-      <h3 style="font-size: 1.5rem; font-weight: 300; color: var(--text); margin-bottom: 0.5rem;">No tienes que cambiar de profesión.</h3>
-      <h2 style="font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--ink); margin: 0;">Tienes que ampliar tu perspectiva.</h2>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 4: USE CASES (Image + Tags) -->
-<section class="enae-wm" style="padding: 8rem 0; background: var(--surface);">
-  <div class="wrap">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;">
-      <div class="reveal delay-1" style="order: 2;">
-        <h2 class="mix" style="margin-bottom: 1.5rem;">
-          <span class="t-bold">Tus clientes ya necesitan</span><br>
-          <span class="t-serif">asesoramiento fiscal.</span>
+    <div class="grid-section" style="align-items: flex-start;">
+      <div class="reveal">
+        <h2 class="mix" style="margin-bottom: 1.25rem; ">
+          <span class="t-bold" style="color: #fff;">¿Cuánto de tu asesoramiento</span>
+          <span class="t-serif" style="color: var(--enae-granate);">depende hoy de otros?</span>
         </h2>
-        <p style="font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 3rem;">La cuestión es quién participa en esa conversación.</p>
-        
-        <p style="font-size: 1.125rem; color: var(--text); margin-bottom: 2rem;">Dentro de tu propia cartera de clientes ya existen decisiones con una dimensión fiscal:</p>
-        
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;">
-          <span style="background: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; color: var(--ink); font-size: 0.875rem; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">Operaciones societarias</span>
-          <span style="background: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; color: var(--ink); font-size: 0.875rem; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">Compraventas</span>
-          <span style="background: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; color: var(--ink); font-size: 0.875rem; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">Contratos</span>
-          <span style="background: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; color: var(--ink); font-size: 0.875rem; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">Sucesiones y donaciones</span>
-          <span style="background: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; color: var(--ink); font-size: 0.875rem; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">Inversiones</span>
-          <span style="background: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; color: var(--ink); font-size: 0.875rem; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">Patrimonio</span>
-          <span style="background: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; color: var(--ink); font-size: 0.875rem; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">Retribuciones</span>
-        </div>
-        
-        <div style="background: rgba(169, 24, 50, 0.05); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--enae-granate);">
-          <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text); margin: 0;">
-            Incorporar conocimientos avanzados de fiscalidad puede ayudarte a <strong style="color: var(--enae-granate);">ampliar los problemas que eres capaz de analizar</strong> y a participar en operaciones donde la dimensión jurídica y fiscal están estrechamente relacionadas.
-          </p>
-        </div>
+        <p style="font-size: 0.9375rem; line-height: 1.6; color: rgba(255,255,255,0.85); margin-bottom: 0.75rem;">No se trata de sustituir al asesor fiscal. Se trata de entender la fiscalidad lo suficiente como para participar en la conversación con criterio.</p>
+        <ul style="list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-direction: column; gap: 0.75rem;">
+          <li style="display: flex; gap: 0.75rem; align-items: baseline; color: rgba(255,255,255,0.9); font-size: 0.9375rem;">
+            <span style="color: var(--enae-granate); font-weight: 800; font-size: 0.8125rem;">01</span>
+            <span>Detectar las preguntas adecuadas.</span>
+          </li>
+          <li style="display: flex; gap: 0.75rem; align-items: baseline; color: rgba(255,255,255,0.9); font-size: 0.9375rem;">
+            <span style="color: var(--enae-granate); font-weight: 800; font-size: 0.8125rem;">02</span>
+            <span>Identificar implicaciones tributarias antes de decidir.</span>
+          </li>
+          <li style="display: flex; gap: 0.75rem; align-items: baseline; color: rgba(255,255,255,0.9); font-size: 0.9375rem;">
+            <span style="color: var(--enae-granate); font-weight: 800; font-size: 0.8125rem;">03</span>
+            <span>Ofrecer a tu cliente una visión más completa.</span>
+          </li>
+        </ul>
       </div>
-      
-      <div class="reveal" style="order: 1;">
-        <img src="./src/img/10042023-317A7711.jpg" alt="Networking ENAE" style="width: 100%; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); object-fit: cover; aspect-ratio: 4/5;">
+      <div class="reveal delay-1">
+        <p style="font-size: 0.9375rem; color: rgba(255,255,255,0.8); margin-bottom: 0.75rem;">Dentro de tu cartera ya existen operaciones con dimensión fiscal:</p>
+        <div class="tag-cloud" style="margin-bottom: 1.5rem;">
+          <span style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #fff;">Operaciones societarias</span>
+          <span style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #fff;">Compraventas</span>
+          <span style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #fff;">Contratos</span>
+          <span style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #fff;">Sucesiones</span>
+          <span style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #fff;">Inversiones</span>
+          <span style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #fff;">Patrimonio</span>
+          <span style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #fff;">Retribuciones</span>
+        </div>
+        <p style="font-size: 1.0625rem; font-weight: 700; color: #fff; line-height: 1.4; margin: 0;">La cuestión es quién participa en esa conversación.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: THE PROGRAM & DATA -->
-<section class="enae-wm" style="padding: 8rem 0; background: #fff;" id="programa">
-  <div class="wrap">
-    <div style="text-align: center; margin-bottom: 5rem; max-width: 800px; margin-inline: auto;">
-      <h2 class="mix reveal">
-        <span class="t-bold">LO QUE APRENDES.</span>
-        <span class="t-serif">LO QUE PUEDES HACER CON ELLO.</span>
+
+<!-- ═══════════════════════════════════════════════════════
+     ANTES / DESPUÉS — Compacto, sin clichés visuales
+     ═══════════════════════════════════════════════════════ -->
+<section class="enae-wm" style="padding: 3.5rem 0; background: #fff;">
+  <div class="wrap" style="max-width: 960px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 2.5rem;">
+      <h2 class="mix reveal" style="">
+        <span class="t-bold">Amplía lo que puedes</span>
+        <span class="t-serif">hacer por tus clientes.</span>
       </h2>
-      <p class="reveal delay-1" style="font-size: 1.25rem; color: var(--text); margin-top: 1.5rem; line-height: 1.6;">Una formación especializada para profesionales que quieren comprender la fiscalidad aplicada a las decisiones empresariales y patrimoniales.</p>
     </div>
-    
-    <div class="reveal delay-2" style="background: #fff; border-radius: 24px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.04); margin-bottom: 5rem; max-width: 1000px; margin-inline: auto;">
+
+    <div class="ba-grid reveal delay-1">
+      <div class="ba-card" style="background: var(--surface); border: 1px solid #e5e7eb;">
+        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: #888; margin: 0 0 1rem; font-style: italic; font-weight: 400;">Hoy</h3>
+        <ul>
+          <li><span class="marker" style="color: #9ca3af;">—</span> <span style="color: var(--text);">Consultas las implicaciones fiscales a terceros.</span></li>
+          <li><span class="marker" style="color: #9ca3af;">—</span> <span style="color: var(--text);">Derivas cuestiones que podrías abordar.</span></li>
+          <li><span class="marker" style="color: #9ca3af;">—</span> <span style="color: var(--text);">Parte del análisis queda fuera de tu ámbito.</span></li>
+          <li><span class="marker" style="color: #9ca3af;">—</span> <span style="color: var(--text);">Necesitas apoyo para valorar alternativas.</span></li>
+        </ul>
+      </div>
+
+      <div class="ba-card" style="background: #fff; box-shadow: 0 20px 50px rgba(169, 24, 50, 0.08); border: 1px solid rgba(169, 24, 50, 0.12); position: relative;">
+        <span style="position: absolute; top: -10px; left: 2rem; background: var(--enae-granate); color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase;">Con el Máster</span>
+        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--enae-granate); margin: 0 0 1rem; font-style: italic; font-weight: 400;">Después</h3>
+        <ul>
+          <li><span class="marker" style="color: var(--enae-granate);">✓</span> <span style="color: var(--ink);">Comprendes las consecuencias tributarias.</span></li>
+          <li><span class="marker" style="color: var(--enae-granate);">✓</span> <span style="color: var(--ink);">Detectas implicaciones antes de decidir.</span></li>
+          <li><span class="marker" style="color: var(--enae-granate);">✓</span> <span style="color: var(--ink);">Planteas mejores preguntas y alternativas.</span></li>
+          <li><span class="marker" style="color: var(--enae-granate);">✓</span> <span style="color: var(--ink);">Te comunicas con mayor criterio con asesores.</span></li>
+          <li><span class="marker" style="color: var(--enae-granate); font-size: 0.875rem;">✓</span> <span style="color: var(--ink); font-weight: 700;">Aportas una visión más completa al cliente.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="reveal delay-2" style="text-align: center; margin-top: 2rem; font-size: 1.0625rem; color: var(--text);">
+      No tienes que cambiar de profesión. <strong style="color: var(--ink);">Tienes que ampliar tu perspectiva.</strong>
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PROGRAMA + DATOS — Se mantiene (funciona bien), más compacto
+     ═══════════════════════════════════════════════════════ -->
+<section class="enae-wm" style="padding: 3.5rem 0; background: var(--surface);" id="programa">
+  <div class="wrap">
+    <div style="text-align: center; margin-bottom: 2.5rem; max-width: 700px; margin-inline: auto;">
+      <h2 class="mix reveal" style="">
+        <span class="t-bold">Lo que aprendes.</span>
+        <span class="t-serif">Lo que puedes hacer con ello.</span>
+      </h2>
+      <p class="reveal delay-1" style="font-size: 0.9375rem; color: var(--text); margin-top: 1rem; line-height: 1.55;">Formación especializada para profesionales que quieren comprender la fiscalidad aplicada a decisiones empresariales y patrimoniales.</p>
+    </div>
+
+    <div class="reveal delay-2" style="background: #fff; border-radius: 16px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 12px 30px rgba(0,0,0,0.04); margin-bottom: 2.5rem; max-width: 900px; margin-inline: auto;">
       <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 600px;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 540px;">
           <thead>
             <tr style="background: var(--surface); border-bottom: 2px solid #e5e7eb;">
-              <th style="padding: 2rem; font-weight: 800; font-size: 1.25rem; width: 45%; color: var(--ink);">El Máster en Asesoría Fiscal</th>
-              <th style="padding: 2rem; font-weight: 800; font-size: 1.25rem; color: var(--ink);">Lo que aporta a tu práctica jurídica</th>
+              <th style="padding: 1.25rem 1.5rem; font-weight: 800; font-size: 0.9375rem; width: 45%; color: var(--ink);">El Máster en Asesoría Fiscal</th>
+              <th style="padding: 1.25rem 1.5rem; font-weight: 800; font-size: 0.9375rem; color: var(--ink);">Lo que aporta a tu práctica</th>
             </tr>
           </thead>
           <tbody style="color: var(--ink);">
             <tr style="border-bottom: 1px solid #f3f4f6;">
-              <td style="padding: 1.5rem 2rem; font-weight: 700; font-size: 1.125rem;">Formación fiscal especializada</td>
-              <td style="padding: 1.5rem 2rem; color: var(--text); font-size: 1.125rem;">Comprender la dimensión tributaria de las operaciones</td>
+              <td style="padding: 1rem 1.5rem; font-weight: 700; font-size: 0.9375rem;">Formación fiscal especializada</td>
+              <td style="padding: 1rem 1.5rem; color: var(--text); font-size: 0.9375rem;">Comprender la dimensión tributaria de las operaciones</td>
             </tr>
             <tr style="border-bottom: 1px solid #f3f4f6; background: #fafafa;">
-              <td style="padding: 1.5rem 2rem; font-weight: 700; font-size: 1.125rem;">Claustro de profesionales</td>
-              <td style="padding: 1.5rem 2rem; color: var(--text); font-size: 1.125rem;">Aprender desde la experiencia y la práctica real diaria</td>
+              <td style="padding: 1rem 1.5rem; font-weight: 700; font-size: 0.9375rem;">Claustro de profesionales</td>
+              <td style="padding: 1rem 1.5rem; color: var(--text); font-size: 0.9375rem;">Aprender desde la experiencia y la práctica real</td>
             </tr>
             <tr style="border-bottom: 1px solid #f3f4f6;">
-              <td style="padding: 1.5rem 2rem; font-weight: 700; font-size: 1.125rem;">Metodología del Caso</td>
-              <td style="padding: 1.5rem 2rem; color: var(--text); font-size: 1.125rem;">Aplicar la teoría a situaciones y convertirlas en criterio aplicable</td>
+              <td style="padding: 1rem 1.5rem; font-weight: 700; font-size: 0.9375rem;">Metodología del Caso</td>
+              <td style="padding: 1rem 1.5rem; color: var(--text); font-size: 0.9375rem;">Aplicar la teoría a situaciones reales</td>
             </tr>
             <tr style="border-bottom: 1px solid #f3f4f6; background: #fafafa;">
-              <td style="padding: 1.5rem 2rem; font-weight: 700; font-size: 1.125rem;">Formación presencial / híbrida</td>
-              <td style="padding: 1.5rem 2rem; color: var(--text); font-size: 1.125rem;">Crear relaciones y compartir experiencias profesionales</td>
+              <td style="padding: 1rem 1.5rem; font-weight: 700; font-size: 0.9375rem;">Formación presencial / híbrida</td>
+              <td style="padding: 1rem 1.5rem; color: var(--text); font-size: 0.9375rem;">Crear relaciones y compartir experiencias</td>
             </tr>
             <tr style="border-bottom: 1px solid #f3f4f6;">
-              <td style="padding: 1.5rem 2rem; font-weight: 700; font-size: 1.125rem;">Visión empresarial integral</td>
-              <td style="padding: 1.5rem 2rem; color: var(--text); font-size: 1.125rem;">Comprender al cliente corporativo más allá del expediente</td>
+              <td style="padding: 1rem 1.5rem; font-weight: 700; font-size: 0.9375rem;">Visión empresarial integral</td>
+              <td style="padding: 1rem 1.5rem; color: var(--text); font-size: 0.9375rem;">Comprender al cliente más allá del expediente</td>
             </tr>
             <tr style="border-bottom: 1px solid #f3f4f6; background: #fafafa;">
-              <td style="padding: 1.5rem 2rem; font-weight: 700; font-size: 1.125rem;">Diversidad de perfiles</td>
-              <td style="padding: 1.5rem 2rem; color: var(--text); font-size: 1.125rem;">Entender cómo piensan economistas y financieros en la operación</td>
+              <td style="padding: 1rem 1.5rem; font-weight: 700; font-size: 0.9375rem;">Diversidad de perfiles</td>
+              <td style="padding: 1rem 1.5rem; color: var(--text); font-size: 0.9375rem;">Entender cómo piensan economistas y financieros</td>
             </tr>
             <tr>
-              <td style="padding: 1.5rem 2rem; font-weight: 700; font-size: 1.125rem; color: var(--enae-granate);">Titulación ENAE Business School</td>
-              <td style="padding: 1.5rem 2rem; color: var(--text); font-size: 1.125rem;">Reforzar tu perfil y posicionamiento en el mercado</td>
+              <td style="padding: 1rem 1.5rem; font-weight: 700; font-size: 0.9375rem; color: var(--enae-granate);">Titulación ENAE Business School</td>
+              <td style="padding: 1rem 1.5rem; color: var(--text); font-size: 0.9375rem;">Reforzar tu perfil en el mercado</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Data cards -->
-    <div class="reveal delay-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1000px; margin-inline: auto;">
-      <div style="background: var(--surface); padding: 2.5rem 2rem; border-radius: 16px; text-align: center;">
-        <div style="font-size: 0.875rem; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; font-weight: 700;">Inicio</div>
-        <div style="font-size: 1.75rem; font-weight: 800; color: var(--ink);">19 octubre 2026</div>
+    <div class="reveal delay-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; max-width: 900px; margin-inline: auto;">
+      <div style="background: #fff; padding: 1.5rem 1.25rem; border-radius: 12px; text-align: center; border: 1px solid #e5e7eb;">
+        <div style="font-size: 0.75rem; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700;">Inicio</div>
+        <div style="font-size: 1.25rem; font-weight: 800; color: var(--ink);">19 oct 2026</div>
       </div>
-      <div style="background: var(--surface); padding: 2.5rem 2rem; border-radius: 16px; text-align: center;">
-        <div style="font-size: 0.875rem; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; font-weight: 700;">Créditos</div>
-        <div style="font-size: 1.75rem; font-weight: 800; color: var(--ink);">60 ECTS</div>
+      <div style="background: #fff; padding: 1.5rem 1.25rem; border-radius: 12px; text-align: center; border: 1px solid #e5e7eb;">
+        <div style="font-size: 0.75rem; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700;">Créditos</div>
+        <div style="font-size: 1.25rem; font-weight: 800; color: var(--ink);">60 ECTS</div>
       </div>
-      <div style="background: var(--surface); padding: 2.5rem 2rem; border-radius: 16px; text-align: center;">
-        <div style="font-size: 0.875rem; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; font-weight: 700;">Modalidad</div>
-        <div style="font-size: 1.75rem; font-weight: 800; color: var(--ink);">Presencial</div>
-      </div>
-      <div style="background: var(--surface); padding: 2.5rem 2rem; border-radius: 16px; text-align: center;">
-        <div style="font-size: 0.875rem; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; font-weight: 700;">Horarios</div>
-        <div style="font-size: 1.75rem; font-weight: 800; color: var(--ink);">Fines de semana</div>
+      <div style="background: #fff; padding: 1.5rem 1.25rem; border-radius: 12px; text-align: center; border: 1px solid #e5e7eb;">
+        <div style="font-size: 0.75rem; color: var(--text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700;">Modalidad</div>
+        <div style="font-size: 1.25rem; font-weight: 800; color: var(--ink);">Presencial</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 6: OBJECTIONS (Split Layout) -->
-<section class="enae-wm" style="padding: 8rem 0; background: var(--surface);">
+
+<!-- ═══════════════════════════════════════════════════════
+     DUDAS — Acordeón compacto (reemplaza las 4 tarjetas)
+     ═══════════════════════════════════════════════════════ -->
+<section class="enae-wm" style="padding: 3.5rem 0; background: #fff;" id="dudas">
   <div class="wrap">
-    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; max-width: 1200px; margin: 0 auto; align-items: start;">
-      
-      <div class="reveal" style="position: sticky; top: 120px;">
-        <h2 class="mix" style="margin-bottom: 2rem;">
-          <span class="t-bold">Respuestas a</span><br>
+    <div class="grid-section" style="align-items: flex-start;">
+      <div class="reveal">
+        <h2 class="mix" style="margin-bottom: 1rem; ">
+          <span class="t-bold">Respuestas a</span>
           <span class="t-serif">tus dudas.</span>
         </h2>
-        <p style="font-size: 1.25rem; color: var(--text); line-height: 1.6;">Es natural preguntarse si un programa fiscal encaja en un perfil puramente jurídico. La respuesta corta es sí.</p>
-        <img src="./src/img/10042023-317A8264.jpg" alt="Detalle ENAE" style="width: 100%; border-radius: 16px; margin-top: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.08); aspect-ratio: 16/9; object-fit: cover;">
+        <p style="font-size: 0.9375rem; color: var(--text); line-height: 1.55; margin-bottom: 1.5rem;">Es natural preguntarse si un programa fiscal encaja en un perfil puramente jurídico.</p>
+        <img src="./src/img/10042023-317A8264.jpg" alt="Detalle ENAE" class="section-img" style="aspect-ratio: 16/9;">
       </div>
 
-      <div>
-        <div class="reveal" style="background: #fff; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 2rem;">
-          <h3 style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--ink); margin-bottom: 0.5rem;">NO NECESITAS SER ECONOMISTA.</h3>
-          <h4 style="font-size: 1.25rem; font-weight: 400; color: var(--enae-granate); margin-bottom: 1.5rem;">Necesitas entender mejor la operación.</h4>
-          <div style="border-left: 4px solid var(--enae-gris-claro); padding-left: 1.5rem; margin-bottom: 1.5rem;">
-            <p style="font-weight: 700; color: var(--ink); font-size: 1.125rem; font-style: italic; margin: 0;">«Yo soy abogado, no economista.»</p>
+      <div class="reveal delay-1">
+        <div class="faq-item open">
+          <button class="faq-trigger" onclick="this.parentElement.classList.toggle('open')">
+            <h3>«Yo soy abogado, no economista.»</h3>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div>
+              <p>Precisamente por eso tu conocimiento jurídico es una base especialmente valiosa. El objetivo no es convertirte en economista. Es <strong>incorporar la perspectiva tributaria</strong> a la forma en la que ya analizas las operaciones.</p>
+              <p style="padding-bottom: 1.5rem;">Tu especialidad sigue siendo el Derecho. Ahora puedes añadir una nueva dimensión a tu análisis.</p>
+            </div>
           </div>
-          <p style="color: var(--text); line-height: 1.7; font-size: 1.125rem; margin-bottom: 1rem;">Precisamente por eso tu conocimiento jurídico es una base especialmente valiosa.</p>
-          <p style="color: var(--text); line-height: 1.7; font-size: 1.125rem; margin-bottom: 1rem;">El objetivo no es convertirte en economista. Es <strong>incorporar la perspectiva tributaria a la forma en la que ya analizas las operaciones.</strong> Tu especialidad sigue siendo el Derecho. Ahora puedes añadir una nueva dimensión a tu análisis.</p>
-        </div>
-        
-        <div class="reveal" style="background: #fff; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 2rem;">
-          <h3 style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--ink); margin-bottom: 0.5rem;">NO SE TRATA DE SUSTITUIR AL ASESOR FISCAL.</h3>
-          <h4 style="font-size: 1.25rem; font-weight: 400; color: var(--enae-granate); margin-bottom: 1.5rem;">Se trata de entenderlo mejor.</h4>
-          <div style="border-left: 4px solid var(--enae-gris-claro); padding-left: 1.5rem; margin-bottom: 1.5rem;">
-            <p style="font-weight: 700; color: var(--ink); font-size: 1.125rem; font-style: italic; margin: 0;">«Para eso ya tengo un asesor fiscal.»</p>
-          </div>
-          <p style="color: var(--text); line-height: 1.7; font-size: 1.125rem; margin-bottom: 1.5rem;">Y contar con especialistas seguirá siendo fundamental. La diferencia está en poder detectar cuándo existe una cuestión fiscal, comprender su relevancia y participar en la conversación con conocimiento.</p>
-          <div style="background: rgba(169, 24, 50, 0.05); padding: 1.5rem; border-radius: 8px;">
-            <p style="font-weight: 700; color: var(--enae-granate); font-size: 1.125rem; margin: 0; text-align: center;">Preguntar mejor. Analizar mejor. Coordinarte mejor. Asesorar mejor.</p>
-          </div>
-        </div>
-        
-        <div class="reveal" style="background: #fff; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 2rem;">
-          <h3 style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--ink); margin-bottom: 0.5rem;">NO TIENES QUE DEDICARTE EXCLUSIVAMENTE A FISCAL.</h3>
-          <h4 style="font-size: 1.25rem; font-weight: 400; color: var(--enae-granate); margin-bottom: 1.5rem;">Complementa tu especialidad.</h4>
-          <p style="color: var(--text); line-height: 1.7; font-size: 1.125rem; margin-bottom: 1rem;">No necesitas cambiar de profesión. El conocimiento fiscal puede complementar tu práctica jurídica y ayudarte a abordar situaciones que ya forman parte de tu trabajo. Porque la fiscalidad puede aparecer en muchas áreas del Derecho.</p>
-          <p style="font-weight: 700; color: var(--ink); font-size: 1.125rem; margin: 0;">La cuestión no es convertirte en otra cosa. Es ampliar lo que puedes hacer como abogado.</p>
         </div>
 
-        <div class="reveal" style="background: var(--enae-negro); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); color: #fff;">
-          <h3 style="font-family: var(--font-serif); font-size: 1.75rem; color: #fff; margin-bottom: 1rem;">¿Y LA INVERSIÓN?</h3>
-          <p style="color: rgba(255,255,255,0.8); line-height: 1.7; font-size: 1.125rem; margin-bottom: 2rem;">No podemos prometerte una determinada facturación ni un retorno económico concreto. Pero sí podemos plantearte otra pregunta:</p>
-          <h4 style="font-size: 1.5rem; font-weight: 700; color: var(--enae-granate); margin-bottom: 1.5rem; line-height: 1.4;">¿Qué valor tiene para tu carrera poder resolver problemas que hoy tienes que derivar?</h4>
-          <p style="color: rgba(255,255,255,0.8); line-height: 1.7; font-size: 1.125rem; margin-bottom: 0;">Una formación especializada no solo amplía tus conocimientos. <strong style="color: #fff;">Amplía tu capacidad de análisis, tu conversación con otros profesionales y el valor que puedes aportar a tus clientes.</strong></p>
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="this.parentElement.classList.toggle('open')">
+            <h3>«Para eso ya tengo un asesor fiscal.»</h3>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div>
+              <p>Contar con especialistas seguirá siendo fundamental. La diferencia está en poder detectar cuándo existe una cuestión fiscal, comprender su relevancia y participar en la conversación con conocimiento.</p>
+              <div class="faq-highlight" style="margin-bottom: 1.5rem;">Preguntar mejor. Analizar mejor. Coordinarte mejor. Asesorar mejor.</div>
+            </div>
+          </div>
         </div>
 
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="this.parentElement.classList.toggle('open')">
+            <h3>«No quiero dedicarme solo a fiscal.»</h3>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div>
+              <p>No necesitas cambiar de profesión. El conocimiento fiscal complementa tu práctica jurídica y te ayuda a abordar situaciones que ya forman parte de tu trabajo.</p>
+              <p style="padding-bottom: 1.5rem;"><strong>La cuestión no es convertirte en otra cosa. Es ampliar lo que puedes hacer como abogado.</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="this.parentElement.classList.toggle('open')">
+            <h3>¿Y la inversión?</h3>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div>
+              <p>No podemos prometerte una facturación concreta. Pero sí plantearte otra pregunta:</p>
+              <p><strong style="color: var(--enae-granate); font-size: 1.0625rem;">¿Qué valor tiene para tu carrera poder resolver problemas que hoy tienes que derivar?</strong></p>
+              <p style="padding-bottom: 1.5rem;">Una formación especializada amplía tu capacidad de análisis, tu conversación con otros profesionales y el valor que aportas a tus clientes.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+
+<!-- ═══════════════════════════════════════════════════════
+     CTA FINAL + FORMULARIO
+     ═══════════════════════════════════════════════════════ -->
 <section class="final enae-wm enae-wm--final" id="solicitar">
   <div class="pattern" aria-hidden="true">
     <span class="b1"></span><span class="b2"></span><span class="b3"></span>
   </div>
   <div class="wrap" style="position:relative;z-index:2;">
-    <div class="final-container" style="grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem;">
-      <div class="final-info reveal">
-        <span class="eyebrow" style="margin-bottom:18px;">
+    <div class="final-container" style="grid-template-columns: 1fr 1fr; align-items: flex-start; gap: 3rem;">
+      <div class="final-info reveal" >
+        <span class="eyebrow" style="margin-bottom:14px;">
           <span class="dot"></span> DERECHO + FISCALIDAD <span class="rule"></span>
         </span>
-        <h2 class="mix" style="margin-bottom:24px; font-size:clamp(32px, 4vw, 54px);">
+        <h2 class="mix" style="margin-bottom:1rem; ">
           <span class="t-bold">Una visión más</span>
           <span class="t-serif">completa del cliente.</span>
         </h2>
-        <p class="lede-final" style="font-size: 1.25rem;">
-          Tu próximo paso profesional puede empezar con una nueva perspectiva. No tienes que dejar de ser abogado para incorporar la fiscalidad a tu forma de asesorar.
+        <p class="lede-final" style="font-size: 1rem; line-height: 1.55;">
+          Tu próximo paso profesional puede empezar con una nueva perspectiva. Solo necesitas comprender mejor una dimensión que ya está presente en muchas de las decisiones de tus clientes.
         </p>
-        <p class="lede-final" style="margin-top: 1rem; font-size: 1.25rem;">
-          Solo necesitas comprender mejor una dimensión que ya está presente en muchas de las decisiones de tus clientes.
-        </p>
-        
-        <div style="margin-top: 3rem; background: rgba(0,0,0,0.3); padding: 2.5rem; border-radius: 16px; border-left: 4px solid var(--enae-granate); backdrop-filter: blur(10px);">
-          <h4 style="color: rgba(255,255,255,0.8); margin: 0 0 0.5rem; font-size: 1.125rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">No se trata de saber más.</h4>
-          <h3 style="font-family: var(--font-serif); color: #fff; margin: 0; font-size: 2.25rem; line-height: 1.2;">SE TRATA DE PODER APORTAR MÁS.</h3>
+
+        <div style="margin-top: 2rem; background: rgba(0,0,0,0.3); padding: 1.5rem 2rem; border-radius: 12px; backdrop-filter: blur(10px);">
+          <p style="color: rgba(255,255,255,0.7); margin: 0 0 0.25rem; font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">No se trata de saber más.</p>
+          <p style="font-family: var(--font-serif); font-style: italic; color: #fff; margin: 0; font-size: 1.5rem; line-height: 1.2;">Se trata de poder aportar más.</p>
         </div>
-        
       </div>
-      <div class="d-form-container reveal delay-1" style="background:#fff; padding: 3rem; border-radius: 20px; box-shadow: 0 40px 80px rgba(0,0,0,0.2); width:100%; max-width:560px;">
-        <h3 style="margin: 0 0 1rem; font-size: 1.75rem; font-weight: 800; color: var(--ink);">Descubre si este Máster es para ti</h3>
-        <p style="color: var(--text); font-size: 1rem; margin-bottom: 2rem; line-height: 1.6;">Déjanos tus datos y recibe toda la información sobre el programa, profesorado, becas y proceso de admisión.</p>
+      <div class="d-form-container reveal delay-1" style="background:#fff; padding: 2.5rem; border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.2); width:100%; max-width:560px;">
+        <h3 style="margin: 0 0 0.75rem; font-size: 1.375rem; font-weight: 800; color: var(--ink);">Descubre si este Máster es para ti</h3>
+        <p style="color: var(--text); font-size: 0.875rem; margin-bottom: 1.5rem; line-height: 1.55;">Déjanos tus datos y recibe toda la información sobre el programa, becas y proceso de admisión.</p>
         <div data-form-id='90ea3a6e-104e-f111-bec7-7ced8d498631' data-form-api-url='https://public-eur.mkt.dynamics.com/api/v1.0/orgs/8bc28068-3b86-4b51-aa0e-5a151b861c76/landingpageforms' data-cached-form-url='https://assets-eur.mkt.dynamics.com/8bc28068-3b86-4b51-aa0e-5a151b861c76/digitalassets/forms/90ea3a6e-104e-f111-bec7-7ced8d498631'></div>
         <script src='https://formui-usa1.mkt.dynamics.com/eur/FormLoader/FormLoader.bundle.js'></script>
       </div>
@@ -606,8 +527,8 @@
       <div>
         <h4>Programa</h4>
         <ul>
-          <li><a href="#beneficio">Beneficios</a></li>
           <li><a href="#programa">Plan de estudios</a></li>
+          <li><a href="#dudas">Preguntas frecuentes</a></li>
           <li><a href="#solicitar">Solicitar información</a></li>
         </ul>
       </div>
@@ -623,96 +544,48 @@
   <a href="#solicitar" class="btn float">Solicitar info <span class="arrow">→</span></a>
 </div>
 
-<!-- CUSTOM JS DIRECTIVOS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-  <script src="./src/js/main.js" defer></script>
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script src="./src/js/main.js" defer></script>
 
 <script>
-  // Smooth details accordion
-  document.querySelectorAll('details.pillar').forEach((el) => {
-    const summary = el.querySelector('summary');
-    const content = el.querySelector('.p-modules');
-    
-    // Convert to explicit height animation
-    summary.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (el.open) {
-        // Closing
-        content.style.height = content.offsetHeight + 'px';
-        // force reflow
-        content.offsetHeight;
-        content.style.height = '0px';
-        content.style.opacity = '0';
-        content.style.paddingTop = '0';
-        setTimeout(() => {
-          el.open = false;
-          content.style.height = '';
-        }, 300);
-      } else {
-        // Opening
-        el.open = true;
-        const targetHeight = content.scrollHeight;
-        content.style.height = '0px';
-        content.style.opacity = '0';
-        content.style.paddingTop = '0';
-        content.offsetHeight; // reflow
-        content.style.transition = 'height 0.3s ease-out, opacity 0.3s ease-out, padding-top 0.3s ease-out';
-        content.style.height = targetHeight + 'px';
-        content.style.opacity = '1';
-        content.style.paddingTop = '1rem';
-        setTimeout(() => {
-          content.style.height = 'auto';
-        }, 300);
-      }
-    });
-  });
-
-  // Anime.js entry and exit animations
   document.addEventListener('DOMContentLoaded', () => {
     const elements = document.querySelectorAll('.reveal');
-    
-    // Override CSS transition so anime.js handles it smoothly
     elements.forEach(el => {
       el.style.transition = 'none';
-      el.style.opacity = '0'; // Initial state
+      el.style.opacity = '0';
     });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // Determine delay based on classes
         let delayVal = 0;
         if (entry.target.classList.contains('delay-1')) delayVal = 200;
         if (entry.target.classList.contains('delay-2')) delayVal = 400;
         if (entry.target.classList.contains('delay-3')) delayVal = 600;
 
         if (entry.isIntersecting) {
-          // Entry animation
           anime.remove(entry.target);
           anime({
             targets: entry.target,
             opacity: [0, 1],
-            translateY: [40, 0],
-            duration: 800,
+            translateY: [30, 0],
+            duration: 700,
             delay: delayVal,
             easing: 'easeOutQuart'
           });
         } else {
-          // Exit animation (reset state for when they come back in)
           anime.remove(entry.target);
           anime({
             targets: entry.target,
             opacity: 0,
-            translateY: 40,
-            duration: 500,
+            translateY: 30,
+            duration: 400,
             easing: 'easeInQuart'
           });
         }
       });
     }, {
       threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      rootMargin: '0px 0px -40px 0px'
     });
 
     elements.forEach(el => observer.observe(el));
