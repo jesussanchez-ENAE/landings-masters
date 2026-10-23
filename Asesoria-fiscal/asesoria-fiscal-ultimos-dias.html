@@ -178,7 +178,6 @@ h1.hero-title .t-light{font-size:var(--fs-l);line-height:1.5;max-width:46ch;marg
   position:absolute;left:8px;right:8px;bottom:8px;
   background:rgba(255,255,255,.9);border-radius:10px;padding:12px 14px;
   -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-  border-top:2px solid var(--enae-granate);
 }
 .fac-badge{
   display:block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
@@ -219,7 +218,7 @@ h1.hero-title .t-light{font-size:var(--fs-l);line-height:1.5;max-width:46ch;marg
 }
 .learn-timeline{display:block;font-size:12px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--board-ink)}
 .learn-timeline i{font-style:normal;margin:0 .35em}
-.learn-stations{list-style:none;margin:0;padding:0 0 0 18px;border-left:3px solid var(--enae-granate);display:grid;gap:22px}
+.learn-stations{list-style:none;margin:0;padding:0;display:grid;gap:22px}
 .station{display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:center}
 .station-pic{width:104px;height:auto;display:block}
 .station-meta{display:block;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--enae-granate)}
@@ -237,7 +236,7 @@ h1.hero-title .t-light{font-size:var(--fs-l);line-height:1.5;max-width:46ch;marg
   .station-pic{width:76px}
 }
 @media(min-width:720px) and (max-width:1149px){
-  .learn-stations{grid-template-columns:1fr 1fr;border-left:0;padding-left:0;gap:28px 32px}
+  .learn-stations{grid-template-columns:1fr 1fr;gap:28px 32px}
 }
 /* Lámina completa: todo el escenario en una única proyección isométrica */
 @media(min-width:1150px){
@@ -254,7 +253,7 @@ h1.hero-title .t-light{font-size:var(--fs-l);line-height:1.5;max-width:46ch;marg
   }
   .learn-title{position:absolute;left:12%;top:13%;margin:0}
   .learn-eyebrow{display:none}
-  .learn-stations{border:0;padding:0;display:block}
+  .learn-stations{display:block}
   .station{display:block}
   .station-pic{display:none}
   .station-note{position:absolute;left:var(--nx);top:var(--ny);width:17.5%}
@@ -307,12 +306,12 @@ details.qa > summary{font-size:var(--fs-l)}
 }
 .ia-note div{
   display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
-  background:var(--enae-blanco);border-left:3px solid var(--enae-granate);border-radius:0 8px 8px 0;
+  background:var(--enae-blanco);border:1px solid rgba(32,34,33,.12);border-radius:8px;
   padding:16px 20px;font-size:16px;color:var(--enae-negro);
 }
 .ia-note .tag{
   font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:#F8F9FA;background:var(--enae-granate);padding:5px 9px;border-radius:2px;
+  color:var(--enae-granate);
 }
 
 /* ---------- Final CTA ---------- */
@@ -321,8 +320,7 @@ details.qa > summary{font-size:var(--fs-l)}
   background:rgba(17,18,17,.45);border:1px solid rgba(255,215,160,.4);border-radius:999px;
   padding:8px 16px;font-size:14px;font-weight:700;color:#ffd7a0;letter-spacing:.04em;
 }
-.final .countdown-pill .live{width:8px;height:8px;border-radius:50%;background:#ffd7a0;animation:livePulse 2s ease-in-out infinite}
-@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
+.final .countdown-pill .live{width:8px;height:8px;border-radius:50%;background:#ffd7a0}
 
 @media(max-width:991px){
   .d-hero-visual{max-width:none}
@@ -446,6 +444,8 @@ footer .foot-bottom a{color:rgba(255,255,255,.85);font-weight:400}
   .station p{font-size:var(--fs-s);line-height:1.4}
   .learn-legend-label,.learn-legend-text{font-size:var(--fs-xs)}
 }
+html .eyebrow{font-size:14px;letter-spacing:.02em;text-transform:none}
+html .section-eyebrow{letter-spacing:.12em}
 </style>
 </head>
 <body>
@@ -515,12 +515,9 @@ footer .foot-bottom a{color:rgba(255,255,255,.85);font-weight:400}
 
 <!-- HERO -->
 <header class="hero d-hero enae-wm enae-wm--hero">
-  <div class="pattern" aria-hidden="true">
-    <span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span><span class="b5"></span>
-  </div>
   <div class="wrap d-hero-inner reveal">
     <div class="d-hero-content">
-      <span class="eyebrow"><span class="dot"></span> Máster en Asesoría Fiscal · 36ª edición <span class="rule"></span></span>
+      <span class="eyebrow">Máster en Asesoría Fiscal · 36ª edición</span>
       <h1 class="hero-title mix">
         <span class="t-bold">Fiscalidad con inspectores de Hacienda</span>
         <span class="t-serif">y abogados fiscalistas.</span>
@@ -587,9 +584,8 @@ footer .foot-bottom a{color:rgba(255,255,255,.85);font-weight:400}
 
 <!-- PILAR 01 · PRÁCTICAS GARANTIZADAS -->
 <section id="practicas" class="steps-wrap">
-  <div class="pattern" aria-hidden="true"><span class="b1"></span><span class="b2"></span></div>
   <div class="section-head reveal" style="position:relative;z-index:2;">
-    <span class="section-eyebrow"><span class="num">01</span> Prácticas</span>
+    <span class="section-eyebrow">Prácticas</span>
     <h2 class="mix">
       <span class="t-bold">Prácticas en firmas como Garrigues y Grant Thornton</span>
       <span class="t-serif">que ENAE propone en España y la UE.</span>
@@ -646,7 +642,7 @@ footer .foot-bottom a{color:rgba(255,255,255,.85);font-weight:400}
 <!-- PILAR 02 · CLAUSTRO -->
 <section id="claustro" class="enae-wm enae-wm--porque">
   <div class="section-head reveal">
-    <span class="section-eyebrow"><span class="num">02</span> Claustro</span>
+    <span class="section-eyebrow">Claustro</span>
     <h2 class="mix">
       <span class="t-bold">Clases con inspectores de la AEAT Murcia</span>
       <span class="t-serif">como Joaquín Molina y Rocío Peral.</span>
@@ -788,11 +784,8 @@ footer .foot-bottom a{color:rgba(255,255,255,.85);font-weight:400}
 
 <!-- PILAR 03 · EMPLEABILIDAD -->
 <section id="empleabilidad" class="stats enae-wm enae-wm--problema">
-  <div class="pattern" aria-hidden="true">
-    <span class="b1"></span><span class="b2"></span><span class="b3"></span>
-  </div>
   <div class="section-head reveal">
-    <span class="section-eyebrow"><span class="num">03</span> Empleabilidad</span>
+    <span class="section-eyebrow">Empleabilidad</span>
     <h2 class="mix">
       <span class="t-bold">Empleabilidad del máster</span>
       <span class="t-serif">según los datos publicados por ENAE.</span>
@@ -1016,9 +1009,6 @@ footer .foot-bottom a{color:rgba(255,255,255,.85);font-weight:400}
 
 <!-- CTA FINAL -->
 <section class="final enae-wm enae-wm--final" id="solicitar">
-  <div class="pattern" aria-hidden="true">
-    <span class="b1"></span><span class="b2"></span><span class="b3"></span>
-  </div>
   <div class="wrap" style="position:relative;z-index:2;">
     <div class="final-container">
       <div class="final-info reveal">
