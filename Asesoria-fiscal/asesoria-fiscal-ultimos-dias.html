@@ -167,9 +167,51 @@
   .faculty-track[aria-hidden="true"]{display:none}
   .fac-card{scroll-snap-align:start}
 }
-.learn-head{
-  max-width:var(--page-max);margin:clamp(56px,7vw,88px) auto 20px;padding-inline:var(--gutter);
-  font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--enae-granate);
+/* ---------- Así aprendes con ellos: lámina isométrica ---------- */
+.learn-board{
+  --board-ink:#202221;
+  position:relative;margin:clamp(56px,7vw,88px) 0 0;padding:28px 24px;
+  background:#eceef1;border:1px solid #dde1e6;border-radius:16px;overflow:hidden;color:var(--board-ink);
+}
+.learn-board-bg{display:none}
+.learn-title{margin-bottom:24px}
+.learn-eyebrow{display:block;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--enae-granate)}
+.learn-title h3{margin:10px 0 8px;font-size:clamp(28px,3vw,40px)}
+.learn-title .t-bold{color:var(--board-ink)}
+.learn-title .t-serif{color:var(--enae-granate)}
+.learn-timeline{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5c6066}
+.learn-timeline i{font-style:normal;color:var(--enae-granate);margin:0 3px}
+.learn-stations{list-style:none;margin:0;padding:0 0 0 18px;border-left:3px solid var(--enae-granate);display:grid;gap:22px}
+.station{display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:center}
+.station-pic{width:104px;height:auto;display:block}
+.station-meta{display:block;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--enae-granate)}
+.station-num{font-family:var(--font-serif);font-style:italic;font-size:15px;letter-spacing:0;margin-right:2px}
+.station h4{margin:2px 0 4px;font-family:var(--font-display);font-weight:900;font-size:16px;letter-spacing:.01em;text-transform:uppercase;color:var(--board-ink)}
+.station p{margin:0;font-size:13.5px;line-height:1.5;color:#4a4e54}
+.learn-legend{margin-top:26px;padding-top:18px;border-top:1px solid #d3d7dd;display:grid;gap:6px}
+.learn-legend-label{font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5c6066}
+.learn-legend-bar{display:block;width:200px;height:8px;border:1.5px solid var(--enae-granate);border-radius:2px}
+.learn-legend-bar span{display:block;width:70%;height:100%;background:var(--enae-granate)}
+.learn-legend-text{font-size:13px;color:#4a4e54}
+.learn-legend-text strong{color:var(--enae-granate)}
+@media(max-width:480px){
+  .station{grid-template-columns:76px 1fr;gap:12px}
+  .station-pic{width:76px}
+}
+@media(min-width:720px) and (max-width:1149px){
+  .learn-stations{grid-template-columns:1fr 1fr;border-left:0;padding-left:0;gap:28px 32px}
+}
+/* Lámina completa: composición absoluta sobre el eje diagonal */
+@media(min-width:1150px){
+  .learn-board{aspect-ratio:1200/680;padding:0}
+  .learn-board-bg{display:block;position:absolute;inset:0;width:100%;height:100%}
+  .learn-title{position:absolute;left:3.3%;top:5.9%;width:34%;margin:0}
+  .learn-stations{border:0;padding:0;display:block}
+  .station{display:block}
+  .station-pic{position:absolute;left:var(--px);top:var(--py);width:13.33%;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+  .station-note{position:absolute;left:var(--nx);top:var(--ny);width:19.5%}
+  .station:hover .station-pic{transform:translateY(-6px)}
+  .learn-legend{position:absolute;left:74%;top:83%;width:22%;margin:0;padding:0;border:0}
 }
 
 /* ---------- Pilar 03 · Empleabilidad ---------- */
@@ -506,25 +548,63 @@
   </div>
   <p class="faculty-more reveal"><strong>+8 profesionales más</strong>: inspectores y técnicos de la AEAT, abogados fiscalistas y profesores de la Universidad de Murcia.</p>
 
-  <p class="learn-head reveal">Así aprendes con ellos</p>
   <div class="wrap">
-    <div class="value reveal delay-1">
-      <div class="value-item">
-        <span class="n">i.</span>
-        <h3>Casos reales de despacho</h3>
-        <p>Analizas expedientes y situaciones reales, no supuestos de manual.</p>
+    <figure class="learn-board reveal" aria-labelledby="learn-title">
+      <svg class="learn-board-bg" viewBox="0 0 1200 680" preserveAspectRatio="none" aria-hidden="true" focusable="false"><defs><pattern id="learn-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#c9ced6"/></pattern></defs><rect width="1200" height="680" fill="url(#learn-grid)"/><line x1="-27.2" y1="646.8" x2="1237.2" y2="113.2" stroke="#a91831" stroke-width="30"/><line x1="-27.2" y1="646.8" x2="1237.2" y2="113.2" stroke="#fff" stroke-width="1.6" stroke-dasharray="12 10" opacity=".7"/><path d="M150 398L180 448" stroke="#a91831" stroke-width="1" stroke-dasharray="2 4" fill="none"/><circle cx="150" cy="398" r="2.5" fill="#a91831"/><circle cx="180" cy="448" r="2.5" fill="#a91831"/><path d="M445 523L430 470" stroke="#a91831" stroke-width="1" stroke-dasharray="2 4" fill="none"/><circle cx="445" cy="523" r="2.5" fill="#a91831"/><circle cx="430" cy="470" r="2.5" fill="#a91831"/><path d="M650 372L650 418" stroke="#a91831" stroke-width="1" stroke-dasharray="2 4" fill="none"/><circle cx="650" cy="372" r="2.5" fill="#a91831"/><circle cx="650" cy="418" r="2.5" fill="#a91831"/><path d="M748 118L812 182" stroke="#a91831" stroke-width="1" stroke-dasharray="2 4" fill="none"/><circle cx="748" cy="118" r="2.5" fill="#a91831"/><circle cx="812" cy="182" r="2.5" fill="#a91831"/><path d="M1040 212L1040 296" stroke="#a91831" stroke-width="1" stroke-dasharray="2 4" fill="none"/><circle cx="1040" cy="212" r="2.5" fill="#a91831"/><circle cx="1040" cy="296" r="2.5" fill="#a91831"/><line x1="548" y1="486" x2="548" y2="507" stroke="#a91831" stroke-width="1.3"/><circle cx="548" cy="486" r="11" fill="#fff" stroke="#a91831" stroke-width="1.3"/><path d="M542 488h12.1" stroke="#a91831" stroke-width=".8"/><line x1="760" y1="470" x2="760" y2="493" stroke="#a91831" stroke-width="1.3"/><circle cx="760" cy="470" r="13" fill="#fff" stroke="#a91831" stroke-width="1.3"/><path d="M752.9 472h14.3" stroke="#a91831" stroke-width=".8"/><line x1="782" y1="492" x2="782" y2="511" stroke="#a91831" stroke-width="1.3"/><circle cx="782" cy="492" r="9" fill="#fff" stroke="#a91831" stroke-width="1.3"/><path d="M777 494h9.9" stroke="#a91831" stroke-width=".8"/><line x1="905" y1="360" x2="905" y2="382" stroke="#a91831" stroke-width="1.3"/><circle cx="905" cy="360" r="12" fill="#fff" stroke="#a91831" stroke-width="1.3"/><path d="M898.4 362h13.2" stroke="#a91831" stroke-width=".8"/><line x1="1168" y1="236" x2="1168" y2="256" stroke="#a91831" stroke-width="1.3"/><circle cx="1168" cy="236" r="10" fill="#fff" stroke="#a91831" stroke-width="1.3"/><path d="M1162.5 238h11" stroke="#a91831" stroke-width=".8"/><line x1="268" y1="432" x2="268" y2="451" stroke="#a91831" stroke-width="1.3"/><circle cx="268" cy="432" r="9" fill="#fff" stroke="#a91831" stroke-width="1.3"/><path d="M263.1 434h9.9" stroke="#a91831" stroke-width=".8"/><path d="M512.8 420.8V411.8Q512.8 407.8 517.8 407.8Q522.8 407.8 522.8 411.8V420.8Z" fill="#fff" stroke="none"/><circle cx="517.8" cy="403.3" r="3.8" fill="#fff" stroke="none"/><path d="M719.9 333.4V324.4Q719.9 320.4 724.9 320.4Q729.9 320.4 729.9 324.4V333.4Z" fill="#fff" stroke="none"/><circle cx="724.9" cy="315.9" r="3.8" fill="#fff" stroke="none"/><path d="M916.1 250.6V241.6Q916.1 237.6 921.1 237.6Q926.1 237.6 926.1 241.6V250.6Z" fill="#fff" stroke="none"/><circle cx="921.1" cy="233.1" r="3.8" fill="#fff" stroke="none"/><circle cx="130.9" cy="580.1" r="14" fill="#fff" stroke="#a91831" stroke-width="2"/><text x="130.9" y="584.3" text-anchor="middle" font-size="12" font-weight="800" font-family="OpenSans,Arial,sans-serif" fill="#a91831">01</text><circle cx="359.8" cy="483.5" r="14" fill="#fff" stroke="#a91831" stroke-width="2"/><text x="359.8" y="487.7" text-anchor="middle" font-size="12" font-weight="800" font-family="OpenSans,Arial,sans-serif" fill="#a91831">02</text><circle cx="566.9" cy="396.1" r="14" fill="#fff" stroke="#a91831" stroke-width="2"/><text x="566.9" y="400.3" text-anchor="middle" font-size="12" font-weight="800" font-family="OpenSans,Arial,sans-serif" fill="#a91831">03</text><circle cx="784.9" cy="304.1" r="14" fill="#fff" stroke="#a91831" stroke-width="2"/><text x="784.9" y="308.3" text-anchor="middle" font-size="12" font-weight="800" font-family="OpenSans,Arial,sans-serif" fill="#a91831">04</text><circle cx="981" cy="221.3" r="14" fill="#fff" stroke="#a91831" stroke-width="2"/><text x="981" y="225.5" text-anchor="middle" font-size="12" font-weight="800" font-family="OpenSans,Arial,sans-serif" fill="#a91831">05</text></svg>
+      <figcaption class="learn-title">
+        <span class="learn-eyebrow">Así aprendes con ellos</span>
+        <h3 id="learn-title" class="mix"><span class="t-bold">De la norma</span><span class="t-serif">al despacho.</span></h3>
+        <span class="learn-timeline">Lección <i>|</i> Caso <i>|</i> Debate <i>|</i> Hacienda <i>|</i> Dictamen</span>
+      </figcaption>
+      <ol class="learn-stations">
+      <li class="station" style="--px:9.25%;--py:62.5%;--nx:3.3%;--ny:42.5%">
+        <svg class="station-pic" viewBox="0 0 160 140" aria-hidden="true" focusable="false"><g fill="none" stroke="#a91831" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"><polygon points="36.4,82 97.1,117 97.1,106 36.4,71" fill="#f6e3e7"/><polygon points="138.6,93 97.1,117 97.1,106 138.6,82" fill="#e8c3cb"/><polygon points="78,47 138.6,82 97.1,106 36.4,71" fill="#ffffff"/><polygon points="43.4,72 95.3,102 95.3,93 43.4,63" fill="#f6e3e7"/><polygon points="131.7,81 95.3,102 95.3,93 131.7,72" fill="#e8c3cb"/><polygon points="79.7,42 131.7,72 95.3,93 43.4,63" fill="#ffffff"/><polygon points="34.7,61 91.9,94 91.9,83 34.7,50" fill="#f6e3e7"/><polygon points="131.7,71 91.9,94 91.9,83 131.7,60" fill="#e8c3cb"/><polygon points="74.5,27 131.7,60 91.9,83 34.7,50" fill="#ffffff"/><line x1="37.3" y1="79.5" x2="96.2" y2="113.5" stroke-width=".7"/><line x1="37.3" y1="76.5" x2="96.2" y2="110.5" stroke-width=".7"/><line x1="37.3" y1="74.5" x2="96.2" y2="108.5" stroke-width=".7"/><line x1="35.6" y1="57.5" x2="91" y2="89.5" stroke-width=".7"/><line x1="35.6" y1="54.5" x2="91" y2="86.5" stroke-width=".7"/><polygon points="71.1,71 76.3,74 76.3,93 73.7,88.5 71.1,90" fill="#a91831" stroke="none"/><ellipse cx="83.2" cy="55" rx="13" ry="7.5" fill="#f6e3e7"/><text x="83.2" y="59" text-anchor="middle" font-size="11" font-family="Georgia,serif" font-style="italic" fill="#a91831" stroke="none">§</text></g></svg>
+        <div class="station-note">
+          <span class="station-meta"><span class="station-num">01</span> Lección</span>
+          <h4>La norma</h4>
+          <p>Lecciones teóricas de IRPF, Sociedades, IVA o Sucesiones, con recursos actualizados en el campus virtual.</p>
+        </div>
+      </li>
+      <li class="station" style="--px:28.3%;--py:48.2%;--nx:27.5%;--ny:77%">
+        <svg class="station-pic" viewBox="0 0 160 140" aria-hidden="true" focusable="false"><g fill="none" stroke="#a91831" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"><polygon points="28.4,76 85.6,109 85.6,103 28.4,70" fill="#f6e3e7"/><polygon points="127.2,85 85.6,109 85.6,103 127.2,79" fill="#e8c3cb"/><polygon points="70,46 127.2,79 85.6,103 28.4,70" fill="#ffffff"/><polygon points="37.1,70 85.6,98 85.6,96 37.1,68" fill="#f6e3e7"/><polygon points="118.5,79 85.6,98 85.6,96 118.5,77" fill="#e8c3cb"/><polygon points="70,49 118.5,77 85.6,96 37.1,68" fill="#ffffff"/><polygon points="42.3,68 89.1,95 89.1,93 42.3,66" fill="#f6e3e7"/><polygon points="122,76 89.1,95 89.1,93 122,74" fill="#e8c3cb"/><polygon points="75.2,47 122,74 89.1,93 42.3,66" fill="#fff"/><line x1="76.1" y1="53.5" x2="108.1" y2="72" stroke-width=".8"/><line x1="70" y1="57" x2="97.7" y2="73" stroke-width=".8"/><line x1="63.9" y1="60.5" x2="87.3" y2="74" stroke-width=".8"/><line x1="57.9" y1="64" x2="76.9" y2="75" stroke-width=".8"/><polygon points="28.4,70 44,61 44,57 30.2,65" fill="#e8c3cb"/><circle cx="118" cy="44" r="15" fill="#fff" fill-opacity=".85" stroke-width="2.4"/><circle cx="118" cy="44" r="9" stroke-width=".8" stroke-dasharray="2 3"/><line x1="128.6" y1="54.6" x2="142" y2="68" stroke-width="5"/></g></svg>
+        <div class="station-note">
+          <span class="station-meta"><span class="station-num">02</span> Caso</span>
+          <h4>El expediente real</h4>
+          <p>Actividades prácticas que te enfrentan a situaciones reales, como las que tus profesores resuelven en sus despachos.</p>
+        </div>
+      </li>
+      <li class="station" style="--px:47.5%;--py:57.5%;--nx:49.6%;--ny:79.5%">
+        <svg class="station-pic" viewBox="0 0 160 140" aria-hidden="true" focusable="false"><g fill="none" stroke="#a91831" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"><path d="M51.7 46.7V37.7Q51.7 33.7 56.7 33.7Q61.7 33.7 61.7 37.7V46.7Z" fill="#c45a6c" stroke="none"/><circle cx="56.7" cy="29.2" r="3.8" fill="#c45a6c" stroke="none"/><path d="M98.3 46.7V37.7Q98.3 33.7 103.3 33.7Q108.3 33.7 108.3 37.7V46.7Z" fill="#c45a6c" stroke="none"/><circle cx="103.3" cy="29.2" r="3.8" fill="#c45a6c" stroke="none"/><path d="M121.5 70V61Q121.5 57 126.5 57Q131.5 57 131.5 61V70Z" fill="#c45a6c" stroke="none"/><circle cx="126.5" cy="52.5" r="3.8" fill="#c45a6c" stroke="none"/><path d="M75 70V56H85V70Z" fill="#e8c3cb"/><ellipse cx="80" cy="70" rx="14" ry="8" fill="#f6e3e7"/><path d="M48.2 56v4A31.8 18.4 0 0 0 111.8 60v-4" fill="#e8c3cb"/><ellipse cx="80" cy="56" rx="31.8" ry="18.4" fill="#fff"/><polygon points="74.8,46.7 86.9,53.7 78.3,58.7 66.1,51.7" fill="#f6e3e7"/><polygon points="81.7,58.7 90.4,63.7 81.7,68.7 73.1,63.7" fill="#f6e3e7"/><path d="M28.5 70V61Q28.5 57 33.5 57Q38.5 57 38.5 61V70Z" fill="#a91831" stroke="none"/><circle cx="33.5" cy="52.5" r="3.8" fill="#a91831" stroke="none"/><path d="M51.7 93.3V84.3Q51.7 80.3 56.7 80.3Q61.7 80.3 61.7 84.3V93.3Z" fill="#a91831" stroke="none"/><circle cx="56.7" cy="75.8" r="3.8" fill="#a91831" stroke="none"/><path d="M98.3 93.3V84.3Q98.3 80.3 103.3 80.3Q108.3 80.3 108.3 84.3V93.3Z" fill="#a91831" stroke="none"/><circle cx="103.3" cy="75.8" r="3.8" fill="#a91831" stroke="none"/><path d="M104 10h28a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6h-18l-6 6v-6h-4a6 6 0 0 1-6-6v-8a6 6 0 0 1 6-6z" fill="#fff"/><circle cx="111" cy="20" r="1.6" fill="#a91831" stroke="none"/><circle cx="118" cy="20" r="1.6" fill="#a91831" stroke="none"/><circle cx="125" cy="20" r="1.6" fill="#a91831" stroke="none"/><path d="M22 22h22a5 5 0 0 1 5 5v6a5 5 0 0 1-5 5h-4v5l-5-5H22a5 5 0 0 1-5-5v-6a5 5 0 0 1 5-5z" fill="#a91831" stroke="none"/><text x="33" y="34.5" text-anchor="middle" font-size="11" font-weight="700" font-family="Georgia,serif" fill="#fff" stroke="none">?</text></g></svg>
+        <div class="station-note">
+          <span class="station-meta"><span class="station-num">03</span> Debate</span>
+          <h4>La mesa de trabajo</h4>
+          <p>El profesor actúa como facilitador: aclara dudas y genera debate entre compañeros, en grupos reducidos.</p>
+        </div>
+      </li>
+      <li class="station" style="--px:63.75%;--py:21.5%;--nx:43.5%;--ny:7%">
+        <svg class="station-pic" viewBox="0 0 160 140" aria-hidden="true" focusable="false"><g fill="none" stroke="#a91831" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"><polygon points="17.8,83 87.1,123 87.1,120 17.8,80" fill="#f6e3e7"/><polygon points="137.3,94 87.1,123 87.1,120 137.3,91" fill="#e8c3cb"/><polygon points="68,51 137.3,91 87.1,120 17.8,80" fill="#ffffff"/><polygon points="24.7,80 87.1,116 87.1,113 24.7,77" fill="#f6e3e7"/><polygon points="130.4,91 87.1,116 87.1,113 130.4,88" fill="#e8c3cb"/><polygon points="68,52 130.4,88 87.1,113 24.7,77" fill="#ffffff"/><polygon points="43.8,72 95.7,102 95.7,78 43.8,48" fill="#f6e3e7"/><polygon points="121.7,87 95.7,102 95.7,78 121.7,63" fill="#e8c3cb"/><polygon points="69.7,33 121.7,63 95.7,78 43.8,48" fill="#ffffff"/><polygon points="64.5,84 74.9,90 74.9,76 64.5,70" fill="#a91831" stroke="none"/><polygon points="29,77.5 34.2,80.5 34.2,56.5 29,53.5" fill="#f6e3e7"/><polygon points="39.4,77.5 34.2,80.5 34.2,56.5 39.4,53.5" fill="#e8c3cb"/><polygon points="34.2,50.5 39.4,53.5 34.2,56.5 29,53.5" fill="#ffffff"/><polygon points="44.6,86.5 49.8,89.5 49.8,65.5 44.6,62.5" fill="#f6e3e7"/><polygon points="55,86.5 49.8,89.5 49.8,65.5 55,62.5" fill="#e8c3cb"/><polygon points="49.8,59.5 55,62.5 49.8,65.5 44.6,62.5" fill="#ffffff"/><polygon points="61.1,96 66.3,99 66.3,75 61.1,72" fill="#f6e3e7"/><polygon points="71.5,96 66.3,99 66.3,75 71.5,72" fill="#e8c3cb"/><polygon points="66.3,69 71.5,72 66.3,75 61.1,72" fill="#ffffff"/><polygon points="77.5,105.5 82.7,108.5 82.7,84.5 77.5,81.5" fill="#f6e3e7"/><polygon points="87.9,105.5 82.7,108.5 82.7,84.5 87.9,81.5" fill="#e8c3cb"/><polygon points="82.7,78.5 87.9,81.5 82.7,84.5 77.5,81.5" fill="#ffffff"/><polygon points="23,53 87.1,90 87.1,86 23,49" fill="#f6e3e7"/><polygon points="132.1,64 87.1,90 87.1,86 132.1,60" fill="#e8c3cb"/><polygon points="68,23 132.1,60 87.1,86 23,49" fill="#ffffff"/><polygon points="23,49 55,53.5 100,27.5 68,23" fill="#ffffff"/><polygon points="55,53.5 87.1,86 132.1,60 100,27.5" fill="#e8c3cb"/><polygon points="23,49 87.1,86 55,53.5" fill="#f6e3e7"/><circle cx="55" cy="62.5" r="3.2" fill="#a91831" stroke="none"/></g></svg>
+        <div class="station-note">
+          <span class="station-meta"><span class="station-num">04</span> Hacienda</span>
+          <h4>El otro lado de la mesa</h4>
+          <p>Inspectores de la Agencia Tributaria en Murcia te muestran cómo se aplican la inspección, las sanciones y los recursos.</p>
+        </div>
+      </li>
+      <li class="station" style="--px:80.1%;--py:9.7%;--nx:78.4%;--ny:44%">
+        <svg class="station-pic" viewBox="0 0 160 140" aria-hidden="true" focusable="false"><g fill="none" stroke="#a91831" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"><polygon points="30.7,71 86.1,103 86.1,99 30.7,67" fill="#f6e3e7"/><polygon points="129.4,78 86.1,103 86.1,99 129.4,74" fill="#e8c3cb"/><polygon points="74,42 129.4,74 86.1,99 30.7,67" fill="#ffffff"/><polygon points="30.7,67 33.3,68.5 33.3,34.5 30.7,33" fill="#f6e3e7"/><polygon points="76.6,43.5 33.3,68.5 33.3,34.5 76.6,9.5" fill="#fff"/><polygon points="74,8 76.6,9.5 33.3,34.5 30.7,33" fill="#ffffff"/><polygon points="74,45 126.8,75.5 126.8,41.5 74,11" fill="#fff"/><polygon points="129.4,74 126.8,75.5 126.8,41.5 129.4,40" fill="#e8c3cb"/><polygon points="76.6,9.5 129.4,40 126.8,41.5 74,11" fill="#ffffff"/><polygon points="85.3,35.5 100.8,44.5 100.8,32.5 85.3,23.5" fill="#fff"/><line x1="88.7" y1="31.5" x2="97.4" y2="36.5" stroke-width=".8"/><polygon points="75.7,59 77.5,60 77.5,48 75.7,47" fill="#f6e3e7"/><polygon points="79.2,59 77.5,60 77.5,48 79.2,47" fill="#e8c3cb"/><polygon points="77.5,46 79.2,47 77.5,48 75.7,47" fill="#ffffff"/><polygon points="100,73 101.7,74 101.7,62 100,61" fill="#f6e3e7"/><polygon points="103.4,73 101.7,74 101.7,62 103.4,61" fill="#e8c3cb"/><polygon points="101.7,60 103.4,61 101.7,62 100,61" fill="#ffffff"/><polygon points="61.9,67 63.6,68 63.6,56 61.9,55" fill="#f6e3e7"/><polygon points="65.3,67 63.6,68 63.6,56 65.3,55" fill="#e8c3cb"/><polygon points="63.6,54 65.3,55 63.6,56 61.9,55" fill="#ffffff"/><polygon points="86.1,81 87.9,82 87.9,70 86.1,69" fill="#f6e3e7"/><polygon points="89.6,81 87.9,82 87.9,70 89.6,69" fill="#e8c3cb"/><polygon points="87.9,68 89.6,69 87.9,70 86.1,69" fill="#ffffff"/><polygon points="58.4,55 87.9,72 87.9,70 58.4,53" fill="#f6e3e7"/><polygon points="106.9,61 87.9,72 87.9,70 106.9,59" fill="#e8c3cb"/><polygon points="77.5,42 106.9,59 87.9,70 58.4,53" fill="#ffffff"/><polygon points="83.5,62.5 85.3,63.5 85.3,52.5 83.5,51.5" fill="#fff"/><polygon points="97.4,56.5 85.3,63.5 85.3,52.5 97.4,45.5" fill="#f6e3e7"/><polygon points="95.7,44.5 97.4,45.5 85.3,52.5 83.5,51.5" fill="#f6e3e7"/><polygon points="75.7,46.8 86.1,52.8 75.7,58.8 65.3,52.8" fill="#fff"/><line x1="74.9" y1="49.3" x2="81.8" y2="53.3" stroke-width=".7"/><line x1="72.3" y1="50.8" x2="79.2" y2="54.8" stroke-width=".7"/><line x1="69.7" y1="52.3" x2="76.6" y2="56.3" stroke-width=".7"/><path d="M58.6 78V69Q58.6 65 63.6 65Q68.6 65 68.6 69V78Z" fill="#a91831" stroke="none"/><circle cx="63.6" cy="60.5" r="3.8" fill="#a91831" stroke="none"/><circle cx="136" cy="30" r="15" fill="#a91831" stroke="#fff" stroke-width="2.5"/><path d="M129 30.5l5 5 9-10" stroke="#fff" stroke-width="2.6"/></g></svg>
+        <div class="station-note">
+          <span class="station-meta"><span class="station-num">05</span> Dictamen</span>
+          <h4>Tu criterio</h4>
+          <p>Llegas a tus prácticas sabiendo preparar un dictamen y defender a un cliente ante la Agencia Tributaria.</p>
+        </div>
+      </li>
+      </ol>
+      <div class="learn-legend">
+        <span class="learn-legend-label">Evaluación</span>
+        <span class="learn-legend-bar" aria-hidden="true"><span></span></span>
+        <span class="learn-legend-text"><strong>70%</strong> cursos · <strong>30%</strong> examen final</span>
+        <span class="learn-legend-text">60 ECTS · Título propio ENAE</span>
       </div>
-      <div class="value-item">
-        <span class="n">ii.</span>
-        <h3>Debate con quien los resuelve</h3>
-        <p>Discutes las problemáticas actuales con los profesionales que se enfrentan a ellas cada día.</p>
-      </div>
-      <div class="value-item">
-        <span class="n">iii.</span>
-        <h3>Criterio desde el primer día</h3>
-        <p>Lecciones teóricas y casos prácticos para que llegues a tus prácticas sabiendo resolver.</p>
-      </div>
-    </div>
+    </figure>
   </div>
 </section>
 
