@@ -11,11 +11,24 @@
 <meta property="og:image" content="./src/img/hero_asesoria_fiscal_mandos_intermedios.jpg">
 <link rel="preload" href="./src/fonts/web/sfuidisplay-900.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="./src/fonts/web/opensans-300.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="./src/fonts/web/oggtext-800-italic.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="./src/css/base.css">
 <link rel="stylesheet" href="./src/css/style.css">
 <link rel="stylesheet" href="./src/css/escala-tipografica.css">
 
 <style>
+/* ---------- Serif de la página: Ogg Text ExtraBold Italic (juego completo; las versiones TRIAL no traen tildes ni comas) ---------- */
+@font-face{
+  font-family:'OggTextXB';
+  src:url('./src/fonts/web/oggtext-800-italic.woff') format('woff');
+  font-weight:800;font-style:italic;font-display:swap;
+}
+:root{--font-serif:'OggTextXB',Georgia,'Times New Roman',serif}
+/* En texto corrido pequeño (citas y leyendas de cifras) el peso ExtraBold cansa: se usa la cursiva de sistema */
+:root{--font-serif-text:Georgia,'Times New Roman',serif}
+html .testi-card blockquote,
+html .kpi-sub{font-family:var(--font-serif-text);font-weight:400}
+
 /* ---------- Barra de urgencia ---------- */
 .urgency-bar{
   background:var(--enae-negro);color:#F8F9FA;
@@ -331,7 +344,6 @@ details.qa > summary{font-size:var(--fs-l)}
 .float-wrap .float-badge{display:none}
 .float-wrap .btn.float{padding:10px 18px;font-size:12px}
 @media(max-width:640px){
-  body{padding-bottom:64px}
   .float-wrap{
     left:0;right:0;bottom:0;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;
     padding:10px 16px calc(10px + env(safe-area-inset-bottom));
@@ -372,6 +384,34 @@ details.qa > summary{font-size:var(--fs-l)}
 /* ---------- Sección 01: columnas equilibradas ---------- */
 .prac-photo{aspect-ratio:4/3}
 @media(min-width:960px){.prac-grid .step{padding-block:20px}}
+
+/* ---------- Pie de página ---------- */
+footer{padding-block:72px 0}
+@media(max-width:640px){footer{padding-bottom:64px}}   /* hueco de la barra fija inferior, dentro del propio pie */
+footer .foot-brand svg{height:auto;width:min(190px,62%);aspect-ratio:370.4/127.12;margin-bottom:22px}
+footer .foot-brand p{font-size:var(--fs-s);line-height:1.6;max-width:38ch;color:rgba(255,255,255,.82);font-weight:400}
+footer h4{
+  margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.16);
+  font-size:var(--fs-xs);letter-spacing:.2em;color:#ffd7a0;
+}
+footer ul{gap:10px}
+footer li{font-size:var(--fs-s);line-height:1.5;color:rgba(255,255,255,.82)}
+footer a{color:#F8F9FA;font-weight:400;text-underline-offset:3px}
+footer a:hover{color:#ffd7a0;text-decoration:underline}
+footer a[href^="tel"],footer a[href^="mailto"]{font-weight:700}
+footer .foot-btn{
+  display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:11px 18px;
+  background:var(--enae-granate);border:1.5px solid var(--enae-granate);border-radius:2px;
+  font-size:var(--fs-xs);font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
+}
+footer .foot-btn:hover{background:#fff;color:var(--enae-granate);border-color:#fff;text-decoration:none}
+footer .foot-bottom{margin-top:56px;padding-block:22px;font-size:var(--fs-xs);color:rgba(255,255,255,.7)}
+footer .foot-bottom a{color:rgba(255,255,255,.85);font-weight:400}
+
+/* ---------- Marca de agua "E": se retira de las secciones con titular largo, donde siempre acababa detrás del texto ---------- */
+.enae-wm--porque::after,
+.enae-wm--programa::after,
+.enae-wm--problema::after{display:none}
 
 /* ---------- Barra superior: una línea en móvil ---------- */
 .urgency-bar .ub-short{display:none}
@@ -1056,13 +1096,14 @@ details.qa > summary{font-size:var(--fs-l)}
           <li><a href="#claustro">Claustro</a></li>
           <li><a href="#empleabilidad">Empleabilidad</a></li>
           <li><a href="#programa">Plan de estudios</a></li>
-          <li><a href="#solicitar">Reserva tu plaza</a></li>
+          <li><a class="foot-btn" href="#solicitar">Reserva tu plaza <span aria-hidden="true">&rarr;</span></a></li>
         </ul>
       </div>
     </div>
   </div>
   <div class="foot-bottom">
-    <span>© 2026 ENAE International Business School · www.enae.es</span>
+    <span>© 2026 ENAE International Business School</span>
+    <a href="https://www.enae.es">www.enae.es</a>
   </div>
 </footer>
 
