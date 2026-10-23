@@ -59,27 +59,32 @@
 }
 .proof-card .pc-deadline strong{display:inline;font-size:15px;letter-spacing:0;text-transform:none;color:#F8F9FA}
 
-/* ---------- Franja de despachos ---------- */
-.partners{background:var(--surface);border-bottom:1px solid var(--hair);padding-block:28px}
-.partners .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 40px}
-.partners-label{
+/* ---------- Franja de reconocimientos (bajo el hero) ---------- */
+.recognition{background:var(--ground);border-bottom:1px solid var(--hair);padding-block:24px}
+.recognition .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 40px}
+.recognition-label{
   font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--enae-granate);
   max-width:22ch;line-height:1.4;
 }
-.partners-list{display:flex;flex-wrap:wrap;align-items:center;gap:12px;flex:1 1 330px;justify-content:flex-start}
+.recognition-seals{display:flex;flex-wrap:wrap;align-items:center;gap:16px 40px}
+.recognition-seal{display:flex;align-items:center;gap:14px;font-size:13px;font-weight:700;color:var(--ink-soft);line-height:1.35}
+.recognition-seal img{height:60px;width:auto}
+
+/* ---------- Firmas colaboradoras (dentro de Prácticas) ---------- */
+.prac-firms{margin-top:28px}
+.prac-firms-label{
+  margin:0 0 14px;font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#ffd7a0;
+}
+.prac-firms-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .partner-logo{
-  width:150px;height:64px;padding:10px 12px;
-  background:#fff;border:1px solid var(--hair);border-radius:8px;overflow:hidden;
+  height:68px;padding:10px 14px;
+  background:#fff;border-radius:8px;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
 }
 .partner-logo img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
 /* Logos con fondo de color propio: ocupan toda la pieza */
-.partner-logo--fill{padding:0;border-color:transparent}
+.partner-logo--fill{padding:0}
 .partner-logo--fill img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
-@media(max-width:640px){.partner-logo{width:calc(50% - 6px)}}
-.partners-seals{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
-.partners-seal{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;color:var(--ink-soft);line-height:1.35}
-.partners-seal img{height:56px;width:auto}
 
 /* ---------- Pilar 01 · Prácticas ---------- */
 .prac-grid{
@@ -231,8 +236,7 @@
   .brand-logo{height:48px}
   .nav .btn{padding:10px 14px;font-size:12px;white-space:nowrap}
   .prac-facts{grid-template-columns:1fr}
-  .partners .wrap{flex-direction:column;align-items:flex-start}
-  .partners-list{flex:0 0 auto;width:100%}
+  .recognition .wrap{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -351,22 +355,16 @@
   </div>
 </header>
 
-<!-- FRANJA DE DESPACHOS -->
-<div class="partners">
+<!-- RECONOCIMIENTOS -->
+<div class="recognition" aria-label="Reconocimientos de ENAE">
   <div class="wrap">
-    <span class="partners-label">Prácticas y colaboración con firmas como</span>
-    <div class="partners-list">
-      <span class="partner-logo"><img src="./src/img/empresas/garrigues.jpg" alt="J&amp;A Garrigues" width="600" height="85" loading="lazy"></span>
-      <span class="partner-logo"><img src="./src/img/empresas/grant-thornton.png" alt="Grant Thornton" width="600" height="124" loading="lazy"></span>
-      <span class="partner-logo partner-logo--fill"><img src="./src/img/empresas/carrillo-asesores.png" alt="Carrillo Asesores" width="600" height="300" loading="lazy"></span>
-      <span class="partner-logo partner-logo--fill"><img src="./src/img/empresas/caja-rural-central.png" alt="Caja Rural Central" width="446" height="262" loading="lazy"></span>
-    </div>
-    <div class="partners-seals">
-      <div class="partners-seal">
+    <span class="recognition-label">Reconocimientos de ENAE</span>
+    <div class="recognition-seals">
+      <div class="recognition-seal">
         <img src="./src/Rankings/sello%20escuelas%20y%20universidades.png" alt="Forbes · Mejores Escuelas de Negocio 2025" loading="lazy">
         <span>Forbes España 2025<br>Mejores Escuelas de Negocio</span>
       </div>
-      <div class="partners-seal">
+      <div class="recognition-seal">
         <img src="./src/Rankings/qs_rated_excellent.png" alt="QS · Rated Excellent" width="240" height="240" loading="lazy">
         <span>QS<br>Rated Excellent</span>
       </div>
@@ -396,6 +394,15 @@
         <div><dt>Bolsa de empleo</dt><dd>Desde la matrícula y para siempre</dd></div>
         <div><dt>Portal de empleo</dt><dd>Más de 200 ofertas activas</dd></div>
       </dl>
+      <div class="prac-firms">
+        <p class="prac-firms-label">Prácticas en firmas como</p>
+        <div class="prac-firms-list">
+          <span class="partner-logo"><img src="./src/img/empresas/garrigues.jpg" alt="J&amp;A Garrigues" width="600" height="85" loading="lazy"></span>
+          <span class="partner-logo"><img src="./src/img/empresas/grant-thornton.png" alt="Grant Thornton" width="600" height="124" loading="lazy"></span>
+          <span class="partner-logo partner-logo--fill"><img src="./src/img/empresas/carrillo-asesores.png" alt="Carrillo Asesores" width="600" height="300" loading="lazy"></span>
+          <span class="partner-logo partner-logo--fill"><img src="./src/img/empresas/caja-rural-central.png" alt="Caja Rural Central" width="446" height="262" loading="lazy"></span>
+        </div>
+      </div>
     </div>
     <div class="reveal delay-1">
       <div class="steps">
