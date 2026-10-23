@@ -110,33 +110,57 @@
 }
 .faculty-intro p{margin:0;max-width:62ch;font-size:17px;font-weight:300;line-height:1.6;color:var(--ink-soft)}
 .faculty-intro strong{color:var(--ink);font-weight:700}
-.faculty-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,24px);
+.faculty-marquee{
+  --gap:24px;
+  position:relative;display:flex;gap:var(--gap);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
 }
-@media(max-width:1080px){.faculty-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.faculty-grid{grid-template-columns:1fr}}
+.faculty-track{
+  display:flex;flex-shrink:0;gap:var(--gap);min-width:100%;
+  animation:facultyScroll 48s linear infinite;
+}
+.faculty-marquee:hover .faculty-track{animation-play-state:paused}
+@keyframes facultyScroll{to{transform:translateX(calc(-100% - var(--gap)))}}
 .fac-card{
-  background:var(--surface);border:1px solid var(--hair);border-radius:12px;
-  padding:26px 24px;display:flex;flex-direction:column;gap:12px;
-  transition:border-color .2s ease,transform .2s ease;
+  position:relative;flex:0 0 256px;aspect-ratio:3/4;margin:0;
+  border-radius:16px;overflow:hidden;background:var(--surface);
 }
-.fac-card:hover{border-color:rgba(169,24,49,.35);transform:translateY(-3px)}
-.fac-avatar{
-  display:block;width:88px;height:88px;border-radius:50%;
-  object-fit:cover;object-position:center top;
-  background:var(--enae-blanco);
-  box-shadow:0 0 0 3px var(--surface),0 0 0 4px rgba(169,24,49,.35);
+.fac-card img{
+  display:block;width:100%;height:100%;object-fit:cover;object-position:center top;
+  filter:grayscale(1);transition:filter .35s ease,transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.fac-card:hover img{filter:grayscale(0);transform:scale(1.04)}
+.fac-card figcaption{
+  position:absolute;left:8px;right:8px;bottom:8px;
+  background:rgba(255,255,255,.9);border-radius:10px;padding:12px 14px;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  border-top:2px solid var(--enae-granate);
 }
 .fac-badge{
-  align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--enae-granate);background:#fbe7ec;padding:5px 9px;border-radius:2px;
+  display:block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--enae-granate);margin-bottom:4px;
 }
-.fac-card h3{margin:0;font-family:var(--font-body);font-weight:800;font-size:19px;line-height:1.25;color:var(--ink)}
-.fac-card p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-soft)}
-.fac-card.more{background:var(--enae-negro);border-color:var(--enae-negro);color:#F8F9FA;justify-content:center}
-.fac-card.more .fac-num{font-family:var(--font-body);font-weight:800;font-size:clamp(40px,4vw,56px);line-height:1;color:#ffd7a0}
-.fac-card.more h3{color:#F8F9FA}
-.fac-card.more p{color:rgba(255,255,255,.78)}
+.fac-card h3{margin:0;font-family:var(--font-body);font-weight:800;font-size:16px;line-height:1.25;color:var(--enae-negro)}
+.fac-card p{margin:3px 0 0;font-size:13px;line-height:1.4;color:var(--enae-gris-oscuro)}
+.faculty-more{
+  max-width:var(--page-max);margin:clamp(24px,3vw,36px) auto 0;padding-inline:var(--gutter);
+  font-size:15px;line-height:1.5;color:var(--ink-soft);text-align:center;
+}
+.faculty-more strong{color:var(--enae-granate);font-weight:800}
+@media(max-width:640px){
+  .faculty-marquee{--gap:16px}
+  .fac-card{flex-basis:224px;aspect-ratio:3/4.6}
+  .fac-card figcaption{padding:9px 12px}
+  .fac-card h3{font-size:15px}
+  .fac-card p{font-size:12px}
+}
+@media(hover:none){.fac-card img{filter:none}}
+@media(prefers-reduced-motion:reduce){
+  .faculty-marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none;scroll-snap-type:x proximity}
+  .faculty-track[aria-hidden="true"]{display:none}
+  .fac-card{scroll-snap-align:start}
+}
 .learn-head{
   max-width:var(--page-max);margin:clamp(56px,7vw,88px) auto 20px;padding-inline:var(--gutter);
   font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--enae-granate);
@@ -403,57 +427,69 @@
   <div class="faculty-intro reveal">
     <p>Parte del profesorado trabaja en la <strong>Agencia Tributaria en Murcia</strong>: verás cómo se aplican los procedimientos desde el otro lado de la mesa. La otra parte <strong>ejerce en despachos</strong> y trae a clase los casos que resuelve con sus clientes. Son, además, tu primer contacto con el sector.</p>
   </div>
-  <div class="wrap">
-    <div class="faculty-grid">
-      <article class="fac-card reveal delay-1">
-        <img class="fac-avatar" src="./src/img/claustro/patricia-perez-garcia.jpg" alt="Patricia Pérez García" width="300" height="300" loading="lazy">
-        <span class="fac-badge">Dirección</span>
-        <h3>Patricia Pérez García</h3>
-        <p>Directora del máster. Abogada fiscalista e investigadora en Derecho Financiero (UMU).</p>
-      </article>
-      <article class="fac-card reveal delay-2">
-        <img class="fac-avatar" src="./src/img/claustro/joaquin-molina-milanes.jpg" alt="Joaquín Molina Milanés" width="300" height="300" loading="lazy">
-        <span class="fac-badge">Agencia Tributaria</span>
-        <h3>Joaquín Molina Milanés</h3>
-        <p>Inspector de Hacienda. Jefe de Gestión Tributaria, AEAT Murcia.</p>
-      </article>
-      <article class="fac-card reveal delay-3">
-        <img class="fac-avatar" src="./src/img/claustro/rocio-peral-cuadrado.jpg" alt="Rocío Peral Cuadrado" width="300" height="300" loading="lazy">
-        <span class="fac-badge">Agencia Tributaria</span>
-        <h3>Rocío Peral Cuadrado</h3>
-        <p>Inspectora Regional Adjunta, AEAT Murcia.</p>
-      </article>
-      <article class="fac-card reveal delay-3">
-        <img class="fac-avatar" src="./src/img/claustro/luis-llamas-fuentes.jpg" alt="Luis Llamas Fuentes" width="300" height="300" loading="lazy">
-        <span class="fac-badge">Despacho</span>
-        <h3>Luis Llamas Fuentes</h3>
-        <p>Asesor fiscal. Exabogado de Garrigues.</p>
-      </article>
-      <article class="fac-card reveal delay-1">
-        <img class="fac-avatar" src="./src/img/claustro/jaime-sanchez-vizcaino-rodriguez.jpg" alt="Jaime Sánchez-Vizcaíno Rodríguez" width="300" height="300" loading="lazy">
-        <span class="fac-badge">Despacho</span>
-        <h3>Jaime Sánchez-Vizcaíno Rodríguez</h3>
-        <p>Socio director, Sánchez-Vizcaíno Abogados.</p>
-      </article>
-      <article class="fac-card reveal delay-2">
-        <img class="fac-avatar" src="./src/img/claustro/ignacio-gomez-alvarez.jpg" alt="Ignacio Gómez Álvarez" width="300" height="300" loading="lazy">
-        <span class="fac-badge">Despacho</span>
-        <h3>Ignacio Gómez Álvarez</h3>
-        <p>Abogado fiscalista, Gaspar de la Peña S.C.</p>
-      </article>
-      <article class="fac-card reveal delay-3">
-        <img class="fac-avatar" src="./src/img/claustro/nerea-monzon-carceller.jpg" alt="Nerea Monzón Carceller" width="300" height="300" loading="lazy">
-        <span class="fac-badge">Universidad</span>
-        <h3>Nerea Monzón Carceller</h3>
-        <p>Abogada. Profesora de Derecho Mercantil (UMU).</p>
-      </article>
-      <article class="fac-card more reveal delay-3">
-        <span class="fac-num">+8</span>
-        <h3>profesionales más</h3>
-        <p>Inspectores y técnicos de la AEAT, abogados fiscalistas y profesores de la Universidad de Murcia.</p>
-      </article>
-    </div>
+  <div class="faculty-marquee reveal delay-1" role="group" aria-label="Profesores del máster">
+      <div class="faculty-track">
+        <figure class="fac-card">
+          <img src="./src/img/claustro/patricia-perez-garcia.jpg" alt="Patricia Pérez García" width="300" height="300">
+          <figcaption><span class="fac-badge">Dirección</span><h3>Patricia Pérez García</h3><p>Directora del máster. Abogada fiscalista</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/joaquin-molina-milanes.jpg" alt="Joaquín Molina Milanés" width="300" height="300">
+          <figcaption><span class="fac-badge">Agencia Tributaria</span><h3>Joaquín Molina Milanés</h3><p>Inspector de Hacienda. Jefe de Gestión Tributaria, AEAT Murcia</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/rocio-peral-cuadrado.jpg" alt="Rocío Peral Cuadrado" width="300" height="300">
+          <figcaption><span class="fac-badge">Agencia Tributaria</span><h3>Rocío Peral Cuadrado</h3><p>Inspectora Regional Adjunta, AEAT Murcia</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/luis-llamas-fuentes.jpg" alt="Luis Llamas Fuentes" width="300" height="300">
+          <figcaption><span class="fac-badge">Despacho</span><h3>Luis Llamas Fuentes</h3><p>Asesor fiscal. Exabogado de Garrigues</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/jaime-sanchez-vizcaino-rodriguez.jpg" alt="Jaime Sánchez-Vizcaíno Rodríguez" width="300" height="300">
+          <figcaption><span class="fac-badge">Despacho</span><h3>Jaime Sánchez-Vizcaíno Rodríguez</h3><p>Socio director, Sánchez-Vizcaíno Abogados</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/ignacio-gomez-alvarez.jpg" alt="Ignacio Gómez Álvarez" width="300" height="300">
+          <figcaption><span class="fac-badge">Despacho</span><h3>Ignacio Gómez Álvarez</h3><p>Abogado fiscalista, Gaspar de la Peña S.C.</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/nerea-monzon-carceller.jpg" alt="Nerea Monzón Carceller" width="300" height="300">
+          <figcaption><span class="fac-badge">Universidad</span><h3>Nerea Monzón Carceller</h3><p>Abogada. Profesora de Derecho Mercantil (UMU)</p></figcaption>
+        </figure>
+      </div>
+      <div class="faculty-track" aria-hidden="true">
+        <figure class="fac-card">
+          <img src="./src/img/claustro/patricia-perez-garcia.jpg" alt="" width="300" height="300">
+          <figcaption><span class="fac-badge">Dirección</span><h3>Patricia Pérez García</h3><p>Directora del máster. Abogada fiscalista</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/joaquin-molina-milanes.jpg" alt="" width="300" height="300">
+          <figcaption><span class="fac-badge">Agencia Tributaria</span><h3>Joaquín Molina Milanés</h3><p>Inspector de Hacienda. Jefe de Gestión Tributaria, AEAT Murcia</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/rocio-peral-cuadrado.jpg" alt="" width="300" height="300">
+          <figcaption><span class="fac-badge">Agencia Tributaria</span><h3>Rocío Peral Cuadrado</h3><p>Inspectora Regional Adjunta, AEAT Murcia</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/luis-llamas-fuentes.jpg" alt="" width="300" height="300">
+          <figcaption><span class="fac-badge">Despacho</span><h3>Luis Llamas Fuentes</h3><p>Asesor fiscal. Exabogado de Garrigues</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/jaime-sanchez-vizcaino-rodriguez.jpg" alt="" width="300" height="300">
+          <figcaption><span class="fac-badge">Despacho</span><h3>Jaime Sánchez-Vizcaíno Rodríguez</h3><p>Socio director, Sánchez-Vizcaíno Abogados</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/ignacio-gomez-alvarez.jpg" alt="" width="300" height="300">
+          <figcaption><span class="fac-badge">Despacho</span><h3>Ignacio Gómez Álvarez</h3><p>Abogado fiscalista, Gaspar de la Peña S.C.</p></figcaption>
+        </figure>
+        <figure class="fac-card">
+          <img src="./src/img/claustro/nerea-monzon-carceller.jpg" alt="" width="300" height="300">
+          <figcaption><span class="fac-badge">Universidad</span><h3>Nerea Monzón Carceller</h3><p>Abogada. Profesora de Derecho Mercantil (UMU)</p></figcaption>
+        </figure>
+      </div>
   </div>
+  <p class="faculty-more reveal"><strong>+8 profesionales más</strong>: inspectores y técnicos de la AEAT, abogados fiscalistas y profesores de la Universidad de Murcia.</p>
 
   <p class="learn-head reveal">Así aprendes con ellos</p>
   <div class="wrap">
