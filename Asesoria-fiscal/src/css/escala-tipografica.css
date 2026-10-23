@@ -1,0 +1,103 @@
+/* Escala tipográfica de la landing de Asesoría Fiscal: 12 · 14 · 16 · 18 · 22 px (+ tamaños fluidos de título).
+   Generado: redondea los font-size fijos de base.css y style.css sin tocar esos archivos (los comparten otras landings). */
+:root{--fs-xs:12px;--fs-s:14px;--fs-m:16px;--fs-l:18px;--fs-xl:22px}
+body{font-size:var(--fs-m)}
+.nav-links{font-size:var(--fs-s)}
+.btn{font-size:var(--fs-s)}
+.eyebrow{font-size:var(--fs-xs)}
+.hero-pills .pill{font-size:var(--fs-xs)}
+.perfil-card h3{font-size:var(--fs-m)}
+.perfil-card p{font-size:var(--fs-s)}
+.pillar summary{font-size:var(--fs-l)}
+.pillar summary .p-count{font-size:var(--fs-s)}
+.pillar summary::after{font-size:var(--fs-xl)}
+.pillar .p-mod .m-num{font-size:var(--fs-l)}
+.pillar .p-mod .m-name{font-size:var(--fs-m)}
+.float-badge{font-size:var(--fs-xs)}
+.lede{font-size:var(--fs-l)}
+.hero-meta{font-size:var(--fs-xs)}
+.hero-meta strong{font-size:var(--fs-s)}
+.hero-num .kpi-cap{font-size:var(--fs-l)}
+.claim-strip .wrap{font-size:var(--fs-s)}
+.claim-strip .lead{font-size:var(--fs-l)}
+.section-eyebrow{font-size:var(--fs-xs)}
+.value-item .n{font-size:var(--fs-xl)}
+.value-item h3{font-size:var(--fs-xl)}
+.value-item p{font-size:var(--fs-m)}
+.kpi-label{font-size:var(--fs-s)}
+.kpi-sub{font-size:var(--fs-m)}
+.stats-note{font-size:var(--fs-s)}
+.mode-tag{font-size:var(--fs-xs)}
+.mode-title{font-size:var(--fs-xl)}
+.mode p{font-size:var(--fs-m)}
+.mode dl{font-size:var(--fs-s)}
+.mode dt{font-size:var(--fs-xs)}
+.module .m-num{font-size:var(--fs-xl)}
+.module .m-name{font-size:var(--fs-l)}
+.module .m-cat{font-size:var(--fs-xs)}
+.curric-note{font-size:var(--fs-s)}
+.quote-attrib{font-size:var(--fs-xs)}
+.method li{font-size:var(--fs-m)}
+.step h3{font-size:var(--fs-l)}
+.step p{font-size:var(--fs-m)}
+details.qa .a{font-size:var(--fs-m)}
+details.qa .a em{font-size:var(--fs-m)}
+.final .lede-final{font-size:var(--fs-l)}
+.final-meta{font-size:var(--fs-xs)}
+.final-meta strong{font-size:var(--fs-s)}
+footer{font-size:var(--fs-s)}
+footer h4{font-size:var(--fs-xs)}
+.foot-bottom{font-size:var(--fs-xs)}
+.d-hero-meta span{font-size:var(--fs-xs)}
+.d-hero-meta strong{font-size:var(--fs-s)}
+.orbit-concept{font-size:var(--fs-xs)}
+.d-rankings-title{font-size:var(--fs-l)}
+.d-ranking-label{font-size:var(--fs-xs)}
+.d-ranking-value{font-size:var(--fs-m)}
+.d-ranking-value span{font-size:var(--fs-s)}
+.method li{font-size:var(--fs-m)}
+.value-card h3{font-size:var(--fs-xl)}
+.value-card p{font-size:var(--fs-m)}
+.cf-text{font-size:var(--fs-s)}
+.msc-number{font-size:var(--fs-s)}
+.msc-title{font-size:var(--fs-l)}
+.msc-desc{font-size:var(--fs-s)}
+.f-perk-icon{font-size:var(--fs-s)}
+.f-perk strong{font-size:var(--fs-m)}
+.f-perk span{font-size:var(--fs-s)}
+.d-input-floating{font-size:var(--fs-m)}
+.d-floating-label{font-size:var(--fs-s)}
+.d-input-floating:focus + .d-floating-label,
+  .d-input-floating:not(:placeholder-shown) + .d-floating-label{font-size:var(--fs-xs)}
+.d-checkbox-text{font-size:var(--fs-xs)}
+.form-status .fs-msg{font-size:var(--fs-xl)}
+.d-form-container h3{font-size:var(--fs-xl)}
+.d-form-container label,
+.d-form-container .textFormFieldBlock label,
+.d-form-container .dateTimeFormFieldBlock label,
+.d-form-container .lookupFormFieldBlock label,
+.d-form-container .twoOptionFormFieldBlock label.block-label,
+.d-form-container .optionSetFormFieldBlock label.block-label,
+.d-form-container .multiOptionSetFormFieldBlock label.block-label,
+.d-form-container .passesBlock label,
+.d-form-container .consentBlock label p,
+.d-form-container .textFormFieldBlock label *,
+.d-form-container .dateTimeFormFieldBlock label *,
+.d-form-container .lookupFormFieldBlock label *,
+.d-form-container .twoOptionFormFieldBlock label.block-label *,
+.d-form-container .optionSetFormFieldBlock label.block-label *,
+.d-form-container .multiOptionSetFormFieldBlock label.block-label *{font-size:var(--fs-xs) !important}
+.d-form-container input[type="text"],
+.d-form-container input[type="email"],
+.d-form-container input[type="tel"],
+.d-form-container input[type="url"],
+.d-form-container input[type="number"],
+.d-form-container input[type="date"],
+.d-form-container input[type="datetime-local"],
+.d-form-container select,
+.d-form-container textarea{font-size:var(--fs-s)}
+.d-form-container .phoneCountryCodeLabel{font-size:var(--fs-s)}
+.d-form-container .consentBlock p:nth-child(2){font-size:var(--fs-s)}
+.d-form-container .columnContainer > div:not([class]) p{font-size:var(--fs-xs)}
+.d-form-container .submitButton{font-size:var(--fs-s)}
+.d-form-container .submitButton::after{font-size:var(--fs-m)}
