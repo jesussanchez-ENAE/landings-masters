@@ -66,8 +66,17 @@
   font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--enae-granate);
   max-width:22ch;line-height:1.4;
 }
-.partners-list{display:flex;flex-wrap:wrap;align-items:center;gap:12px 32px;flex:1;justify-content:flex-start}
-.partners-list span{font-family:var(--font-display);font-weight:900;font-size:clamp(16px,1.6vw,20px);color:var(--ink-soft);letter-spacing:-.01em}
+.partners-list{display:flex;flex-wrap:wrap;align-items:center;gap:12px;flex:1;justify-content:flex-start}
+.partner-logo{
+  width:150px;height:64px;padding:10px 12px;
+  background:#fff;border:1px solid var(--hair);border-radius:8px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.partner-logo img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+/* Logos con fondo de color propio: ocupan toda la pieza */
+.partner-logo--fill{padding:0;border-color:transparent}
+.partner-logo--fill img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
+@media(max-width:640px){.partner-logo{width:calc(50% - 6px)}}
 .partners-seal{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;color:var(--ink-soft);line-height:1.35}
 .partners-seal img{height:56px;width:auto}
 
@@ -321,12 +330,10 @@
   <div class="wrap">
     <span class="partners-label">Prácticas y colaboración con firmas como</span>
     <div class="partners-list">
-      <span>J&amp;A Garrigues</span>
-      <span>Grant Thornton</span>
-      <span>Carrillo Asesores</span>
-      <span>Juan Orenes y Cía.</span>
-      <span>Nasved Asesores</span>
-      <span>Caja Rural Central</span>
+      <span class="partner-logo"><img src="./src/img/empresas/garrigues.jpg" alt="J&amp;A Garrigues" width="600" height="85" loading="lazy"></span>
+      <span class="partner-logo"><img src="./src/img/empresas/grant-thornton.png" alt="Grant Thornton" width="600" height="124" loading="lazy"></span>
+      <span class="partner-logo partner-logo--fill"><img src="./src/img/empresas/carrillo-asesores.png" alt="Carrillo Asesores" width="600" height="300" loading="lazy"></span>
+      <span class="partner-logo partner-logo--fill"><img src="./src/img/empresas/caja-rural-central.png" alt="Caja Rural Central" width="446" height="262" loading="lazy"></span>
     </div>
     <div class="partners-seal">
       <img src="./src/Rankings/sello%20escuelas%20y%20universidades.png" alt="Forbes · Mejores Escuelas de Negocio 2025" loading="lazy">
