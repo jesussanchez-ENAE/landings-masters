@@ -353,6 +353,12 @@ details.qa > summary{font-size:var(--fs-l)}
 
 /* ---------- Control del carrusel de profesores ---------- */
 .faculty-marquee.is-paused .faculty-track{animation-play-state:paused}
+/* Carrusel arrastrable: mejora progresiva (sin JavaScript sigue la animación CSS) */
+.faculty-marquee--js .faculty-track{animation:none;will-change:transform}
+.faculty-marquee--js{cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+.faculty-marquee--js.is-dragging{cursor:grabbing}
+.faculty-marquee--js img{-webkit-user-drag:none;pointer-events:none}
+.faculty-marquee:focus-visible{outline:2px solid var(--enae-granate);outline-offset:4px;border-radius:12px}
 .faculty-controls{display:flex;justify-content:center;margin-top:20px}
 .marquee-toggle{
   display:inline-flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;
@@ -651,7 +657,7 @@ html .section-eyebrow{letter-spacing:.12em}
   <div class="faculty-intro reveal">
     <p>Parte del profesorado trabaja en la <strong>Delegación de la Agencia Tributaria en Murcia</strong> y la otra parte <strong>ejerce en despachos</strong>. Llevan a clase los procedimientos que aplican y los casos que resuelven con sus clientes.</p>
   </div>
-  <div class="faculty-marquee reveal delay-1" id="faculty-marquee" role="group" aria-label="Profesores del máster">
+  <div class="faculty-marquee reveal delay-1" id="faculty-marquee" role="group" tabindex="0" aria-label="Profesores del máster. Arrastra o usa las flechas del teclado para desplazarte.">
       <div class="faculty-track">
         <figure class="fac-card">
           <img src="./src/img/claustro/patricia-perez-garcia-3x4.jpg" alt="Patricia Pérez García" width="480" height="640">
@@ -1113,6 +1119,87 @@ html .section-eyebrow{letter-spacing:.12em}
         const paused = marquee.classList.toggle('is-paused');
         marqueeToggle.setAttribute('aria-pressed', String(paused));
         marqueeToggle.querySelector('.marquee-toggle-label').textContent = paused ? 'Reanudar carrusel' : 'Pausar carrusel';
+      });
+    }
+
+    // Arrastrar el carrusel (ratón, dedo y teclado) con inercia y bucle continuo
+    if (marquee && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const tracks = marquee.querySelectorAll('.faculty-track');
+      const AUTO_SPEED = 41;          // px/s: la misma velocidad que la animación CSS original
+      let x = 0, velocity = 0, dragging = false, hovering = false, focused = false, visible = true;
+      let startX = 0, startOffset = 0, samples = [], last = 0, raf = 0;
+
+      const period = () => tracks[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(marquee).columnGap) || 0);
+      const render = () => {
+        const p = period();
+        x = ((x % p) + p) % p;        // bucle: ambas copias avanzan juntas
+        const t = 'translate3d(' + (-x) + 'px,0,0)';
+        tracks.forEach((el) => { el.style.transform = t; });
+      };
+      const autoPaused = () => marquee.classList.contains('is-paused') || hovering || focused;
+      const tick = (now) => {
+        const dt = Math.min((now - last) / 1000, 0.05);
+        last = now;
+        if (!dragging) {
+          if (Math.abs(velocity) > 8) {
+            x += velocity * dt;
+            velocity *= Math.pow(0.04, dt);   // fricción: conserva ~4% de la velocidad al cabo de 1 s
+          } else {
+            velocity = 0;
+            if (!autoPaused()) x += AUTO_SPEED * dt;
+          }
+        }
+        render();
+        raf = visible ? requestAnimationFrame(tick) : 0;
+      };
+      const start = () => {
+        if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+      };
+
+      marquee.classList.add('faculty-marquee--js');
+      new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        if (visible) start();
+      }).observe(marquee);
+      start();
+
+      marquee.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        dragging = true;
+        velocity = 0;
+        startX = e.clientX;
+        startOffset = x;
+        samples = [{ t: e.timeStamp, x: e.clientX }];
+        marquee.classList.add('is-dragging');
+        try { marquee.setPointerCapture(e.pointerId); } catch (err) { /* el puntero ya no existe */ }
+      });
+      marquee.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        x = startOffset - (e.clientX - startX);
+        samples.push({ t: e.timeStamp, x: e.clientX });
+        if (samples.length > 6) samples.shift();
+      });
+      const release = (e) => {
+        if (!dragging) return;
+        dragging = false;
+        marquee.classList.remove('is-dragging');
+        const a = samples[0], b = samples[samples.length - 1];
+        const dt = (b.t - a.t) / 1000;
+        // inercia solo si el gesto termina en movimiento
+        velocity = (dt > 0.01 && e.timeStamp - b.t < 100) ? -(b.x - a.x) / dt : 0;
+        velocity = Math.max(-2000, Math.min(2000, velocity));
+      };
+      marquee.addEventListener('pointerup', release);
+      marquee.addEventListener('pointercancel', release);
+      marquee.addEventListener('dragstart', (e) => e.preventDefault());
+
+      marquee.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hovering = true; });
+      marquee.addEventListener('pointerleave', () => { hovering = false; });
+      marquee.addEventListener('focusin', () => { focused = marquee.matches(':focus-visible'); });
+      marquee.addEventListener('focusout', () => { focused = false; });
+      marquee.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { velocity = 900; e.preventDefault(); }       // ≈ una tarjeta
+        else if (e.key === 'ArrowLeft') { velocity = -900; e.preventDefault(); }
       });
     }
 
